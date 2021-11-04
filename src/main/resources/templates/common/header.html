@@ -17,7 +17,7 @@
 							</svg>-->
 						</a>
 						<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-							<li><a href="#" class="nav-link nav-title"><b>KIIIEVE</b></a></li>
+							<li><a href="/" class="nav-link nav-title"><b>KIIIEVE</b></a></li>
 							<!--<li><a href="#" class="nav-link px-2 text-white">상의</a></li>
 							<li><a href="#" class="nav-link px-2 text-white">하의</a></li>
 							<li><a href="#" class="nav-link px-2 text-white">악세사리</a></li>
@@ -28,10 +28,14 @@
 								aria-label="Search">
 						</form>-->
 						<!--서치바-->
-						
+
 						<div class="text-end">
-							<button type="button" class="btn btn-primary me-2">로그인</button>
-							<button type="button" class="btn btn-primary">회원가입</button>
+							<a th:href="@{/users/login}">
+								<button type="button" class="btn btn-primary me-2">로그인</button>
+							</a>
+							<a th:href="@{/users/join}">
+								<button type="button" class="btn btn-primary">회원가입</button>
+							</a>
 						</div>
 					</div>
 				</div>

@@ -16,20 +16,12 @@ public class MainController {
 	private UserDAO dao;
 	
 	@RequestMapping("/")
-	public String index(Model model) {
-		return "index";
+	public String root(Model model) {
+		return "redirect:index";
 	}
 	
-	@RequestMapping("/home")
-	public String index(@RequestParam String name,Model model, HttpSession session) {
-		System.out.println(model);
-		System.out.println("넘어온 name값 : ");
-		System.out.println(name);
-		String address = dao.getUser(name);
-		System.out.print("돌아온 주소값 : ");
-		System.out.println(address);
-		model.addAttribute("text",name+"의 주소는 "+address+"입니다");
-		session.setAttribute("sessionTest", "Y");
-		return "home";
+	@RequestMapping("/index")
+	public String index(Model model, HttpSession session) {
+		return "index";
 	}
 }
