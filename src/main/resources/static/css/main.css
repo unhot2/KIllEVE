@@ -1,0 +1,21 @@
+@charset "UTF-8";
+header {
+	position : fixed;
+	width : 100%;
+	z-index: 10;
+}
+
+section {
+	padding-top : 64px;
+}
+
+.nav-title {
+	color : white;
+	font-size : 27px;
+}
+
+.nav-btn {
+	background-color: #45aba6;
+	color : white;
+	font-weight: bold;
+}

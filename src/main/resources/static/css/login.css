@@ -1,7 +1,3 @@
-/*body {
-  background: #607D8B;
-  font-family: arial;
-}*/
 .login-form h1 {
   font-size: 36px;
   text-align: center;
@@ -21,7 +17,7 @@
     background: #212529;
     width: 450px;
     border-radius: 6px;
-    margin: 105px auto;
+    margin: 122px auto;
     display: table;
     padding: 15px 30px 30px;
     box-sizing: border-box;
@@ -125,6 +121,5 @@
 @media screen and (max-width:767px) {
 .login-form {
     width: 90%;
-    padding: 15px 15px 30px;
 }
 }
