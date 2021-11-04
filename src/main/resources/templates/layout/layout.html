@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>thymeleaf layout</title>
+	<title>Shop Homepage - Start Bootstrap Template</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" href="/bootstrap/assets/favicon.ico" />
+	<!-- Bootstrap CSS -->
+	<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<!-- NAV CSS -->
+	<link href="/css/nav.css" rel="stylesheet">
+	<!-- Bootstrap JS-->
+	<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+	<!-- header -->
+	<th:block th:replace="common/header::sampleheader"></th:block>
+	<!-- content -->
+	<th:block layout:fragment="content"></th:block>
+	<!-- footer -->
+	<th:block th:replace="common/footer::samplefooter"> </th:block>
+</body>
+
+</html>
