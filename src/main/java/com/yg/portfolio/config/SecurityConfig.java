@@ -15,6 +15,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.yg.portfolio.service.SecurityService;
 
 @Configuration //이 클래스를 통해 bean 등록이나 각종 설정을 하겠다는 표시
+
+
 @EnableWebSecurity // Spring Security 설정할 클래스라고 정의합니다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -42,19 +44,46 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	}
 
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//	
+//		http
+//		.authorizeRequests() 
+//			.antMatchers("/admin/**").hasAnyAuthority("ADMIN")// 관리자페이지를 위한 곳
+//			.antMatchers("/**").permitAll() 
+//			.anyRequest().authenticated()// 여기까지는 기본적으로 경로를 어떻게 사용할 것인가를 위한 곳이다
+//		.and()
+//			.csrf().ignoringAntMatchers("/admin/goods/ckUpload") //기본적으로 springSecurity에선 post로 controller로 정보를 보내줄떼 csrf라는 토큰이 필요하다 이것을 무시하기위한 경로
+//		.and()
+//			.formLogin()
+//			.loginPage("/users/login") //로그인 폼
+//			.failureUrl("/member/signin?error") /*로그인 실패시 url*/ 
+//			.defaultSuccessUrl("/", true) /*로그인 성공시 url*/
+//		.and()
+//			.logout()
+//			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//			.deleteCookies("JSESSIONID")
+//			.invalidateHttpSession(true)
+//			.logoutSuccessUrl("/home")
+//		.and()
+//			.exceptionHandling()
+//			.accessDeniedPage("/access-denied");
+//	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	
-		http
-		.authorizeRequests() 
-			.antMatchers("/admin/**").hasAnyAuthority("ADMIN")// 관리자페이지를 위한 곳
-			.antMatchers("/**").permitAll() 
-			.anyRequest().authenticated()// 여기까지는 기본적으로 경로를 어떻게 사용할 것인가를 위한 곳이다
+		http.csrf().disable(); //csrf 비활성화
+		http.authorizeRequests() 
+			.antMatchers("/user/**").authenticated() // user관련은 인증받아야됨
+			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")// 매니저권한 필요
+			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN')")// 매니저권한 필요
+			.anyRequest().permitAll() // 그 외의 주소는 아무나 접근가능
 		.and()
 			.csrf().ignoringAntMatchers("/admin/goods/ckUpload") //기본적으로 springSecurity에선 post로 controller로 정보를 보내줄떼 csrf라는 토큰이 필요하다 이것을 무시하기위한 경로
 		.and()
 			.formLogin()
 			.loginPage("/users/login") //로그인 폼
+			.loginProcessingUrl("/login") // LOGIN 주소가 호출되면 시큐리티가 낚아채서 대신 로그인을 진행 ( 컨트롤러에 /login에 대한 메소드 안만들어도 됨 )
 			.failureUrl("/member/signin?error") /*로그인 실패시 url*/ 
 			.defaultSuccessUrl("/", true) /*로그인 성공시 url*/
 		.and()
