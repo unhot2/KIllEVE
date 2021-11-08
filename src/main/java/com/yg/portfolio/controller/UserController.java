@@ -64,9 +64,6 @@ public class UserController {
 		System.out.println("들어온값 zipcode :"+user.getZipCode());
 		System.out.println("들어온값 address :"+user.getAddress());
 		System.out.println("들어온값 detailAddress :"+user.getDetailAddress());
-		/*
-		 * if (userService.join(user) == 1) { System.out.println("회원가입 성공"); }
-		 */
 		return "redirect:/users/loginForm";
 	}
 }
