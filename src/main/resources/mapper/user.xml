@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yg.portfolio.repository.UserRepository">
 	<select id="findByUsername" resultType="User">
-		select * from user where username = #{username}
+		select * from user where userId = #{userId}
 	</select>
 	
 	<insert id="join">
-		insert into user(createDate,email,password,role,username)
-		values(now(),#{email},#{password},#{role},#{username}); 
+		insert into user(createDate,email,password,role,userName,userId,phone,gender,emailReceiveYn, smsReceiveYn,zipCode,address,detailAddress)
+		values(now(),#{email},#{password},#{role},#{userName},#{userId},#{phone},#{gender},#{emailReceiveYn},#{smsReceiveYn},#{zipCode},#{address},#{detailAddress}); 
 	</insert>
 </mapper>
