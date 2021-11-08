@@ -5,7 +5,7 @@
 		select * from user where username = #{username}
 	</select>
 	
-	<insert id="save">
+	<insert id="join">
 		insert into user(createDate,email,password,role,username)
 		values(now(),#{email},#{password},#{role},#{username}); 
 	</insert>

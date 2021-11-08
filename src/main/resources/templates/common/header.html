@@ -7,34 +7,52 @@
 
 <body>
 	<div th:fragment="sampleheader">
-			<header class="p-1 bg-dark text-white">
-				<div class="container">
-					<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-						<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-							<!--<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+		<header class="p-1 bg-dark text-white">
+			<div class="container">
+				<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+					<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+						<!--<svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
 								<use xlink:href="#bootstrap" />
 							</svg>-->
-						</a>
-						<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-							<li><a href="/" class="nav-link nav-title"><b>KIIIEVE</b></a></li>
-						</ul>
-						<!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+					</a>
+					<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+						<li><a href="/" class="nav-link nav-title"><b>KIIIEVE</b></a></li>
+					</ul>
+					<!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
 							<input type="search" class="form-control form-control-dark" placeholder="검색"
 								aria-label="Search">
 						</form>-->
-						<!--서치바-->
+					<!--서치바-->
 
-						<div class="text-end">
-							<a th:href="@{/users/loginForm}">
-								<button type="button" class="btn nav-btn me-2">Login</button>
-							</a>
-							<a th:href="@{/users/joinForm}">
-								<button type="button" class="btn nav-btn">Join</button>
-							</a>
-						</div>
+					<div class="text-end">
+						<!--<a th:href="@{/users/loginForm}">
+							<button type="button" class="btn nav-btn me-2">Login</button>
+						</a>
+						<a th:href="@{/users/joinForm}">
+							<button type="button" class="btn nav-btn">Join</button>
+						</a>-->
+						<span th:if=${session.loginName}>
+							<span th:text="${session.loginName}+'님 안녕하세요'"></span>
+						</span>
+						<a sec:authorize="isAnonymous()" th:href="@{/users/loginForm}">
+							<button type="button" class="btn nav-btn me-2">Login</button>
+						</a>
+						<a sec:authorize="isAnonymous()" th:href="@{/users/joinForm}">
+							<button type="button" class="btn nav-btn">Join</button>
+						</a>
+						<a sec:authorize="isAuthenticated()" th:href="@{/logout}">
+							<button type="button" class="btn nav-btn">Logout</button>
+						</a>
+						<a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/manager}">
+							<button type="button" class="btn nav-btn">Manager</button>
+						</a>
+						<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">
+							<button type="button" class="btn nav-btn">Admin</button>
+						</a>
 					</div>
 				</div>
-			</header>
+			</div>
+		</header>
 	</div>
 </body>
 

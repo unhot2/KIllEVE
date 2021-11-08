@@ -8,8 +8,9 @@ import com.yg.portfolio.model.User;
 
 @Mapper
 public interface UserRepository {
-	
+	// 로그인
 	public User findByUsername(String username);
 	
-	int save (User user);
+	// 회원가입
+	public int join (User user);
 }

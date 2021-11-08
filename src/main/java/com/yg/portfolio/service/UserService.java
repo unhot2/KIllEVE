@@ -1,13 +1,11 @@
 package com.yg.portfolio.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import com.yg.portfolio.config.PrincipalDetails;
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.repository.UserRepository;
@@ -16,8 +14,10 @@ import com.yg.portfolio.repository.UserRepository;
 // 시큐리티 설정에서 loginProcessingURL("/login")
 // login 요청이 들어오면 자동으로 UserDetailsService 타입으로 IoC되어 있는 loadUserByUsername 함수가 실행
 @Service
-public class PrincipalDetailsService implements UserDetailsService{
+public class UserService implements UserDetailsService{
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -35,6 +35,21 @@ public class PrincipalDetailsService implements UserDetailsService{
 			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★아이디 없음★★★★★★★★★★★★★★★★★★★★★★★");
 			return null;
 		}
+	}
+	
+	// 회원가입시 ID에 따라 ROLE 다르게 설정
+	public int join(User user) {
+		if (("admin").equals(user.getUsername())) {
+            user.setRole("ROLE_ADMIN");
+        } 
+		else if(("manager").equals(user.getUsername())) {
+        	user.setRole("ROLE_MANAGER");
+        }
+		else {
+			user.setRole("ROLE_USER");
+		}
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		return userRepository.join(user);
 	}
 
 }
