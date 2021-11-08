@@ -39,10 +39,10 @@ public class UserService implements UserDetailsService{
 	
 	// 회원가입시 ID에 따라 ROLE 다르게 설정
 	public int join(User user) {
-		if (("admin").equals(user.getUsername())) {
+		if (("admin").equals(user.getUserId())) {
             user.setRole("ROLE_ADMIN");
         } 
-		else if(("manager").equals(user.getUsername())) {
+		else if(("manager").equals(user.getUserId())) {
         	user.setRole("ROLE_MANAGER");
         }
 		else {

@@ -25,21 +25,21 @@ public class UserController {
 	// 로그인 폼
 	@GetMapping("/loginForm")
 	public String login() {
-		return "users/loginForm"; 
+		return "/users/loginForm"; 
 	}
 	
 	// 로그인 폼
 	@GetMapping("/loginFail")
 	public String loginFail() {
-		return "users/loginFail"; 
+		return "/users/loginFail"; 
 	}
 	
 	// 로그인 성공
 	@GetMapping("/loginSucess")
 	public String loginSucess(Authentication authentication, HttpSession session) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-		System.out.print("로그인한 사용자 : ");
-		System.out.println(userDetails.getUsername());
+		System.out.print("★★★★★★★★★★★★★ 로그인성공 ID : ");
+		System.out.println(userDetails.getUsername()+" ★★★★★★★★★★★★★★★★★★★");
 		session.setAttribute("loginName", userDetails.getUsername());
 		return "redirect:/"; 
 	}
@@ -53,9 +53,20 @@ public class UserController {
 	// 회원가입
 	@PostMapping("/join")
 	public String join(User user) {
-		if (userService.join(user) == 1) {
-			System.out.println("회원가입 성공");
-		}
-		return "redirect:/loginForm";
+		System.out.println("들어온값 userid : "+user.getUserId());
+		System.out.println("들어온값 password : "+user.getPassword());
+		System.out.println("들어온값 username: "+user.getUserName());
+		System.out.println("들어온값 email : "+user.getEmail());
+		System.out.println("들어온값 phone : "+user.getPhone());
+		System.out.println("들어온값 gender : "+user.getGender());
+		System.out.println("들어온값 email yn : "+user.getEmailReceiveYn());
+		System.out.println("들어온값 sms yn :"+user.getSmsReceiveYn());
+		System.out.println("들어온값 zipcode :"+user.getZipCode());
+		System.out.println("들어온값 address :"+user.getAddress());
+		System.out.println("들어온값 detailAddress :"+user.getDetailAddress());
+		/*
+		 * if (userService.join(user) == 1) { System.out.println("회원가입 성공"); }
+		 */
+		return "redirect:/users/loginForm";
 	}
 }

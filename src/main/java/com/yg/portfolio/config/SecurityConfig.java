@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.formLogin()
 			.loginPage("/users/loginForm") //로그인 폼
+			.usernameParameter("userId") // 로그인시 사용되는 파라매터 수정 username -> userId
 			.loginProcessingUrl("/login") // LOGIN 주소가 호출되면 시큐리티가 낚아채서 대신 로그인을 진행 ( 컨트롤러에 /login에 대한 메소드 안만들어도 됨 )
 			.defaultSuccessUrl("/users/loginSucess", true) /*로그인 성공시 url*/
 			.failureUrl("/users/loginFail") /*로그인 실패시 url*/
