@@ -1,26 +1,19 @@
 package com.yg.portfolio.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AccountExpiredException;
-import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.CredentialsExpiredException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yg.portfolio.config.PrincipalDetails;
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.service.UserService;
 
@@ -28,6 +21,25 @@ import com.yg.portfolio.service.UserService;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+	
+	
+	@GetMapping("/test/oauth/login")
+	public @ResponseBody String loginOAuthTest(Authentication authentication, @AuthenticationPrincipal OAuth2User oauth) {
+		System.out.println("/test/oauth/login =================");
+		OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+		System.out.println("authentication : "+oAuth2User.getAttributes());
+		System.out.println("oauth2User : "+oauth.getAttributes());
+		return "OAuth 세션 정보 확인하기";
+	}
+	
+	@GetMapping("/test/login")
+	public @ResponseBody String loginTest(Authentication authentication, @AuthenticationPrincipal PrincipalDetails userDetails) {
+		System.out.println("/test/login =================");
+		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+		System.out.println("authentication : "+principalDetails.getUser()); 
+		System.out.println("userDetails : "+userDetails.getUser());
+		return "세션정보확인하기";
+	}
 	
 	@Autowired
 	private UserService userService;
@@ -68,9 +80,11 @@ public class UserController {
 	@GetMapping("/loginSucess")
 	public String loginSucess(Authentication authentication, HttpSession session) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
 		System.out.print("★★★★★★★★★★★★★ 로그인성공 ID : ");
 		System.out.println(userDetails.getUsername()+" ★★★★★★★★★★★★★★★★★★★");
 		session.setAttribute("loginName", userDetails.getUsername());
+		session.setAttribute("loginName", principalDetails.getUser());
 		return "redirect:/"; 
 	}
 
