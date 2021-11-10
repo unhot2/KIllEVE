@@ -56,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.oauth2Login()
 			.loginPage("/loginForm")
+			.defaultSuccessUrl("/users/loginSucess", true)
 			.userInfoEndpoint()
 			.userService(principalOauth2UserService);
 		// 구글로그인 완료 시 코드X, 엑세스토큰+사용자프포필정보를 한번에 받음

@@ -6,7 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.yg.portfolio.config.PrincipalDetails;
+
+import com.yg.portfolio.model.PrincipalDetails;
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.repository.UserRepository;
 
@@ -25,7 +26,7 @@ public class UserService implements UserDetailsService{
 	// 만약 바꾸려면 SecurityConfig에서 .usernameParameter("username2")와 같이 추가해주어야 함
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		User userEntity = userRepository.findByUsername(userId);
+		User userEntity = userRepository.findByUserId(userId);
 		if (userEntity != null) {
 			// 시큐리티 session = Authentication = UserDetails
 			// UserDetails 가 리턴되면 Authentication 내부에 들어가고 그 Authentication은 시큐리티 session내부에 들어감

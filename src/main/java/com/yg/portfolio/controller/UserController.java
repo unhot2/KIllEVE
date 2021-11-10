@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yg.portfolio.config.PrincipalDetails;
+import com.yg.portfolio.model.PrincipalDetails;
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.service.UserService;
 
@@ -78,13 +78,14 @@ public class UserController {
 	
 	// 로그인 성공
 	@GetMapping("/loginSucess")
-	public String loginSucess(Authentication authentication, HttpSession session) {
+	public String loginSucess(Authentication authentication, HttpSession session, @AuthenticationPrincipal PrincipalDetails principalDetailss) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+		System.out.println("principalDetailss 값 : "+principalDetailss.getUser());
 		System.out.print("★★★★★★★★★★★★★ 로그인성공 ID : ");
 		System.out.println(userDetails.getUsername()+" ★★★★★★★★★★★★★★★★★★★");
 		session.setAttribute("loginName", userDetails.getUsername());
-		session.setAttribute("loginName", principalDetails.getUser());
+		System.out.println("로그인 후 넘어온 값 : "+principalDetails.getUser());
 		return "redirect:/"; 
 	}
 

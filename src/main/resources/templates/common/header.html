@@ -31,9 +31,15 @@
 						<a th:href="@{/users/joinForm}">
 							<button type="button" class="btn nav-btn">Join</button>
 						</a>-->
-						<span th:if=${session.loginName}>
+						<!--<span th:if=${session.loginName}>
 							<span th:text="${session.loginName}+' 님'"></span>
-						</span>
+						</span>-->
+						<!--<span sec:authentication="principal.user">demo</span>-->
+						<th:block sec:authorize="isAuthenticated()">
+							<span sec:authentication="principal.username"></span>님
+						</th:block>
+
+
 						<a sec:authorize="isAnonymous()" th:href="@{/users/loginForm}">
 							<button type="button" class="btn nav-btn me-2">Login</button>
 						</a>

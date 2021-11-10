@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yg.portfolio.repository.UserRepository">
-	<select id="findByUsername" resultType="User">
-		select * from user where userId = #{userId}
+
+	<select id="findByUserId" resultType="User">
+		select * 
+		  from user 
+		 where userId = #{userId}
 	</select>
 	
 	<insert id="join">
-		insert into user(createDate,email,password,role,userName,userId,phone,gender,emailReceiveYn, smsReceiveYn,zipCode,address,detailAddress)
-		values(now(),#{email},#{password},#{role},#{userName},#{userId},#{phone},#{gender},#{emailReceiveYn},#{smsReceiveYn},#{zipCode},#{address},#{detailAddress}); 
+		insert into user (		<!-- id는 auto_increment => 생략 -->
+			 createDate			<!-- 가입일자 --> 
+		     , email			<!-- 이메일 -->
+		     , password			<!-- 비밀번호 -->
+			 , role				<!-- 권한 -->
+		     , userName			<!-- 유저이름 -->
+		     , userId			<!-- 유저아이디 -->
+		     , phone			<!-- 핸드폰 번호 -->
+		     , gender			<!-- 성별 -->
+		     , emailReceiveYn	<!-- 이메일 수신여부 -->
+		     , smsReceiveYn		<!-- 문자 수신여부 -->
+		     , zipCode			<!-- 우편번호 -->
+		     , address	 		<!-- 주소 -->
+		     , detailAddress)	<!-- 상세주소 -->
+		values (
+			   now()
+			 , #{email}
+			 , #{password}
+			 , #{role}
+			 , #{userName}
+			 , #{userId}
+			 , #{phone}
+			 , #{gender}
+			 , #{emailReceiveYn}
+			 , #{smsReceiveYn}
+			 , #{zipCode}
+			 , #{address}
+			 , #{detailAddress}) 
 	</insert>
 </mapper>
