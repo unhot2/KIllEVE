@@ -1,14 +1,25 @@
 package com.yg.portfolio.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AccountExpiredException;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.service.UserService;
@@ -29,7 +40,27 @@ public class UserController {
 	
 	// 로그인 폼
 	@GetMapping("/loginFail")
-	public String loginFail() {
+	public @ResponseBody String loginFail(Model model) {
+		/*
+		 * if (accessException instanceof AuthenticationServiceException) {
+		 * model.addAttribute("error", "존재하지 않는 사용자입니다."); System.out.println("존재x");
+		 * 
+		 * } else if(accessException instanceof BadCredentialsException) {
+		 * model.addAttribute("error", "비밀번호가 틀립니다."); System.out.println("비번x");
+		 * 
+		 * } else if(accessException instanceof LockedException) {
+		 * model.addAttribute("error", "잠긴 계정입니다..");
+		 * 
+		 * 
+		 * } else if(accessException instanceof DisabledException) {
+		 * model.addAttribute("error", "비활성화된 계정입니다..");
+		 * 
+		 * } else if(accessException instanceof AccountExpiredException) {
+		 * model.addAttribute("error", "만료된 계정입니다..");
+		 * 
+		 * } else if(accessException instanceof CredentialsExpiredException) {
+		 * model.addAttribute("error", "비밀번호가 만료되었습니다."); }
+		 */
 		return "/users/loginFail"; 
 	}
 	

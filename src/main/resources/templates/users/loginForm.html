@@ -24,9 +24,13 @@
 					<button class="login-btn">Login</button>
 					<a class="reset-psw" href="#">비밀번호를 잊어버리셨나요?</a>
 					<div class="seperator"><b>or</b></div>
-					<div class="social-icon">
-						<button type="button"><i class="fa fa-twitter"></i></button>
-						<button type="button"><i class="fa fa-facebook"></i></button>
+					<div class="form-group">
+						<a class="btn btn-lg btn-secondary" th:href="@{/kakao/oauth}">
+							<img src="/img/kakao_login_medium_wide.png">
+						</a>
+					</div>
+					<div class="form-group">
+						<img src="/img/btn_google_signin_light_normal_web.png">
 					</div>
 				</form>
 			</div>

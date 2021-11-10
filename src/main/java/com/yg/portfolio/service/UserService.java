@@ -25,17 +25,13 @@ public class UserService implements UserDetailsService{
 	// 만약 바꾸려면 SecurityConfig에서 .usernameParameter("username2")와 같이 추가해주어야 함
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		System.out.println("userId 값 : "+userId);
 		User userEntity = userRepository.findByUsername(userId);
 		if (userEntity != null) {
 			// 시큐리티 session = Authentication = UserDetails
 			// UserDetails 가 리턴되면 Authentication 내부에 들어가고 그 Authentication은 시큐리티 session내부에 들어감
 			return new PrincipalDetails(userEntity);
 		}
-		else {
-			System.out.println("★★★★★★★★★★★★★★★★★★★★★★★아이디 없음★★★★★★★★★★★★★★★★★★★★★★★");
-			return null;
-		}
+		return null;
 	}
 	
 	// 회원가입시 ID에 따라 ROLE 다르게 설정
