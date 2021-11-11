@@ -1,6 +1,5 @@
 package com.yg.portfolio.model;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,26 +21,4 @@ public class User {
 	private String role; //권한 이름
 	private String provider;
 	private String providerId;
-	
-	@Builder
-	public User(String userId, String userName, String password, String email, String phone, String gender,
-			String emailReceiveYn, String smsReceiveYn, String zipCode, String address, String detailAddress,
-			String role, String provider, String providerId) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.password = password;
-		this.email = email;
-		this.phone = phone;
-		this.gender = gender;
-		this.emailReceiveYn = emailReceiveYn;
-		this.smsReceiveYn = smsReceiveYn;
-		this.zipCode = zipCode;
-		this.address = address;
-		this.detailAddress = detailAddress;
-		this.role = role;
-		this.provider = provider;
-		this.providerId = providerId;
-	}
-	
 }

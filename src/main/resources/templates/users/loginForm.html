@@ -25,13 +25,18 @@
 					<a class="reset-psw" href="#">비밀번호를 잊어버리셨나요?</a>
 					<div class="seperator"><b>or</b></div>
 					<div class="form-group">
-						<a class="btn btn-lg btn-secondary" th:href="@{/oauth2/authorization/kakao}">
-							<img src="/img/kakao_login_medium_wide.png">
+						<a class="btn btn-lg btn-secondary" th:href="@{/oauth2/authorization/google}">
+							<img src="/img/btn_google_signin_light_normal_web.png">
 						</a>
 					</div>
 					<div class="form-group">
-						<a class="btn btn-lg btn-secondary" th:href="@{/oauth2/authorization/google}">
-							<img src="/img/btn_google_signin_light_normal_web.png">
+						<a class="btn btn-lg btn-secondary" th:href="@{/oauth2/authorization/facebook}">
+							페이스북 로그인
+						</a>
+					</div>
+					<div class="form-group">
+						<a class="btn btn-lg btn-secondary" th:href="@{/oauth2/authorization/naver}">
+							네이버 로그인
 						</a>
 					</div>
 				</form>

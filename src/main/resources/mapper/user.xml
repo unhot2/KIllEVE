@@ -3,13 +3,13 @@
 <mapper namespace="com.yg.portfolio.repository.UserRepository">
 
 	<select id="findByUserId" resultType="User">
-		select * 
-		  from user 
-		 where userId = #{userId}
+		SELECT * 
+		  FROM user 
+		 WHERE userId = #{userId}
 	</select>
 	
 	<insert id="join">
-		insert into user (		<!-- id는 auto_increment => 생략 -->
+		INSERT INTO user (		<!-- id는 auto_increment => 생략 -->
 			 createDate			<!-- 가입일자 --> 
 		     , email			<!-- 이메일 -->
 		     , password			<!-- 비밀번호 -->
@@ -23,7 +23,7 @@
 		     , zipCode			<!-- 우편번호 -->
 		     , address	 		<!-- 주소 -->
 		     , detailAddress)	<!-- 상세주소 -->
-		values (
+		VALUES (
 			   now()
 			 , #{email}
 			 , #{password}
@@ -37,5 +37,30 @@
 			 , #{zipCode}
 			 , #{address}
 			 , #{detailAddress}) 
+	</insert>
+	
+	<insert id="oAuthJoin">
+		INSERT INTO user (		<!-- id는 auto_increment => 생략 -->
+			 createDate			<!-- 가입일자 --> 
+		     , email			<!-- 이메일 -->
+		     , password			<!-- 비밀번호 -->
+			 , role				<!-- 권한 -->
+		     , userName			<!-- 유저이름 -->
+		     , userId			<!-- 유저아이디 -->
+		     , emailReceiveYn	<!-- 이메일 수신여부 -->
+		     , smsReceiveYn		<!-- 문자 수신여부 -->
+		     , provider			<!-- Provider -->
+		     , providerId)		<!-- Provider Id -->
+		VALUES (
+			   now()
+			 , #{email}
+			 , #{password}
+			 , #{role}
+			 , #{userName}
+			 , #{userId}
+			 , #{emailReceiveYn}
+			 , #{smsReceiveYn}
+			 , #{provider}
+			 , #{providerId})
 	</insert>
 </mapper>

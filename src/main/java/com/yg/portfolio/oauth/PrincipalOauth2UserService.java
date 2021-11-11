@@ -1,5 +1,7 @@
 package com.yg.portfolio.oauth;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -10,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.yg.portfolio.model.PrincipalDetails;
 import com.yg.portfolio.model.User;
+import com.yg.portfolio.oauth.provider.FacebookUserInfo;
+import com.yg.portfolio.oauth.provider.GoogleUserInfo;
+import com.yg.portfolio.oauth.provider.NaverUserInfo;
+import com.yg.portfolio.oauth.provider.OAuth2UserInfo;
 import com.yg.portfolio.repository.UserRepository;
-
 
 @Service
 public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
@@ -34,36 +39,41 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-		System.out.println("getClientRegistration : " + userRequest.getClientRegistration()); // registrationId 로 어떤 Oauth로 로그인했는지 확인가능
-		System.out.println("getAccessToken : " + userRequest.getAccessToken().getTokenValue());
-
+//		System.out.println("getClientRegistration : " + userRequest.getClientRegistration()); // registrationId 로 어떤
+//		System.out.println("getAccessToken : " + userRequest.getAccessToken().getTokenValue());
+//		System.out.println("getAttributes : " + super.loadUser(userRequest).getAttributes()); // 구글 아이디 정보
 		OAuth2User oauth2User = super.loadUser(userRequest);
+
+		OAuth2UserInfo oAuth2UserInfo = null;
+		if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+			oAuth2UserInfo = new GoogleUserInfo(oauth2User.getAttributes());
+		} else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+			oAuth2UserInfo = new FacebookUserInfo(oauth2User.getAttributes());
+
+		} else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+			oAuth2UserInfo = new NaverUserInfo((Map)oauth2User.getAttributes().get("response"));
+
+		} else {
+			System.out.println("구글, 페이스북만 지원합니다.");
+		}
 		// 구글로그인버튼 클릭 -> 구글로그인창 -> 로그인 -> code리턴(OauthCline라이브러리가 받음) -> AccessToken 요청
 		// : 여기까지가 userRequest정보
 		// userRequest정보를 loadUser함수에 사용하여 회원프로필 정보를 받을 수 있음
-		System.out.println("getAttributes : " + super.loadUser(userRequest).getAttributes()); // 구글 아이디 정보
-
-		String provider = userRequest.getClientRegistration().getClientName(); // google
-		String providerId = oauth2User.getAttribute("sub"); // 102359424997605896130
-		String userId = provider + "_" + providerId; // google_102359424997605896130
-		String userName = oauth2User.getAttribute("name");
-		String password = bCryptPasswordEncoder.encode("killeve"); // 의미없지만 명목상 생성
-		String email = oauth2User.getAttribute("email");
-		String role = "ROLE_USER";
-		
-		
-		User userEntity = userRepository.findByUserId(userId); // userId이 있는지 찾음
+		User userEntity = userRepository.findByUserId(oAuth2UserInfo.getUserId()); // userId이 있는지 찾음
 		if (userEntity == null) {
-			userEntity = User.builder()
-			.userId(userId)
-			.userName(userName)
-			.password(password)
-			.email(email)
-			.role(role)
-			.build();
-			System.out.println("★★★★★★★★ userEntity 값 : "+userEntity);
-			userRepository.join(userEntity);
-		} 
-		return new PrincipalDetails(userEntity,oauth2User.getAttributes());
+			userEntity = new User();
+			userEntity.setUserId(oAuth2UserInfo.getUserId());
+			userEntity.setUserName(oAuth2UserInfo.getName());
+			userEntity.setPassword(bCryptPasswordEncoder.encode("killeve"));
+			userEntity.setEmail(oAuth2UserInfo.getEmail());
+			userEntity.setRole("ROLE_USER");
+			userEntity.setEmailReceiveYn("Y"); // 이메일 수신여부 기본값 Y로 설정
+			userEntity.setSmsReceiveYn("Y"); // 문자 수신여부 기본값 Y로 설정
+			userEntity.setProvider(oAuth2UserInfo.getProvider());
+			userEntity.setProviderId(oAuth2UserInfo.getProviderId());
+//			System.out.println("userEntity값 : ★★★" + userEntity);
+			userRepository.oAuthJoin(userEntity);
+		}
+		return new PrincipalDetails(userEntity, oauth2User.getAttributes());
 	}
 }

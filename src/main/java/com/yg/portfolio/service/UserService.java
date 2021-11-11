@@ -46,6 +46,7 @@ public class UserService implements UserDetailsService{
 		else {
 			user.setRole("ROLE_USER");
 		}
+		// BCryptPasswordEncoder 통해 비밀번호 암호화
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userRepository.join(user);
 	}
