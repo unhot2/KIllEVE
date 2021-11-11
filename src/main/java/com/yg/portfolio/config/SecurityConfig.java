@@ -3,26 +3,52 @@ package com.yg.portfolio.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import com.yg.portfolio.oauth.PrincipalOauth2UserService;
+import com.yg.portfolio.service.UserService;
+
 
 @Configuration //이 클래스를 통해 bean 등록이나 각종 설정을 하겠다는 표시
 @EnableWebSecurity // Spring Security 설정할 클래스라고 정의합니다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-	@Autowired
+	
+	
 	// OAuth 로그인 Service
+	@Autowired
 	private PrincipalOauth2UserService principalOauth2UserService;
+	// 로그인 실패
+	@Autowired
+	private AuthFailureHandler authFailureHandler;
+	@Autowired
+	private UserService userServcie;
+	
 	
 	@Bean //회원가입시 비번 암호화에 필요한 bean 등록
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	@Bean
+	public DaoAuthenticationProvider daoAuthenticationProvider() {
+	    DaoAuthenticationProvider bean = new DaoAuthenticationProvider();
+	    bean.setHideUserNotFoundExceptions(false);
+	    bean.setUserDetailsService(userServcie);
+	    bean.setPasswordEncoder(passwordEncoder());
+	    
+	    return bean;
+	}
+	 
+	@Override 
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	    auth.authenticationProvider(this.daoAuthenticationProvider());
+	}
+
 	
 	@Override
     public void configure(WebSecurity web) throws Exception {
@@ -43,7 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.usernameParameter("userId") // 로그인시 사용되는 파라매터 수정 username -> userId
 			.loginProcessingUrl("/login") // LOGIN 주소가 호출되면 시큐리티가 낚아채서 대신 로그인을 진행 ( 컨트롤러에 /login에 대한 메소드 안만들어도 됨 )
 			.defaultSuccessUrl("/users/loginSucess", true) /*로그인 성공시 url*/
-			.failureUrl("/users/loginFail") /*로그인 실패시 url*/
+			.failureHandler(authFailureHandler)
+//			.failureUrl("/users/loginFail").permitAll() /*로그인 실패시 url*/
 		.and() // 로그아웃 설정
 	        .logout()
 	        .logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL

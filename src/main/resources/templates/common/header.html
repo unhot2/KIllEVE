@@ -25,36 +25,32 @@
 					<!--서치바-->
 
 					<div class="text-end">
-						<!--<a th:href="@{/users/loginForm}">
-							<button type="button" class="btn nav-btn me-2">Login</button>
-						</a>
-						<a th:href="@{/users/joinForm}">
-							<button type="button" class="btn nav-btn">Join</button>
-						</a>-->
-						<!--<span th:if=${session.loginName}>
-							<span th:text="${session.loginName}+' 님'"></span>
-						</span>-->
-						<!--<span sec:authentication="principal.user">demo</span>-->
-						<th:block sec:authorize="isAuthenticated()">
+						<th:block th:if="${session.userRole != null }">
 							<span sec:authentication="principal.username"></span>님
 						</th:block>
-
-
-						<a sec:authorize="isAnonymous()" th:href="@{/users/loginForm}">
-							<button type="button" class="btn nav-btn me-2">Login</button>
-						</a>
-						<a sec:authorize="isAnonymous()" th:href="@{/users/joinForm}">
-							<button type="button" class="btn nav-btn">Join</button>
-						</a>
-						<a sec:authorize="isAuthenticated()" th:href="@{/logout}">
-							<button type="button" class="btn nav-btn">Logout</button>
-						</a>
-						<a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/manager}">
-							<button type="button" class="btn nav-btn">Manager</button>
-						</a>
-						<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">
-							<button type="button" class="btn nav-btn">Admin</button>
-						</a>
+						<th:block th:if="${session.userRole == null}">
+							<a th:href="@{/users/loginForm}">
+								<button type="button" class="btn nav-btn me-2">Login</button>
+							</a>
+							<a th:href="@{/users/joinForm}">
+								<button type="button" class="btn nav-btn">Join</button>
+							</a>
+						</th:block>
+						<th:block th:if="${session.userRole != null }">
+							<a th:href="@{/logout}">
+								<button type="button" class="btn nav-btn">Logout</button>
+							</a>
+						</th:block>
+						<th:block th:if="${session.userRole == 'ROLE_MANAGER' }">
+							<a th:href="@{/manager}">
+								<button type="button" class="btn nav-btn">Manager</button>
+							</a>
+						</th:block>
+						<th:block th:if="${session.userRole == 'ROLE_ADMIN' }">
+							<a th:href="@{/admin}">
+								<button type="button" class="btn nav-btn">Admin</button>
+							</a>
+						</th:block>
 					</div>
 				</div>
 			</div>

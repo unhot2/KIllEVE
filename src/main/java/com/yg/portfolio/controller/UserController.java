@@ -1,13 +1,16 @@
 package com.yg.portfolio.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yg.portfolio.model.PrincipalDetails;
@@ -18,61 +21,14 @@ import com.yg.portfolio.service.UserService;
 @RequestMapping("/users")
 public class UserController {
 
-	/*
-	 * @GetMapping("/test/oauth/login") public @ResponseBody String
-	 * loginOAuthTest(Authentication authentication,
-	 * 
-	 * @AuthenticationPrincipal OAuth2User oauth) {
-	 * System.out.println("/test/oauth/login ================="); OAuth2User
-	 * oAuth2User = (OAuth2User) authentication.getPrincipal();
-	 * System.out.println("authentication : " + oAuth2User.getAttributes());
-	 * System.out.println("oauth2User : " + oauth.getAttributes()); return
-	 * "OAuth 세션 정보 확인하기"; }
-	 * 
-	 * @GetMapping("/test/login") public @ResponseBody String
-	 * loginTest(Authentication authentication,
-	 * 
-	 * @AuthenticationPrincipal PrincipalDetails userDetails) {
-	 * System.out.println("/test/login ================="); PrincipalDetails
-	 * principalDetails = (PrincipalDetails) authentication.getPrincipal();
-	 * System.out.println("authentication : " + principalDetails.getUser());
-	 * System.out.println("userDetails : " + userDetails.getUser()); return
-	 * "세션정보확인하기"; }
-	 */
-
 	@Autowired
 	private UserService userService;
 
 	// 로그인 폼
-	@GetMapping("/loginForm")
-	public String login() {
+	@RequestMapping(value = "/loginForm", method= {RequestMethod.GET, RequestMethod.POST})
+	public String login(@RequestParam(value = "error", required = false) String error, Model model) {
+		model.addAttribute("error",error);
 		return "/users/loginForm";
-	}
-
-	// 로그인 실패 메소드 (보류)
-	@GetMapping("/loginFail")
-	public @ResponseBody String loginFail(Model model) {
-		/*
-		 * if (accessException instanceof AuthenticationServiceException) {
-		 * model.addAttribute("error", "존재하지 않는 사용자입니다."); System.out.println("존재x");
-		 * 
-		 * } else if(accessException instanceof BadCredentialsException) {
-		 * model.addAttribute("error", "비밀번호가 틀립니다."); System.out.println("비번x");
-		 * 
-		 * } else if(accessException instanceof LockedException) {
-		 * model.addAttribute("error", "잠긴 계정입니다..");
-		 * 
-		 * 
-		 * } else if(accessException instanceof DisabledException) {
-		 * model.addAttribute("error", "비활성화된 계정입니다..");
-		 * 
-		 * } else if(accessException instanceof AccountExpiredException) {
-		 * model.addAttribute("error", "만료된 계정입니다..");
-		 * 
-		 * } else if(accessException instanceof CredentialsExpiredException) {
-		 * model.addAttribute("error", "비밀번호가 만료되었습니다."); }
-		 */
-		return "/users/loginFail";
 	}
 
 	// 로그인 성공 메소드
@@ -80,7 +36,7 @@ public class UserController {
 	// 1. Authentication을 통해 principalDetails로 다운캐스팅하여 가져오는 방법
 	// 2. @AuthenticationPrincipal 어노테이션을 통해 바로 PrincipalDetails에서 User를 가져오는 방법
 	@GetMapping("/loginSucess")
-	public String loginSucess(@AuthenticationPrincipal PrincipalDetails principalDetailss) {
+	public String loginSucess(@AuthenticationPrincipal PrincipalDetails principalDetailss, HttpSession session) {
 		System.out.println("");
 		if (principalDetailss.getUser().getProvider() == null) {
 			System.out.println("★★★★★ 일반 로그인 ★★★★★	" );
@@ -101,6 +57,8 @@ public class UserController {
 		System.out.println("★★★★★ Phone		값 : " + principalDetailss.getUser().getPhone());
 		System.out.println("★★★★★ Provider		값 : " + principalDetailss.getUser().getProvider());
 		System.out.println("★★★★★ ProviderId	값 : " + principalDetailss.getUser().getProviderId());
+		System.out.println(principalDetailss.getUser().getRole());
+		session.setAttribute("userRole", principalDetailss.getUser().getRole());
 		return "redirect:/";
 	}
 

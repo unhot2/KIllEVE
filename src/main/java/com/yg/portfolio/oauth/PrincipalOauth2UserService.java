@@ -32,18 +32,14 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 	// userRequest.getAccessToken() = 엑세스토큰 값
 	// super.loadUser(userRequest).getAttributes() = sub(구글로그인 primary key), name,
 	// given_name, email 등의 정보
-	// id = 구글 sub 사용 ex) 102359424997605896130 -> google_102359424997605896130
-	// password = 암호화(killeve)로 사용 : db에 저장되있는 pw로 로그인하는게 아니기 때문에 상관없음
-	// email = 구글 email
-	// role = "ROLE_USER"로 사용
-
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-//		System.out.println("getClientRegistration : " + userRequest.getClientRegistration()); // registrationId 로 어떤
+//		System.out.println("getClientRegistration : " + userRequest.getClientRegistration()); 
 //		System.out.println("getAccessToken : " + userRequest.getAccessToken().getTokenValue());
-//		System.out.println("getAttributes : " + super.loadUser(userRequest).getAttributes()); // 구글 아이디 정보
+//		System.out.println("getAttributes : " + super.loadUser(userRequest).getAttributes()); 
 		OAuth2User oauth2User = super.loadUser(userRequest);
 
+		// 인터페이스를 통해서 구글,네이버,페이스북마다 각각 다른 값을 하나의 oAuthUserInfo에 담기위한 설정
 		OAuth2UserInfo oAuth2UserInfo = null;
 		if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
 			oAuth2UserInfo = new GoogleUserInfo(oauth2User.getAttributes());
@@ -51,11 +47,9 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			oAuth2UserInfo = new FacebookUserInfo(oauth2User.getAttributes());
 
 		} else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
-			oAuth2UserInfo = new NaverUserInfo((Map)oauth2User.getAttributes().get("response"));
-
-		} else {
-			System.out.println("구글, 페이스북만 지원합니다.");
+			oAuth2UserInfo = new NaverUserInfo((Map) oauth2User.getAttributes().get("response"));
 		}
+
 		// 구글로그인버튼 클릭 -> 구글로그인창 -> 로그인 -> code리턴(OauthCline라이브러리가 받음) -> AccessToken 요청
 		// : 여기까지가 userRequest정보
 		// userRequest정보를 loadUser함수에 사용하여 회원프로필 정보를 받을 수 있음
@@ -71,7 +65,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			userEntity.setSmsReceiveYn("Y"); // 문자 수신여부 기본값 Y로 설정
 			userEntity.setProvider(oAuth2UserInfo.getProvider());
 			userEntity.setProviderId(oAuth2UserInfo.getProviderId());
-//			System.out.println("userEntity값 : ★★★" + userEntity);
 			userRepository.oAuthJoin(userEntity);
 		}
 		return new PrincipalDetails(userEntity, oauth2User.getAttributes());
