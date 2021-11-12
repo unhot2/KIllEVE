@@ -1,22 +1,19 @@
 package com.yg.portfolio.service;
 
-import javax.servlet.RequestDispatcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.yg.portfolio.model.PrincipalDetails;
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.repository.UserRepository;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 // 시큐리티 설정에서 loginProcessingURL("/login")
 // login 요청이 들어오면 자동으로 UserDetailsService 타입으로 IoC되어 있는 loadUserByUsername 함수가 실행
@@ -34,13 +31,11 @@ public class UserService implements UserDetailsService {
 // 	UserDetails 가 리턴되면 Authentication 내부에 들어가고 그 Authentication은 시큐리티 securityContextHolder에 들어감
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		User userEntity = userRepository.findByUserId(userId);
-		if (userEntity == null) {
-			throw new BadCredentialsException(String.format("아이디를 찾을 수 없음"));
-		}
-		else {
+			User userEntity = userRepository.findByUserId(userId);
+			if (userEntity == null) {
+				throw new UsernameNotFoundException("존재하지 않는 아이디 입니다.");
+			}
 			return new PrincipalDetails(userEntity);
-		}
 	}
 //	@Override
 //	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
