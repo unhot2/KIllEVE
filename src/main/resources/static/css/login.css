@@ -5,14 +5,6 @@
   margin-bottom: 30px;
   font-weight: normal;
 }
-.login-form .social-icon {
-    width: 100%;
-    font-size: 20px;
-    padding-top: 20px;
-    color: #fff;
-    text-align: center;
-    float: left;
-}
 .login-form {
     background: #212529;
     width: 450px;
@@ -76,17 +68,6 @@
   text-align: center;
   margin-top: 11px;
 }
-.login-form .social-icon button {
-    font-size: 20px;
-    color: white;
-    height: 50px;
-    width: 50px;
-    background: #45aba6;
-    border-radius: 60%;
-    margin: 0px 10px;
-    border: none;
-    cursor: pointer;
-}
 .login-form button:hover{
   opacity: 0.9;
 }
@@ -111,13 +92,7 @@
   top: -22px;
   z-index: 1;
 }
-.login-form p {
-  float: left;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  margin: 0 0 10px;
-}
+
 @media screen and (max-width:767px) {
 .login-form {
     width: 90%;

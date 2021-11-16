@@ -11,6 +11,9 @@ public interface UserRepository {
 	// 로그인시 아이디 존재여부 조회
 	public User findByUserId(String userId);
 	
+	// 로그인시 아이디 존재여부 조회
+	public int findId(String userId);
+	
 	// 회원가입
 	public int join (User user);
 	

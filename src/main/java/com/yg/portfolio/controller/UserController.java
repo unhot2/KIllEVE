@@ -1,5 +1,7 @@
 package com.yg.portfolio.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +27,9 @@ public class UserController {
 	private UserService userService;
 
 	// 로그인 폼
-	@RequestMapping(value = "/loginForm", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/loginForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(@RequestParam(value = "error", required = false) String error, Model model) {
-		model.addAttribute("error",error);
+		model.addAttribute("error", error);
 		return "/users/loginForm";
 	}
 
@@ -39,9 +41,9 @@ public class UserController {
 	public String loginSucess(@AuthenticationPrincipal PrincipalDetails principalDetailss, HttpSession session) {
 		System.out.println("");
 		if (principalDetailss.getUser().getProvider() == null) {
-			System.out.println("★★★★★ 일반 로그인 ★★★★★	" );
+			System.out.println("★★★★★ 일반 로그인 ★★★★★	");
 		} else {
-			System.out.println("★★★★★ "+principalDetailss.getUser().getProvider()+" OAuth 로그인 ★★★★★	" );
+			System.out.println("★★★★★ " + principalDetailss.getUser().getProvider() + " OAuth 로그인 ★★★★★	");
 		}
 		System.out.println("★★★★★ UserId		값 : " + principalDetailss.getUser().getUserId());
 		System.out.println("★★★★★ Password		값 : " + principalDetailss.getUser().getPassword());
@@ -64,8 +66,22 @@ public class UserController {
 
 	// 회원가입 폼
 	@GetMapping("/joinForm")
-	public String joinForm() {
+	public String joinForm(@RequestParam(value = "nomalJoin", required = false) String nomalJoin, Model model) {
+		if (nomalJoin != null) {
+			model.addAttribute("nomalJoin", "Y");
+		}
 		return "/users/joinForm";
+	}
+
+	// 회원가입 => 아이디 중복체크
+	@GetMapping("/findId")
+	public @ResponseBody int findId(@RequestParam(value = "userId", required = false) String userId) {
+		int cnt = userService.findId(userId);
+		if (cnt >= 1) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 	// 회원가입

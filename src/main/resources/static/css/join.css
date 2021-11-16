@@ -3,3 +3,141 @@
   margin : 16px 0;
 }
 
+.join-form {
+    width: 450px;
+    border-radius: 6px;
+    margin: 0px auto;
+    display: table;
+    padding: 15px 30px 30px;
+    box-sizing: border-box;
+}
+
+.join-form .title {
+	border-bottom: 1px solid #c0bfbf;
+}
+
+.join-form .title h1 {
+	margin : 0 auto;
+	font-size : 18px;
+	padding : 18px 0;
+}
+
+.join-form .form-group img {
+	width: 31px;
+    height: 31px;
+    margin: 12px;
+}
+
+.join-content{
+	padding : 40px 126px;
+}
+
+.join-table > tbody > tr {
+	font-size : 12px;
+	color : #575757;
+	border-top: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	
+}
+.join-table > tbody > tr > th {
+	width : 200px;
+	background-color: #fbfafa;
+	padding : 11px 14px;
+	
+}
+.join-table > tbody > tr > td {
+	width : 773px;
+	display : flex;
+	padding : 11px 14px;
+}
+
+.requiredText {
+    display: inline-block;
+    float: right;
+    position: relative;
+    top: -44px;
+    left: -73px;
+    font-size: 12px;
+    color: #575757;
+}
+
+.join-table .joinInput {
+	width : 152px;
+	border: 1px solid #d5d5d5;
+}
+
+.join-table .joinCheckInput {
+	width: 13px;
+    border: 1px solid #d5d5d5;
+    position: relative;
+    top: 5px;
+}
+.join-table span {
+	padding : 2px 5px;
+}
+
+.sexText {
+	position: relative;
+    top: -2px;
+    padding: 0 6px;
+}
+
+.birthInput1{
+	width : 77px;
+	border: 1px solid #d5d5d5;
+}
+
+.birthInput2{
+	width : 52px;
+	border: 1px solid #d5d5d5;
+}
+
+.check-span {
+	display: inline-block;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.font {
+	font-size:12px; 
+	font-weight: 700;
+}
+
+.font-s {
+	font-size: 12px;
+    color: #575757;
+}
+
+.termsBox {
+	resize:none;
+	width: 933px;
+    padding: 12px 20px;
+    margin: 15px 0px;	
+}
+
+.terms-table tr {
+	background-color: #fbfafa;
+	border: 1px solid #dfdfdf;
+}
+
+.terms-table tr th{
+	padding : 20px;
+}
+
+.join-btn {
+  background: #45aba6;
+  padding: 11px 50px;
+  border-color: #45aba6;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 20px;
+  border: 1px solid #45aba6;
+  border-radius: 44px;
+  width: 100%;
+  height: 56px;
+  cursor: pointer;
+}

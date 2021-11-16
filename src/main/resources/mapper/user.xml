@@ -8,6 +8,12 @@
 		 WHERE userId = #{userId}
 	</select>
 	
+	<select id="findId" resultType="Integer">
+		SELECT count(*) 
+		  FROM user 
+		 WHERE userId = #{userId}
+	</select>
+	
 	<insert id="join">
 		INSERT INTO user (		<!-- id는 auto_increment => 생략 -->
 			 createDate			<!-- 가입일자 --> 

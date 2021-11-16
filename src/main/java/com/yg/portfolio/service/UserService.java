@@ -68,5 +68,10 @@ public class UserService implements UserDetailsService {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userRepository.join(user);
 	}
+	
+	public int findId(String userId) {
+		return userRepository.findId(userId);
+		
+	}
 
 }
