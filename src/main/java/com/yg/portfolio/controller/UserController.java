@@ -98,7 +98,10 @@ public class UserController {
 		System.out.println("들어온값 zipcode :" + user.getZipCode());
 		System.out.println("들어온값 address :" + user.getAddress());
 		System.out.println("들어온값 detailAddress :" + user.getDetailAddress());
-		userService.join(user);
+		System.out.println("들어온값 birthYear :" + user.getBirthYear());
+		System.out.println("들어온값 birthMonth :" + user.getBirthMonth());
+		System.out.println("들어온값 birthDay :" + user.getBirthDay());
+//		userService.join(user);
 		return "redirect:/users/loginForm";
 	}
 }

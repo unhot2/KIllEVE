@@ -18,11 +18,13 @@ $(function() {
 					if (res == 1) {
 						$(".chkId").html("이미 존재하는 아이디 입니다.")
 							.css({ "color": "red" })
+						$(".chkId").addClass("ErrorId");
 					}
 					// 아이디 없음
 					else {
 						$(".chkId").html("사용 가능한 아이디 입니다.")
 							.css({ "color": "green" })
+						$(".chkId").removeClass("ErrorId");
 					}
 				},
 				error: function(data) {
@@ -71,7 +73,30 @@ $(function() {
 	});
 });
 
-
+// 생년월일 selectBox 생성 
+$(document).ready(function(){
+	 var now = new Date(); 
+	 var year = now.getFullYear(); 
+	 var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1);
+	 var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate()); 
+	 //년도 selectbox만들기 
+	 for(var i = 1900 ; i <= year ; i++) {
+		$('#year').append('<option value="' + i + '">' + i + '년</option>'); 
+	 } 
+	 // 월별 selectbox 만들기 
+	 for(var i=1; i <= 12; i++) {
+		var mm = i > 9 ? i : "0"+i ;
+		$('#month').append('<option value="' + mm + '">' + mm + '월</option>');
+	 } 
+	 // 일별 selectbox 만들기 
+	 for(var i=1; i <= 31; i++) {
+		var dd = i > 9 ? i : "0"+i ;
+		$('#day').append('<option value="' + dd + '">' + dd+ '일</option>');
+	 } 
+	 $("#year > option[value="+year+"]").attr("selected", "true");
+	 $("#month > option[value="+mon+"]").attr("selected", "true");
+	 $("#day > option[value="+day+"]").attr("selected", "true"); 
+})
 
 
 $(function() {
@@ -79,11 +104,13 @@ $(function() {
 	var modalContents = $(".modal-contents");
 	var modal = $("#defaultModal");
 
+	// modal 창 close 기능
 	$("#close").click(function() {
 		$("#defaultModal").modal("hide");
 	});
 
 
+	// 값 검증 기능
 	$('.onlyAlphabetAndNumber').keyup(function(event) {
 		if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
 			var inputVal = $(this).val();
@@ -109,7 +136,6 @@ $(function() {
 	$('#id').keyup(function(event) {
 
 		var divId = $('#divId');
-
 		if ($('#id').val() == "") {
 			divId.removeClass("has-success");
 			divId.addClass("has-error");
@@ -213,37 +239,22 @@ $(function() {
 		var divEmail = $('#divEmail');
 		var divPhoneNumber = $('#divPhoneNumber');
 
-		//회원가입약관
-		if ($('#provisionYn:checked').val() == "N") {
-			modalContents.text("회원가입약관에 동의하여 주시기 바랍니다."); //모달 메시지 입력
-			modal.modal('show'); //모달 띄우기
-
-			provision.removeClass("has-success");
-			provision.addClass("has-error");
-			$('#provisionYn').focus();
-			return false;
-		} else {
-			provision.removeClass("has-error");
-			provision.addClass("has-success");
-		}
-
-		//개인정보취급방침
-		if ($('#memberInfoYn:checked').val() == "N") {
-			modalContents.text("개인정보취급방침에 동의하여 주시기 바랍니다.");
-			modal.modal('show');
-
-			memberInfo.removeClass("has-success");
-			memberInfo.addClass("has-error");
-			$('#memberInfoYn').focus();
-			return false;
-		} else {
-			memberInfo.removeClass("has-error");
-			memberInfo.addClass("has-success");
-		}
-
 		//아이디 검사
 		if ($('#id').val() == "") {
 			modalContents.text("아이디를 입력하여 주시기 바랍니다.");
+			modal.modal('show');
+
+			divId.removeClass("has-success");
+			divId.addClass("has-error");
+			$('#id').focus();
+			return false;
+		} else {
+			divId.removeClass("has-error");
+			divId.addClass("has-success");
+		}
+		
+		if($(".chkId").hasClass("ErrorId") === true) {
+			modalContents.text("중복되지 않는 아이디로 수정해주시기 바랍니다.");
 			modal.modal('show');
 
 			divId.removeClass("has-success");
@@ -311,46 +322,72 @@ $(function() {
 			divName.addClass("has-success");
 		}
 
-		//별명
-		if ($('#nickname').val() == "") {
-			modalContents.text("별명을 입력하여 주시기 바랍니다.");
-			modal.modal('show');
-
-			divNickname.removeClass("has-success");
-			divNickname.addClass("has-error");
-			$('#nickname').focus();
-			return false;
-		} else {
-			divNickname.removeClass("has-error");
-			divNickname.addClass("has-success");
-		}
-
-		//이메일
-		if ($('#email').val() == "") {
-			modalContents.text("이메일을 입력하여 주시기 바랍니다.");
-			modal.modal('show');
-
-			divEmail.removeClass("has-success");
-			divEmail.addClass("has-error");
-			$('#email').focus();
-			return false;
-		} else {
-			divEmail.removeClass("has-error");
-			divEmail.addClass("has-success");
-		}
-
-		//휴대폰 번호
-		if ($('#phoneNumber').val() == "") {
-			modalContents.text("휴대폰 번호를 입력하여 주시기 바랍니다.");
+		//우편번호
+		if ($('#zipCode').val() == "") {
+			modalContents.text("우편번호를 입력하여 주시기 바랍니다.");
 			modal.modal('show');
 
 			divPhoneNumber.removeClass("has-success");
 			divPhoneNumber.addClass("has-error");
-			$('#phoneNumber').focus();
+			$('#zipCode').focus();
 			return false;
 		} else {
 			divPhoneNumber.removeClass("has-error");
 			divPhoneNumber.addClass("has-success");
+		}
+		// 기본주소
+		if ($('#address').val() == "") {
+			modalContents.text("기본주소를 입력하여 주시기 바랍니다.");
+			modal.modal('show');
+
+			divPhoneNumber.removeClass("has-success");
+			divPhoneNumber.addClass("has-error");
+			$('#address').focus();
+			return false;
+		} else {
+			divPhoneNumber.removeClass("has-error");
+			divPhoneNumber.addClass("has-success");
+		}
+		// 상세주소
+		if ($('#detailAddress').val() == "") {
+			modalContents.text("상세주소를 입력하여 주시기 바랍니다.");
+			modal.modal('show');
+
+			divPhoneNumber.removeClass("has-success");
+			divPhoneNumber.addClass("has-error");
+			$('#detailAddress').focus();
+			return false;
+		} else {
+			divPhoneNumber.removeClass("has-error");
+			divPhoneNumber.addClass("has-success");
+		}
+		
+		//회원가입약관
+		if ($('#joinCheck:checked').val() != "Y") {
+			modalContents.text("회원가입약관에 동의하여 주시기 바랍니다."); //모달 메시지 입력
+			modal.modal('show'); //모달 띄우기
+
+			provision.removeClass("has-success");
+			provision.addClass("has-error");
+			$('#joinCheck').focus();
+			return false;
+		} else {
+			provision.removeClass("has-error");
+			provision.addClass("has-success");
+		}
+
+		//개인정보취급방침
+		if ($('#personCheck:checked').val() != "Y") {
+			modalContents.text("개인정보취급방침에 동의하여 주시기 바랍니다.");
+			modal.modal('show');
+
+			memberInfo.removeClass("has-success");
+			memberInfo.addClass("has-error");
+			$('#personCheck').focus();
+			return false;
+		} else {
+			memberInfo.removeClass("has-error");
+			memberInfo.addClass("has-success");
 		}
 	});
 });

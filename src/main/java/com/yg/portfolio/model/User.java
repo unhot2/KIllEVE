@@ -6,19 +6,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class User {
-	private int id; //회원 아이디
-	private String userId;
-	private String userName; // 회원 이름
-	private String password;// 비밀번호
-	private String email; // 이메일
-	private String phone;
-	private String gender;
-	private String emailReceiveYn;
-	private String smsReceiveYn;
-	private String zipCode;
-	private String address;
-	private String detailAddress;
-	private String role; //권한 이름
-	private String provider;
-	private String providerId;
+	private int id; 				// id (자동채번)
+	private String userId;			// 유저아이디
+	private String userName; 		// 회원 이름
+	private String password;		// 비밀번호
+	private String email; 			// 이메일
+	private String phone; 			// 전화번호
+	private String gender;			// 성별
+	private String emailReceiveYn;	// 이메일 수신여부
+	private String smsReceiveYn;	// 문자 수신여부
+	private String zipCode;			// 우편번호
+	private String address;			// 기본주소
+	private String detailAddress;	// 상세주소
+	private String role; 			// 권한 이름
+	private String provider;		// provider
+	private String providerId;		// provider Id
+	private String birthYear;		// 생년
+	private String birthMonth;		// 월
+	private String birthDay;		// 일
+	
 }
