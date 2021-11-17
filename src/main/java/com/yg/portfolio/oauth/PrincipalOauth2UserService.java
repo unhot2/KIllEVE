@@ -61,8 +61,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			userEntity.setPassword(bCryptPasswordEncoder.encode("killeve"));
 			userEntity.setEmail(oAuth2UserInfo.getEmail());
 			userEntity.setRole("ROLE_USER");
-			userEntity.setEmailReceiveYn("Y"); // 이메일 수신여부 기본값 Y로 설정
-			userEntity.setSmsReceiveYn("Y"); // 문자 수신여부 기본값 Y로 설정
+			userEntity.setEmailReceiveYn("on"); // 이메일 수신여부 기본값 Y로 설정
+			userEntity.setSmsReceiveYn("on"); // 문자 수신여부 기본값 Y로 설정
 			userEntity.setProvider(oAuth2UserInfo.getProvider());
 			userEntity.setProviderId(oAuth2UserInfo.getProviderId());
 			userRepository.oAuthJoin(userEntity);

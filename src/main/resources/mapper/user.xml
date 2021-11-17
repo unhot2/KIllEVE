@@ -28,7 +28,10 @@
 		     , smsReceiveYn		<!-- 문자 수신여부 -->
 		     , zipCode			<!-- 우편번호 -->
 		     , address	 		<!-- 주소 -->
-		     , detailAddress)	<!-- 상세주소 -->
+		     , detailAddress	<!-- 상세주소 -->
+		     , birthYear		<!-- 생년 -->
+		     , birthMonth		<!-- 월 -->
+		     , birthDay)		<!-- 일 -->
 		VALUES (
 			   now()
 			 , #{email}
@@ -42,7 +45,10 @@
 			 , #{smsReceiveYn}
 			 , #{zipCode}
 			 , #{address}
-			 , #{detailAddress}) 
+			 , #{detailAddress}
+			 , #{birthYear}
+			 , #{birthMonth}
+			 , #{birthDay}) 
 	</insert>
 	
 	<insert id="oAuthJoin">

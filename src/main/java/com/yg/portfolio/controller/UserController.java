@@ -39,7 +39,6 @@ public class UserController {
 	// 2. @AuthenticationPrincipal 어노테이션을 통해 바로 PrincipalDetails에서 User를 가져오는 방법
 	@GetMapping("/loginSucess")
 	public String loginSucess(@AuthenticationPrincipal PrincipalDetails principalDetailss, HttpSession session) {
-		System.out.println("");
 		if (principalDetailss.getUser().getProvider() == null) {
 			System.out.println("★★★★★ 일반 로그인 ★★★★★	");
 		} else {
@@ -61,6 +60,8 @@ public class UserController {
 		System.out.println("★★★★★ ProviderId	값 : " + principalDetailss.getUser().getProviderId());
 		System.out.println(principalDetailss.getUser().getRole());
 		session.setAttribute("userRole", principalDetailss.getUser().getRole());
+		session.setAttribute("userId", principalDetailss.getUser().getUserId());
+		session.setAttribute("userName", principalDetailss.getUser().getUserName());
 		return "redirect:/";
 	}
 
@@ -101,7 +102,7 @@ public class UserController {
 		System.out.println("들어온값 birthYear :" + user.getBirthYear());
 		System.out.println("들어온값 birthMonth :" + user.getBirthMonth());
 		System.out.println("들어온값 birthDay :" + user.getBirthDay());
-//		userService.join(user);
+		userService.join(user);
 		return "redirect:/users/loginForm";
 	}
 }

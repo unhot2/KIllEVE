@@ -1,8 +1,7 @@
 .title h1 {
   font-size: 18px;
-  margin-bottom: 18px;
+  margin: 23px 0;
   font-weight: 700;
-  padding-top: 13px;
 }
 
 .seperator {
@@ -13,7 +12,7 @@
     border-radius: 6px;
     margin: 92px auto;
     display: table;
-    padding: 15px 30px 30px;
+    padding: 15px 30px;
     box-sizing: border-box;
     border : 1px solid #d2d2d2;
 }
@@ -81,6 +80,7 @@
     height: 44px;
     border-radius: 5px;
     margin-bottom: 17px;
+    margin-top : 38px;
 }
 
 .snsBtn{

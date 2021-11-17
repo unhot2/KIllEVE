@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable(); //csrf 비활성화
 		http.authorizeRequests() 
+			.antMatchers("/members/**").authenticated()
 			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")// 매니저권한 필요
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")// 매니저권한 필요
 			.anyRequest().permitAll() // 그 외의 주소는 아무나 접근가능

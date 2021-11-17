@@ -17,23 +17,27 @@
 					</ul>
 					<ul class="guide_nav">
 						<th:block th:if="${session.userRole != null }">
-							<li><span sec:authentication="principal.username"></span><span
-									style="font-size: 14px;">님</span></li>
+							<li>
+								<span th:text="${session.userName}"></span>
+								<span style="font-size: 14px;">님</span>
+							</li>
+							<li><a th:href="@{/members/memberInfo(userId=${session.userId})}"><span>마이페이지</span></a></li>
+							<li><a th:href="@{/users/loginForm}"><span>장바구니</span></a></li>
 						</th:block>
 						<th:block th:if="${session.userRole == null}">
 							<li><a th:href="@{/users/loginForm}"><span>로그인</span></a></li>
 							<li><a th:href="@{/users/joinForm}"><span>회원가입</span></a></li>
-							<li><a th:href="@{/users/loginForm}"><span>마이페이지</span></a></li>
+							<li><a th:href="@{/members/memberInfo}"><span>마이페이지</span></a></li>
 							<li><a th:href="@{/users/loginForm}"><span>장바구니</span></a></li>
 						</th:block>
 						<th:block th:if="${session.userRole != null }">
-							<li><a th:href="@{/logout}"><span>Logout</span></a></li>
+							<li><a th:href="@{/logout}"><span>LOGOUT</span></a></li>
 						</th:block>
 						<th:block th:if="${session.userRole == 'ROLE_MANAGER' }">
-							<li><a th:href="@{/manager}"><span>Manager</span></a></li>
+							<li><a th:href="@{/manager}"><span>MANAGER</span></a></li>
 						</th:block>
 						<th:block th:if="${session.userRole == 'ROLE_ADMIN' }">
-							<li><a th:href="@{/admin}"><span>Admin</span></a></li>
+							<li><a th:href="@{/admin}"><span>ADMIN</span></a></li>
 						</th:block>
 						<!--<li class="community"><a href="#n"><span>커뮤니티</span></a>
 						<ul class="xans-element- xans-layout xans-layout-boardinfo slideUp">

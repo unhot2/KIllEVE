@@ -1,39 +1,5 @@
 // 회원가입 아이디 사용가능여부 조회
 $(function() {
-	$("#id").focusout(function() {
-		var value = $("#id").val();
-		if (value == null || value == "") {
-			// userId 입력값없을 시 비움
-			$(".chkId").html('');
-		}
-		else {
-			$.ajax({
-				type: "GET",
-				url: "/users/findId",
-				data: { userId: value },
-				dataType: "json",
-				success: function(res) {
-					// hidden으로 체크하는거 넣어야됨 => 아이디 중복체크여부
-					// 아이디 있음
-					if (res == 1) {
-						$(".chkId").html("이미 존재하는 아이디 입니다.")
-							.css({ "color": "red" })
-						$(".chkId").addClass("ErrorId");
-					}
-					// 아이디 없음
-					else {
-						$(".chkId").html("사용 가능한 아이디 입니다.")
-							.css({ "color": "green" })
-						$(".chkId").removeClass("ErrorId");
-					}
-				},
-				error: function(data) {
-					console.log("error 발생")
-				}
-			})
-		}
-	})
-
 	if ($("#password").val() == '' || $("#password").val() == "null") {
 		$(".chkPwd").html("비밀번호를 입력해주세요.")
 	}
@@ -61,24 +27,27 @@ $(function() {
 	})
 });
 
-// 전체동의 버튼
-$(function() {
-	var chkList = $("input[name=xxx]");
-
-	$("#allChecked").on("click", function() {
-		if ($(this).is(":checked")) {
-			chkList.prop("checked", true);
-		} else
-			chkList.prop("checked", false);
-	});
-});
-
 // 생년월일 selectBox 생성 
 $(document).ready(function(){
 	var now = new Date(); 
-	var year = now.getFullYear();
-	var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1);	
-	var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());	
+	if(birthYear != null){
+		var year = birthYear
+	}
+	else{
+		var year = now.getFullYear();
+	}
+	if(birthMonth != null){
+		var mon = birthMonth > 9 ? birthMonth : "0"+birthMonth 	
+	}
+	else{
+		var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1);	
+	}
+	if(birthDay != null){
+		var day = birthDay > 9 ? birthDay : "0"+birthDay;
+	}
+	else{
+		var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());	
+	}
 	 //년도 selectbox만들기 
 	 for(var i = 1900 ; i <= year ; i++) {
 		$('#year').append('<option value="' + i + '">' + i + '년</option>'); 
@@ -132,100 +101,6 @@ $(function() {
 		}
 	});
 
-	//------- 검사하여 상태를 class에 적용
-	$('#id').keyup(function(event) {
-
-		var divId = $('#divId');
-		if ($('#id').val() == "") {
-			divId.removeClass("has-success");
-			divId.addClass("has-error");
-		} else {
-			divId.removeClass("has-error");
-			divId.addClass("has-success");
-		}
-	});
-
-	$('#password').keyup(function(event) {
-
-		var divPassword = $('#divPassword');
-
-		if ($('#password').val() == "") {
-			divPassword.removeClass("has-success");
-			divPassword.addClass("has-error");
-		} else {
-			divPassword.removeClass("has-error");
-			divPassword.addClass("has-success");
-		}
-	});
-
-	$('#passwordCheck').keyup(function(event) {
-
-		var passwordCheck = $('#passwordCheck').val();
-		var password = $('#password').val();
-		var divPasswordCheck = $('#divPasswordCheck');
-
-		if ((passwordCheck == "") || (password != passwordCheck)) {
-			divPasswordCheck.removeClass("has-success");
-			divPasswordCheck.addClass("has-error");
-		} else {
-			divPasswordCheck.removeClass("has-error");
-			divPasswordCheck.addClass("has-success");
-		}
-	});
-
-	$('#name').keyup(function(event) {
-
-		var divName = $('#divName');
-
-		if ($.trim($('#name').val()) == "") {
-			divName.removeClass("has-success");
-			divName.addClass("has-error");
-		} else {
-			divName.removeClass("has-error");
-			divName.addClass("has-success");
-		}
-	});
-
-	$('#nickname').keyup(function(event) {
-
-		var divNickname = $('#divNickname');
-
-		if ($.trim($('#nickname').val()) == "") {
-			divNickname.removeClass("has-success");
-			divNickname.addClass("has-error");
-		} else {
-			divNickname.removeClass("has-error");
-			divNickname.addClass("has-success");
-		}
-	});
-
-	$('#email').keyup(function(event) {
-
-		var divEmail = $('#divEmail');
-
-		if ($.trim($('#email').val()) == "") {
-			divEmail.removeClass("has-success");
-			divEmail.addClass("has-error");
-		} else {
-			divEmail.removeClass("has-error");
-			divEmail.addClass("has-success");
-		}
-	});
-
-	$('#phoneNumber').keyup(function(event) {
-
-		var divPhoneNumber = $('#divPhoneNumber');
-
-		if ($.trim($('#phoneNumber').val()) == "") {
-			divPhoneNumber.removeClass("has-success");
-			divPhoneNumber.addClass("has-error");
-		} else {
-			divPhoneNumber.removeClass("has-error");
-			divPhoneNumber.addClass("has-success");
-		}
-	});
-
-
 	//------- validation 검사
 	$("form").submit(function(event) {
 
@@ -238,33 +113,6 @@ $(function() {
 		var divNickname = $('#divNickname');
 		var divEmail = $('#divEmail');
 		var divPhoneNumber = $('#divPhoneNumber');
-
-		//아이디 검사
-		if ($('#id').val() == "") {
-			modalContents.text("아이디를 입력하여 주시기 바랍니다.");
-			modal.modal('show');
-
-			divId.removeClass("has-success");
-			divId.addClass("has-error");
-			$('#id').focus();
-			return false;
-		} else {
-			divId.removeClass("has-error");
-			divId.addClass("has-success");
-		}
-		
-		if($(".chkId").hasClass("ErrorId") === true) {
-			modalContents.text("중복되지 않는 아이디로 수정해주시기 바랍니다.");
-			modal.modal('show');
-
-			divId.removeClass("has-success");
-			divId.addClass("has-error");
-			$('#id').focus();
-			return false;
-		} else {
-			divId.removeClass("has-error");
-			divId.addClass("has-success");
-		}
 
 		//패스워드 검사
 		if ($('#password').val() == "") {
@@ -362,33 +210,6 @@ $(function() {
 			divPhoneNumber.addClass("has-success");
 		}
 		
-		//회원가입약관
-		if ($('#joinCheck:checked').val() != "Y") {
-			modalContents.text("회원가입약관에 동의하여 주시기 바랍니다."); //모달 메시지 입력
-			modal.modal('show'); //모달 띄우기
-
-			provision.removeClass("has-success");
-			provision.addClass("has-error");
-			$('#joinCheck').focus();
-			return false;
-		} else {
-			provision.removeClass("has-error");
-			provision.addClass("has-success");
-		}
-
-		//개인정보취급방침
-		if ($('#personCheck:checked').val() != "Y") {
-			modalContents.text("개인정보취급방침에 동의하여 주시기 바랍니다.");
-			modal.modal('show');
-
-			memberInfo.removeClass("has-success");
-			memberInfo.addClass("has-error");
-			$('#personCheck').focus();
-			return false;
-		} else {
-			memberInfo.removeClass("has-error");
-			memberInfo.addClass("has-success");
-		}
 	});
 });
 
