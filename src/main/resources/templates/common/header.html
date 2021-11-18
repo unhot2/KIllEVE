@@ -12,7 +12,7 @@
 				<div class="inwrap">
 					<ul class="navlog">
 						<li>
-						<a th:href="@{/}"><img src="/img/logo-black.svg"></a>
+							<a th:href="@{/}"><img src="/img/logo-black.svg"></a>
 						</li>
 					</ul>
 					<ul class="guide_nav">
@@ -21,13 +21,27 @@
 								<span th:text="${session.userName}"></span>
 								<span style="font-size: 14px;">님</span>
 							</li>
-							<li><a th:href="@{/members/memberInfo(userId=${session.userId})}"><span>마이페이지</span></a></li>
+							<li><a th:href="@{/members/memberInfo(userId=${session.userId})}"><span>마이페이지</span></a>
+							</li>
 							<li><a th:href="@{/users/loginForm}"><span>장바구니</span></a></li>
+							<li>
+								<a th:href="@{#}" id="drop-Btn">커뮤니티</a>
+								<div id="drop-content">
+									<div class="dropBox"><a th:href="@{/community/notice}">공지사항</a></div>
+									<div class="dropBox"><a th:href="@{/community/qna}">질문사항</a></div>
+								</div>
+							</li>
 						</th:block>
 						<th:block th:if="${session.userRole == null}">
 							<li><a th:href="@{/users/loginForm}"><span>로그인</span></a></li>
 							<li><a th:href="@{/users/joinForm}"><span>회원가입</span></a></li>
-							<li><a th:href="@{/members/memberInfo}"><span>마이페이지</span></a></li>
+							<li>
+								<a th:href="@{#}" id="drop-Btn">커뮤니티</a>
+								<div id="drop-content">
+									<div class="dropBox"><a th:href="@{/community/notice}">공지사항</a></div>
+									<div class="dropBox"><a th:href="@{/community/qna}">질문사항</a></div>
+								</div>
+							</li>
 							<li><a th:href="@{/users/loginForm}"><span>장바구니</span></a></li>
 						</th:block>
 						<th:block th:if="${session.userRole != null }">
@@ -48,15 +62,93 @@
 						</ul>
 					</li>-->
 					</ul>
-				</div> <!--// inwrap END -->
-			</div>
-			<!--<div class="header-middle bg-dark">
-				<div>
-					<a href="/"><img src="/img/logo.png" class="logo"></a>
 				</div>
-			</div>-->
+				<!--// inwrap END -->
+			</div>
+			<div class="index-header">
+				<div class="index-logo">
+					<img src="/img/logo-white.svg">
+				</div>
+			</div>
+			<div class="category-bar">
+				<ul>
+					<li>
+						<div class="dropdown">
+							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+								NEW
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#">코트</a></li>
+								<li><a class="dropdown-item" href="#">자켓</a></li>
+								<li><a class="dropdown-item" href="#">패딩</a></li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown">
+							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+								BEST
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#">코트</a></li>
+								<li><a class="dropdown-item" href="#">자켓</a></li>
+								<li><a class="dropdown-item" href="#">패딩</a></li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown">
+							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+								OUTER
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#">코트</a></li>
+								<li><a class="dropdown-item" href="#">자켓</a></li>
+								<li><a class="dropdown-item" href="#">패딩</a></li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown">
+							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+								TOP
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#">코트</a></li>
+								<li><a class="dropdown-item" href="#">자켓</a></li>
+								<li><a class="dropdown-item" href="#">패딩</a></li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown">
+							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+								PANTS
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#">코트</a></li>
+								<li><a class="dropdown-item" href="#">자켓</a></li>
+								<li><a class="dropdown-item" href="#">패딩</a></li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div class="dropdown">
+							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+								SHIRT
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" href="#">코트</a></li>
+								<li><a class="dropdown-item" href="#">자켓</a></li>
+								<li><a class="dropdown-item" href="#">패딩</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</header>
-	</div> <!--th:fragment End-->
+	</div>
+	<!--th:fragment End-->
 </body>
 
 </html>

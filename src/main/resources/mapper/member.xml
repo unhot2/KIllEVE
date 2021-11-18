@@ -25,4 +25,10 @@
 		     , birthDay			= #{birthDay}
 		WHERE userId			= #{userId}
 	</update>
+	
+	<delete id="memberWithdrawal">
+		DELETE 
+		  FROM user
+		 WHERE userId = #{userId}
+	</delete>
 </mapper>

@@ -36,5 +36,10 @@ public class MemberService{
 		memberRepository.memberModify(user);
 	}
 	
+	// 회원탈퇴
+	public void memberWithdrawal(User user) {
+		memberRepository.memberWithdrawal(user);
+	}
+	
 
 }

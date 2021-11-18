@@ -14,4 +14,7 @@ public interface MemberRepository {
 
 	// 회원정보 수정
 	public void memberModify(User user);
+	
+	// 회원탈퇴
+	public void memberWithdrawal(User user);
 }

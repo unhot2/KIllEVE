@@ -69,5 +69,11 @@ public class MemberController {
 		session.setAttribute("userName", user.getUserName());
 		return "redirect:/";
 	}
+	
+	@GetMapping("memberWithdrawal")
+	public String memberWithdrawal(User user) {
+		memberService.memberWithdrawal(user);
+		return "redirect:/";
+	}
 
 }

@@ -214,3 +214,20 @@
     height: 22px;
     border-style: none;
 }
+
+/*회원정보수정,취소,회원탈퇴 버튼*/
+.member-btn-area{
+    color: #414141;
+    border: 1px solid #b6b6b6;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    padding-top: 5px;
+    margin: 0 8px;
+    border-radius: 3px;
+    background: #e2e2e2;
+}
+
+.member-btn{
+	all:unset;
+}

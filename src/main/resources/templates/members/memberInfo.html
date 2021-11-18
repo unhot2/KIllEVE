@@ -186,7 +186,17 @@
 								</tr>
 								<tr>
 									<th>
-									<button>회원정보수정</button>
+										<td>
+											<button class="member-btn">
+												<div class="member-btn-area">회원정보수정</div>
+											</button>
+											<a class="member-btn" th:href="@{/}">
+												<div class="member-btn-area">취소</div>
+											</a>
+											<a class="member-btn" th:href="@{/members/memberWithdrawal(userId=${userInfo.userId})} ">
+												<div class="member-btn-area">회원탈퇴</div>
+											</a>
+										</td>
 									</th>
 								</tr>
 							</table>
