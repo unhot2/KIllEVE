@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class User {
-	private int id; 				// id (자동채번)
 	private String userId;			// 유저아이디
 	private String userName; 		// 회원 이름
 	private String password;		// 비밀번호

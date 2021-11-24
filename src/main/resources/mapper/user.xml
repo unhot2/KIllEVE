@@ -16,7 +16,7 @@
 	
 	<insert id="join">
 		INSERT INTO user (		<!-- id는 auto_increment => 생략 -->
-			 createDate			<!-- 가입일자 --> 
+			   createDate		<!-- 가입일자 --> 
 		     , email			<!-- 이메일 -->
 		     , password			<!-- 비밀번호 -->
 			 , role				<!-- 권한 -->

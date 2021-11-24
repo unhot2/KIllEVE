@@ -4,12 +4,79 @@
 
 <head>
 	<meta charset="utf-8" />
+	<link th:href="@{/css/notice.css}" rel="stylesheet">
 </head>
-
 <body>
-	<div layout:fragment="content">
-		NOTICE 페이지
-	</div>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="notice-content">
+				<div class="notice-title">
+					NOTICE<br>
+					<span class="notice-sub-title">공지사항 입니다.</span>
+				</div>
+				<div class="notice-body">
+					<table class="notice-table">
+						<tr>
+							<th class="col-1">번호</th>
+							<th class="col-8">제목</th>
+							<th class="col-1">작성자</th>
+							<th class="col-1">작성일</th>
+							<th class="col-1">조회수</th>
+						</tr>
+						<tr th:each="product : ${list}">
+							<td th:text="${product.boardNum}"></td>
+							<td><a th:href="@{/community/notice/{boardNum}(boardNum = ${product.boardNum})}" th:text="${product.title}"></a>
+							</td>
+							<td th:text="${product.userName}"></td>
+							<td th:text="${#dates.format(new java.util.Date(product.writeDate), 'yyyy-MM-dd')}">
+							</td>
+							<td th:text="${product.count}"></td>
+						</tr>
+					</table>
+					<div class="notice-paging">
+						<th:block th:if="${currentPage > 1}">
+							<a th:href="@{/community/notice(currentPage = ${currentPage -1}, search = ${search})}" th:if="${not #strings.isEmpty(search)}">
+								<span class="fas fa-angle-double-left"></span>
+							</a>
+							<a th:href="@{/community/notice(currentPage = ${currentPage -1})}"  th:unless="${not #strings.isEmpty(search)}">
+								<span class="fas fa-angle-double-left"></span>
+							</a>
+						</th:block>
+						<th:block th:each="num: ${#numbers.sequence(1,totalPage)}">
+								<a th:href="@{/community/notice(currentPage = ${num}, search = ${search})}" th:if="${not #strings.isEmpty(search)}">
+									<span th:text="${num}" th:classappend="${num} == ${currentPage} ? 'current'"></span>
+								</a>
+								<a th:href="@{/community/notice(currentPage = ${num})}" th:unless="${not #strings.isEmpty(search)}">
+									<span th:text="${num}" th:classappend="${num} == ${currentPage} ? 'current'"></span>
+								</a>
+						</th:block>
+						<th:block th:if="${currentPage < totalPage}">
+							<a th:href="@{/community/notice(currentPage = ${currentPage +1}, search = ${search})}" th:if="${not #strings.isEmpty(search)}">
+								<span class="fas fa-angle-double-right"></span>
+							</a>
+							<a th:href="@{/community/notice(currentPage = ${currentPage +1})}"  th:unless="${not #strings.isEmpty(search)}">
+								<span class="fas fa-angle-double-right"></span>
+							</a>
+						</th:block>
+					</div>
+					<div class="notice-bottom">
+						<div class="searchBox">
+							<form action="/community/notice">
+								<input type="text" name="search">
+								<button>SEARCH</button>
+							</form>
+						</div>
+						<div class="buttonBox">
+							<a th:href="@{/community/notice}" style="float: right;">글목록</a>
+							<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN'}">
+								<a th:href="@{/manager/noticeForm}" style="float: right;">글작성</a>
+							</th:block>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 
 </html>

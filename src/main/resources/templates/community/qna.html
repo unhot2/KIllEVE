@@ -4,12 +4,60 @@
 
 <head>
 	<meta charset="utf-8" />
+	<link th:href="@{/css/qna.css}" rel="stylesheet">
 </head>
 
 <body>
-	<div layout:fragment="content">
-		QNA 페이지
-	</div>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="qna-content">
+				<div class="qna-title">
+					<font>Q & A</font><br>
+					<span class="notice-sub-title">상품 Q&A 입니다.</span>
+				</div>
+				<div class="qna-body">
+					<table class="qna-table">
+						<tr>
+							<th class="col-1">번호</th>
+							<th class="col-8">제목</th>
+							<th class="col-1">작성자</th>
+							<th class="col-1">작성일</th>
+							<th class="col-1">조회수</th>	
+						</tr>
+						<tr th:each="qna : ${list}">
+							<td th:text="${qna.boardNum}"></td>
+							<td>
+								<th:block th:if="${#strings.equals(qna.chkSecret,'secret')}">
+									<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum})}">비밀글 입니다 <i class="fas fa-lock"></i></a>
+								</th:block>
+								<th:block th:unless="${#strings.equals(qna.chkSecret,'secret')}">
+									<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum})}" th:text="${qna.title}"></a>								
+								</th:block>
+							</td>
+							<td th:text="${qna.userName}"></td>
+							<td th:text="${#dates.format(new java.util.Date(qna.writeDate), 'yyyy-MM-dd')}">
+							</td>
+							<td th:text="${qna.count}"></td>
+						</tr>
+					</table>
+					<div class="qna-bottom">
+						<div class="searchBox">
+							<form action="/community/notice">
+								<input type="text" name="search">
+								<button>SEARCH</button>
+							</form>
+						</div>
+						<div class="qna-paging">
+						</div>
+						<div class="buttonBox">
+							<a th:href="@{/community/notice}" style="float: right;">글목록</a>
+							<a th:href="@{/community/qnaForm}" style="float: right;">글작성</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 
 </html>

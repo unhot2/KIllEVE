@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests() 
 			.antMatchers("/members/**").authenticated()
 			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")// 매니저권한 필요
-			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")// 매니저권한 필요
+			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")// 관리자권한 필요
 			.anyRequest().permitAll() // 그 외의 주소는 아무나 접근가능
 		.and()
 			.formLogin()
@@ -72,10 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.defaultSuccessUrl("/users/loginSucess", true) /*로그인 성공시 url*/
 			.failureHandler(authFailureHandler)
 //			.failureUrl("/users/loginFail").permitAll() /*로그인 실패시 url*/
-		.and() // 로그아웃 설정
-	        .logout()
-	        .logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
-			.invalidateHttpSession(true) // "/logout"으로 로그아웃시 세션값 삭제
+//		.and() // 로그아웃 설정
+//	        .logout()
+//	        .logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
+//			.invalidateHttpSession(true) // "/logout"으로 로그아웃시 세션값 삭제
 		.and()
 			// Oauth 로그인 프로세스 => 1.코드받기, 2.엑세스토큰, 3.사용자 프포필정보를 가져옴
 			// 4-1.그 정보를 토대로 자동 회원가입을 진행 or 4-2. 정보가 부족시 추가정보 입력후 회원가입 시킴
