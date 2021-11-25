@@ -1,6 +1,7 @@
 @charset "UTF-8";
 body {
-	font-family: 'Nanum Gothic Coding', monospace;
+	/*font-family: 'Nanum Gothic Coding', monospace;*/
+	font-family: sans-serif, monospace;
 }
 
 section {

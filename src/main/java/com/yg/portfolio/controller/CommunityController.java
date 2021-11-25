@@ -1,5 +1,6 @@
 package com.yg.portfolio.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yg.portfolio.model.Notice;
 import com.yg.portfolio.model.Qna;
@@ -59,18 +61,43 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/qna/{boardNum}")
-	public String qnaDetail(Model model, @PathVariable int boardNum) {
-		model.addAttribute("detail",communityService.qnaDetail(boardNum));
-		return "/community/qnaDetailForm";
+	public String qnaDetail(Model model, @PathVariable int boardNum,
+			@RequestParam(value = "chkSecret", required = false) String chkSecret) {
+		if (chkSecret.equals("secret")) {
+			model.addAttribute("boardNum",boardNum);
+			return "/community/qnaCheckPw";
+		} else {
+			model.addAttribute("detail",communityService.qnaDetail(boardNum));
+			return "/community/qnaDetailForm";
+		}
 	}
 	
-	// QNA 글 작성 Form 이동
+	// QNA 글 작성 Form 이동 
 	@GetMapping("/qnaForm")
 	public String noticeForm(@RequestParam(value = "boardNum", required = false) Integer boardNum, Model model) {
 		if (boardNum != null) {
 			model.addAttribute("detail",communityService.noticeDetail(boardNum));
 		}
 		return "/community/qnaForm";
+	}
+	
+	@GetMapping("/chkPassword")
+	public @ResponseBody int chkPassword(Model model,
+			@RequestParam(value = "password", required = false) String password,
+			@RequestParam(value = "boardNum", required = false) Integer boardNum,
+			@RequestParam(value = "role", required = false) String role) {
+		System.out.println("role 값 : "+role);
+		Qna qna = communityService.qnaDetail(boardNum);
+		if (role.equals("ROLE_ADMIN") || role.equals("ROLE_MANAGER")) {
+			return 1;
+		} 
+		else {
+			if (qna.getPassword().equals(password)) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 	}
 	
 	// QNA 글 작성

@@ -28,10 +28,10 @@
 							<td th:text="${qna.boardNum}"></td>
 							<td>
 								<th:block th:if="${#strings.equals(qna.chkSecret,'secret')}">
-									<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum})}">비밀글 입니다 <i class="fas fa-lock"></i></a>
+									<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum}, chkSecret = ${qna.chkSecret})}">비밀글 입니다 <i class="fas fa-lock"></i></a>
 								</th:block>
 								<th:block th:unless="${#strings.equals(qna.chkSecret,'secret')}">
-									<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum})}" th:text="${qna.title}"></a>								
+									<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum}, chkSecret = ${qna.chkSecret})}" th:text="${qna.title}"></a>								
 								</th:block>
 							</td>
 							<td th:text="${qna.userName}"></td>

@@ -13,7 +13,6 @@
 	padding:50px 0;
 }
 
-/* 공지사항 */
 .qna-paging {
 	text-align: center;
 	padding : 15px 0 0 0;
@@ -92,8 +91,6 @@
     padding-top: 2px;
 }
 
-
-/* 공지사항 작성폼 */
 .qna-write-table {
     border-top: 2px solid black;
     border-bottom: 2px solid black;
@@ -128,7 +125,11 @@
 
 .buttonBox {
 	position: relative;
-	right : -777px;
+	right : -769px;
+}
+
+.passwordBtn {
+    padding: 12px 135px;
 }
 
 .radioInput {
@@ -137,3 +138,16 @@
     top: 2px;
 }
 
+.passwordBox {
+    width: 500px;
+    height: 288px;
+    border: 1px solid #c8c7c7;
+    text-align: center;	
+    margin : 10px auto;
+}
+
+.box-title {
+    font-size: 23px;
+    font-weight: 600;
+    margin: 36px 0;
+}

@@ -4,19 +4,19 @@
 
 <head>
 	<meta charset="utf-8" />
-	<link th:href="@{/css/detail.css}" rel="stylesheet">
+	<link th:href="@{/css/qnaDetail.css}" rel="stylesheet">
 </head>
 
 <body>
 	<section layout:fragment="content">
 		<div class="container">
-			<div class="notice-content">
-				<div class="notice-title">
+			<div class="qna-content">
+				<div class="qna-title">
 					Q & A<br>
-					<span class="notice-sub-title">상품 Q&A 입니다.</span>
+					<span class="qna-sub-title">상품 Q&A 입니다.</span>
 				</div>
-				<div class="notice-body">
-					<table class="notice-detail-table">
+				<div class="qna-body">
+					<table class="qna-detail-table">
 						<tr>
 							<th>제목</th>
 							<td th:text="${detail.title}"></td>
@@ -40,7 +40,7 @@
 					<div class="notice-bottom">
 						<a th:href="@{/community/qna}" class="writeBtn">글목록</a>
 						<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN'}">
-							<a th:href="@{/manager/noticeForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
+							<a th:href="@{/manager/qnaForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
 						</th:block>
 					</div>
 				</div>
