@@ -18,14 +18,15 @@ $(function() {
 
 /*커뮤니티 드롭다운*/
 $(function() {
-	$('#drop-Btn').click(function() {
-		if ($('#drop-content').css('display') == 'none') {
+	$('#drop-Btn').hover(function(){
+        $('#drop-content').css('display', 'block');
+    }, function() {
+		$('#drop-content').hover(function(){
 			$('#drop-content').css('display', 'block');
-		}
-		else {
+		 }, function() {
 			$('#drop-content').css('display', 'none');
-		}
-	});
+		});
+    });
 });
 
 
