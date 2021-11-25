@@ -23,4 +23,9 @@
 		     , updateTime	= current_timestamp
 		 WHERE boardNum 	= #{boardNum}
 	</update>
+	
+	<delete id="deleteNotice">
+		DELETE FROM notice
+		 WHERE boardNum		= #{boardNum}
+	</delete>
 </mapper>

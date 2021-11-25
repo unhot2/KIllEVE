@@ -25,7 +25,6 @@ public class ManagerService {
 	
 	// 공지사항 글 수정
 	public void updateNotice(Notice notice) {
-		System.out.println("수정 Service");
 		int test = managerRepository.updateNotice(notice);
 		if (test == 1) {
 			System.out.println("NOTICE 수정 성공 : "+test);
@@ -33,5 +32,10 @@ public class ManagerService {
 		else {
 			System.out.println("NOTICE 수정 실패 : "+test);
 		}
+	}
+	
+	// 공지사항 글 삭제
+	public int deleteNotice(Integer boardNum) {
+		return managerRepository.deleteNotice(boardNum);
 	};
 }

@@ -102,6 +102,54 @@
 		 WHERE num BETWEEN #{startPage} and #{endPage}
 	</select>
 	
+	<select id="qnaCnt" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM qna
+	</select>
+	
+	<select id="qnaSearch" resultType="Qna">
+		SELECT *
+		  FROM (SELECT @ROWNUM:=@ROWNUM+1 as num
+		  			 , A.boardNum
+		  			 , A.writeDate
+		  			 , A.userId
+		  			 , A.userName
+		  			 , A.title
+		  			 , A.content
+		  			 , A.count
+		  			 , A.password
+		  			 , A.chkSecret
+				  FROM (SELECT boardNum
+				  			 , writeDate
+				  			 , userId
+				  			 , userName
+				  			 , title
+				  			 , content
+				  			 , count
+				  			 , password
+				  			 , chkSecret
+						  FROM qna, (SELECT @ROWNUM:=0) AS R
+						<if test = "searchKind == 'title'">
+						 WHERE title LIKE CONCAT('%',#{search},'%')		
+						</if>
+						<if test = "searchKind == 'userName'">
+						 WHERE userName LIKE CONCAT('%',#{search},'%')
+						</if>
+						 ORDER BY boardNum DESC ) A ) B
+		 WHERE num BETWEEN #{startPage} and #{endPage}
+	</select>
+	
+	<select id="qnaSearchCnt" resultType="Integer">
+		SELECT COUNT(*)
+		  FROM qna
+	     <if test = "searchKind == 'title'">
+		 WHERE title LIKE CONCAT('%',#{search},'%')		
+		</if>
+		<if test = "searchKind == 'userName'">
+		 WHERE userName LIKE CONCAT('%',#{search},'%')
+		</if>
+	</select>
+	
 	<select id="qnaDetail" resultType="Qna">
 		SELECT *
 		  FROM qna
@@ -125,10 +173,19 @@
 			 , #{password})
 	</insert>
 
-	<select id="qnaCnt" resultType="Integer">
-		SELECT COUNT(*)
-		  FROM qna
-	</select>
+	<update id="updateQna">
+		UPDATE qna
+		   SET title		= #{title}
+		   	 , chkSecret	= #{chkSecret}
+		   	 , password		= #{password}
+		     , content		= #{content}
+		 WHERE boardNum 	= #{boardNum}
+	</update>
+	
+	<delete id="deleteQna">
+		DELETE FROM qna
+		 WHERE boardNum		= #{boardNum}
+	</delete>
 
 	<update id="noticeCntUp">
 		UPDATE notice

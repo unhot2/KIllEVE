@@ -32,11 +32,23 @@ public interface CommunityRepository {
 	// QNA 목록 조회
 	public List<Qna> qna(int startPage, int endPage);
 	
+	// QNA 검색결과 조회
+	public List<Notice> qnaSearch(int startPage, int endPage, String search, String searchKind);
+	
 	// QNA 글개수 조회
 	public int qnaCnt();
 	
+	// QNA 글개수 조회
+	public int qnaSearchCnt(String search, String searchKind);
+	
 	// QNA 글작성
 	public int writeQna(Qna qna);
+	
+	// QNA 글수정
+	public int updateQna(Qna qna);
+	
+	// QNA 글삭제
+	public int deleteQna(Integer boardNum);
 	
 	// QNA 상세정보 조회
 	public Qna qnaDetail(int boardNum);
@@ -46,5 +58,8 @@ public interface CommunityRepository {
 	
 	// 조회수 더하기
 	public void qnaCntUp(int boardNum);
+
+	
+
 	
 }

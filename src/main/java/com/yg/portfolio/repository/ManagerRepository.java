@@ -15,4 +15,7 @@ public interface ManagerRepository {
 	// 공지사항 글 수정
 	public int updateNotice(Notice notice);
 	
+	// 공지사항 글 삭제
+	public int deleteNotice(Integer boardNum);
+	
 }

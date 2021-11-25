@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yg.portfolio.model.Notice;
 import com.yg.portfolio.service.CommunityService;
@@ -53,5 +54,10 @@ public class ManagerController {
 		managerService.updateNotice(notice);
 		return "redirect:/community/notice";
 	}
-
+	
+	// 공지사항 글 삭제
+	@PostMapping("/deleteNotice")
+	public @ResponseBody int deleteQna(@RequestParam(value = "boardNum", required = false) Integer boardNum) {
+		return managerService.deleteNotice(boardNum);
+	}
 }

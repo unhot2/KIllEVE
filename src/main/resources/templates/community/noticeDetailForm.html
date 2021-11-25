@@ -4,6 +4,7 @@
 
 <head>
 	<meta charset="utf-8" />
+	<script th:src="@{/js/notice.js}"></script>
 	<link th:href="@{/css/noticeDetail.css}" rel="stylesheet">
 </head>
 
@@ -16,6 +17,7 @@
 					<span class="notice-sub-title">공지사항 입니다.</span>
 				</div>
 				<div class="notice-body">
+					<input type="hidden" id="boardNum" th:value="${detail.boardNum}">
 					<table class="notice-detail-table">
 						<tr>
 							<th>제목</th>
@@ -41,6 +43,7 @@
 						<a th:href="@{/community/notice}" class="writeBtn">글목록</a>
 						<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN'}">
 							<a th:href="@{/manager/noticeForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
+							<a onClick="deleteNotice()">글삭제</a>
 						</th:block>
 					</div>
 				</div>

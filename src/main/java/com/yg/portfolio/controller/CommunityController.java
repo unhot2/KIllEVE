@@ -27,14 +27,11 @@ public class CommunityController {
 			@RequestParam(value = "search", required = false) String search, 
 			@RequestParam(value = "searchKind", required = false) String searchKind,
 			@RequestParam(value = "currentPage", required = false) Integer currentPage) {
-		System.out.println("search값 : "+search);
-		System.out.println("searchKind값 : "+searchKind);
 		if (search == null || search.isEmpty()) {
 			List<Notice> list = communityService.notice(currentPage, model);
 			model.addAttribute("list",list);
 		} else {
-			List<Notice> list = communityService.noticeSearch(currentPage, model, search,searchKind);
-			System.out.println("list.size : "+ list.size());
+			List<Notice> list = communityService.noticeSearch(currentPage, model, search, searchKind);
 			if (list.size() > 0) {
 				model.addAttribute("list",list);
 			}
@@ -52,16 +49,18 @@ public class CommunityController {
 	// QNA 전체 글 조회
 	@GetMapping("/qna")
 	public String qna(Model model, 
-			@RequestParam(value = "search", required = false) String search, 
+			@RequestParam(value = "search", required = false) String search,
+			@RequestParam(value = "searchKind", required = false) String searchKind,
 			@RequestParam(value = "currentPage", required = false) Integer currentPage) {
 		if (search == null || search.isEmpty()) {
 			List<Qna> list = communityService.qna(currentPage, model);
 			model.addAttribute("list",list);
-		} 
-//		else {
-//			List<Notice> list = communityService.qnaSearch(currentPage, model, search);
-//			model.addAttribute("list",list);
-//		}
+		} else {
+			List<Notice> list = communityService.qnaSearch(currentPage, model, search, searchKind);
+			if (list.size() > 0) {
+				model.addAttribute("list",list);
+			}
+		}
 		return "/community/qna";
 	}
 	
@@ -80,9 +79,9 @@ public class CommunityController {
 	
 	// QNA 글 작성 Form 이동 
 	@GetMapping("/qnaForm")
-	public String noticeForm(@RequestParam(value = "boardNum", required = false) Integer boardNum, Model model) {
+	public String qnaForm(@RequestParam(value = "boardNum", required = false) Integer boardNum, Model model) {
 		if (boardNum != null) {
-			model.addAttribute("detail",communityService.noticeDetail(boardNum));
+			model.addAttribute("detail",communityService.qnaDetail(boardNum));
 		}
 		return "/community/qnaForm";
 	}
@@ -113,5 +112,17 @@ public class CommunityController {
 		communityService.writeQna(qna);
 		return "redirect:/community/qna";
 	}
-
+	
+	// QNA 글 수정
+	@PostMapping("/updateQna")
+	public String updateQna(Qna qna) {
+		communityService.updateQna(qna);
+		return "redirect:/community/qna";
+	}
+	
+	// QNA 글 삭제
+	@PostMapping("/deleteQna")
+	public @ResponseBody int deleteQna(@RequestParam(value = "boardNum", required = false) Integer boardNum) {
+		return communityService.deleteQna(boardNum);
+	}
 }

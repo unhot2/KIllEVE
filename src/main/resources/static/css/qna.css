@@ -109,13 +109,10 @@
 	width : 129px;
 }
 
-.qna-write-table td {
-	padding-left : 12px;
-}
-
-.write-input {
+.qna-input {
 	border: 1px solid #d5d5d5;
-	padding-left: 7px;
+	padding-left: 12px;
+	margin-left: 12px;
 	width: 300px;
 }
 
@@ -125,7 +122,7 @@
 
 .buttonBox {
 	position: relative;
-	right : -769px;
+	right : -689px;
 }
 
 .passwordBtn {
@@ -138,6 +135,9 @@
     top: 2px;
 }
 
+.radio-input {
+	padding-left: 7px;
+}
 .passwordBox {
     width: 500px;
     height: 288px;
@@ -150,4 +150,9 @@
     font-size: 23px;
     font-weight: 600;
     margin: 36px 0;
+}
+
+.searchKind {
+	width : 76px;
+	height: 30px;
 }

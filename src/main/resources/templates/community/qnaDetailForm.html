@@ -4,6 +4,7 @@
 
 <head>
 	<meta charset="utf-8" />
+	<script th:src="@{/js/qna.js}"></script>
 	<link th:href="@{/css/qnaDetail.css}" rel="stylesheet">
 </head>
 
@@ -16,6 +17,7 @@
 					<span class="qna-sub-title">상품 Q&A 입니다.</span>
 				</div>
 				<div class="qna-body">
+					<input type="hidden" id="boardNum" th:value="${detail.boardNum}">
 					<table class="qna-detail-table">
 						<tr>
 							<th>제목</th>
@@ -37,10 +39,11 @@
 							<td colspan="2" th:utext="${detail.content}" class="detailContent"></td>
 						</tr>
 					</table>
-					<div class="notice-bottom">
+					<div class="qna-bottom">
 						<a th:href="@{/community/qna}" class="writeBtn">글목록</a>
-						<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN'}">
-							<a th:href="@{/manager/qnaForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
+						<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN' or session.userId == detail.userId}">
+							<a th:href="@{/community/qnaForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
+							<a onClick="deleteQna()" style="float: right;">글삭제</a>
 						</th:block>
 					</div>
 				</div>

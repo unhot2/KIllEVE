@@ -65,7 +65,7 @@ public class CommunityService {
 			}
 		}
 		startPage = (listCount * (currentPage - 1)) + 1;
-		endPage = startPage + listCount;
+		endPage = currentPage * listCount;
 	}
 	
 	
@@ -78,12 +78,23 @@ public class CommunityService {
 		return qnaList;
 	}
 	
+	public List<Notice> qnaSearch(Integer page, Model model, String search, String searchKind) {
+		totalCount = communityRepository.qnaSearchCnt(search, searchKind); // 공지사항 검색된 게시물 수
+		paging(page); //페이징 처리
+		List<Notice> qnaSearchList = communityRepository.qnaSearch(startPage, endPage, search, searchKind);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("search", search);
+		model.addAttribute("searchKind", searchKind);
+		return qnaSearchList;
+	};
+	
 	public Qna qnaDetail(int boardNum) {
 		communityRepository.qnaCntUp(boardNum);
 		return communityRepository.qnaDetail(boardNum);
 	}
 	
-	// 공지사항 글 작성
+	// QNA 글 작성
 	public void writeQna(Qna qna) {
 		int test = communityRepository.writeQna(qna);
 		if (test == 1) {
@@ -92,5 +103,23 @@ public class CommunityService {
 		else {
 			System.out.println("QNA 작성 실패 : "+test);
 		}
+	}
+	
+	// QNA 글 수정
+	public void updateQna(Qna qna) {
+		int test = communityRepository.updateQna(qna);
+		if (test == 1) {
+			System.out.println("QNA 수정 성공 : "+test);
+		}
+		else {
+			System.out.println("QNA 수정 실패 : "+test);
+		}
+	}
+	
+	// QNA 글 삭제
+	public int deleteQna(Integer boardNum) {
+		return communityRepository.deleteQna(boardNum); 
 	};
+
+	
 }
