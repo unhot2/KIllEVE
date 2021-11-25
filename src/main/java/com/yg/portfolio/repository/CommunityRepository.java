@@ -17,13 +17,13 @@ public interface CommunityRepository {
 	public List<Notice> notice(int startPage, int endPage);
 	
 	// 공지사항 검색결과 조회
-	public List<Notice> noticeSearch(int startPage, int endPage, String search);
+	public List<Notice> noticeSearch(int startPage, int endPage, String search, String searchKind);
 	
 	// 공지사항 글개수 조회
 	public int noticeCnt();
 	
 	// 공지사항 검색결과 개수 조회
-	public int noticeSearchCnt(String search);
+	public int noticeSearchCnt(String search, String searchKind);
 	
 	// 공지사항 상세정보 조회
 	public Notice noticeDetail(int boardNum);

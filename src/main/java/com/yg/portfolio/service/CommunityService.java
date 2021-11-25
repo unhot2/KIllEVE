@@ -32,13 +32,14 @@ public class CommunityService {
 		return noticeList;
 	}
 	
-	public List<Notice> noticeSearch(Integer page, Model model, String search) {
-		totalCount = communityRepository.noticeSearchCnt(search); // 공지사항 검색된 게시물 수
+	public List<Notice> noticeSearch(Integer page, Model model, String search, String searchKind) {
+		totalCount = communityRepository.noticeSearchCnt(search, searchKind); // 공지사항 검색된 게시물 수
 		paging(page); //페이징 처리
-		List<Notice> noticeSearchList = communityRepository.noticeSearch(startPage, endPage, search);
+		List<Notice> noticeSearchList = communityRepository.noticeSearch(startPage, endPage, search, searchKind);
 		model.addAttribute("currentPage",currentPage);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("search", search);
+		model.addAttribute("searchKind", searchKind);
 		return noticeSearchList;
 	}
 	

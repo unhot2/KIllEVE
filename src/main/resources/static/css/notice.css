@@ -129,6 +129,10 @@
 
 .buttonBox {
 	position: relative;
-	right : -777px;
+	right : -806px;
 }
 
+.searchKind {
+	width : 76px;
+	height: 30px;
+}

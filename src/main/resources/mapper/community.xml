@@ -48,7 +48,12 @@
 				  			 , content
 				  			 , count
 						  FROM notice, (SELECT @ROWNUM:=0) AS R
-						 WHERE title LIKE CONCAT('%',#{search},'%')
+						<if test = "searchKind == 'title'">
+						 WHERE title LIKE CONCAT('%',#{search},'%')		
+						</if>
+						<if test = "searchKind == 'userName'">
+						 WHERE userName LIKE CONCAT('%',#{search},'%')
+						</if>
 						 ORDER BY boardNum DESC ) A ) B
 		 WHERE num BETWEEN #{startPage} and #{endPage}
 	</select>
@@ -56,7 +61,12 @@
 	<select id="noticeSearchCnt" resultType="Integer">
 		SELECT COUNT(*)
 		  FROM notice
-		 WHERE title LIKE CONCAT('%',#{search},'%')
+	     <if test = "searchKind == 'title'">
+		 WHERE title LIKE CONCAT('%',#{search},'%')		
+		</if>
+		<if test = "searchKind == 'userName'">
+		 WHERE userName LIKE CONCAT('%',#{search},'%')
+		</if>
 	</select>
 	
 	<select id="noticeDetail" resultType="Notice">

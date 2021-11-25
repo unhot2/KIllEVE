@@ -1,8 +1,6 @@
 package com.yg.portfolio.controller;
 
-import java.security.Principal;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.yg.portfolio.model.Notice;
 import com.yg.portfolio.model.Qna;
 import com.yg.portfolio.service.CommunityService;
@@ -24,27 +21,35 @@ public class CommunityController {
 	@Autowired
 	private CommunityService communityService;
 
+	// 공지사항 전체 글 조회
 	@GetMapping("/notice")
 	public String notice(Model model, 
 			@RequestParam(value = "search", required = false) String search, 
+			@RequestParam(value = "searchKind", required = false) String searchKind,
 			@RequestParam(value = "currentPage", required = false) Integer currentPage) {
+		System.out.println("search값 : "+search);
+		System.out.println("searchKind값 : "+searchKind);
 		if (search == null || search.isEmpty()) {
 			List<Notice> list = communityService.notice(currentPage, model);
 			model.addAttribute("list",list);
 		} else {
-			List<Notice> list = communityService.noticeSearch(currentPage, model, search);
-			model.addAttribute("list",list);
+			List<Notice> list = communityService.noticeSearch(currentPage, model, search,searchKind);
+			System.out.println("list.size : "+ list.size());
+			if (list.size() > 0) {
+				model.addAttribute("list",list);
+			}
 		}
 		return "/community/notice";
 	}
 	
+	// 공지사항 글 상세보기
 	@GetMapping("/notice/{boardNum}")
 	public String noticeDetail(Model model, @PathVariable int boardNum) {
 		model.addAttribute("detail",communityService.noticeDetail(boardNum));
 		return "/community/noticeDetailForm";
 	}
 	
-	
+	// QNA 전체 글 조회
 	@GetMapping("/qna")
 	public String qna(Model model, 
 			@RequestParam(value = "search", required = false) String search, 
@@ -60,6 +65,7 @@ public class CommunityController {
 		return "/community/qna";
 	}
 	
+	// QNA 글 상세보기
 	@GetMapping("/qna/{boardNum}")
 	public String qnaDetail(Model model, @PathVariable int boardNum,
 			@RequestParam(value = "chkSecret", required = false) String chkSecret) {
@@ -81,6 +87,7 @@ public class CommunityController {
 		return "/community/qnaForm";
 	}
 	
+	// QNA 비밀글 비밀번호 체크
 	@GetMapping("/chkPassword")
 	public @ResponseBody int chkPassword(Model model,
 			@RequestParam(value = "password", required = false) String password,
