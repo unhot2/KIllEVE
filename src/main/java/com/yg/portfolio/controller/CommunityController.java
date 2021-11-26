@@ -68,7 +68,7 @@ public class CommunityController {
 	@GetMapping("/qna/{boardNum}")
 	public String qnaDetail(Model model, @PathVariable int boardNum,
 			@RequestParam(value = "chkSecret", required = false) String chkSecret) {
-		if (chkSecret.equals("secret")) {
+		if (chkSecret.equals("secret") || chkSecret.equals("reply")) {
 			model.addAttribute("boardNum",boardNum);
 			return "/community/qnaCheckPw";
 		} else {

@@ -96,30 +96,17 @@ public class CommunityService {
 	
 	// QNA 글 작성
 	public void writeQna(Qna qna) {
-		int test = communityRepository.writeQna(qna);
-		if (test == 1) {
-			System.out.println("QNA 작성 성공 : "+test);
-		}
-		else {
-			System.out.println("QNA 작성 실패 : "+test);
-		}
+		communityRepository.writeQna(qna);
 	}
 	
 	// QNA 글 수정
 	public void updateQna(Qna qna) {
-		int test = communityRepository.updateQna(qna);
-		if (test == 1) {
-			System.out.println("QNA 수정 성공 : "+test);
-		}
-		else {
-			System.out.println("QNA 수정 실패 : "+test);
-		}
+		communityRepository.updateQna(qna);
 	}
 	
 	// QNA 글 삭제
 	public int deleteQna(Integer boardNum) {
 		return communityRepository.deleteQna(boardNum); 
-	};
-
+	}
 	
 }

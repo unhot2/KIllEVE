@@ -88,6 +88,8 @@
 		  			 , A.count
 		  			 , A.password
 		  			 , A.chkSecret
+		  			 , A.groupNo
+		  			 , A.groupStep
 				  FROM (SELECT boardNum
 				  			 , writeDate
 				  			 , userId
@@ -97,8 +99,10 @@
 				  			 , count
 				  			 , password
 				  			 , chkSecret
+				  			 , groupNo
+				  			 , groupStep
 						  FROM qna, (SELECT @ROWNUM:=0) AS R
-						 ORDER BY boardNum DESC ) A ) B
+						 ORDER BY groupNo DESC, groupStep ASC ) A ) B
 		 WHERE num BETWEEN #{startPage} and #{endPage}
 	</select>
 	
@@ -119,6 +123,8 @@
 		  			 , A.count
 		  			 , A.password
 		  			 , A.chkSecret
+		  			 , A.groupNo
+		  			 , A.groupStep
 				  FROM (SELECT boardNum
 				  			 , writeDate
 				  			 , userId
@@ -128,6 +134,8 @@
 				  			 , count
 				  			 , password
 				  			 , chkSecret
+				  			 , groupNo
+				  			 , groupStep
 						  FROM qna, (SELECT @ROWNUM:=0) AS R
 						<if test = "searchKind == 'title'">
 						 WHERE title LIKE CONCAT('%',#{search},'%')		
@@ -135,7 +143,7 @@
 						<if test = "searchKind == 'userName'">
 						 WHERE userName LIKE CONCAT('%',#{search},'%')
 						</if>
-						 ORDER BY boardNum DESC ) A ) B
+						 ORDER BY groupNo DESC, groupStep ASC ) A ) B
 		 WHERE num BETWEEN #{startPage} and #{endPage}
 	</select>
 	

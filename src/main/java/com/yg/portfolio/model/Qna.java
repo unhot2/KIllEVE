@@ -18,4 +18,6 @@ public class Qna {
 	private int totalCnt;			// 게시물 총개수
 	private String password;		// 비밀번호
 	private String chkSecret;		// 비밀글 여부
+	private String groupNo;			// groupNo
+	private String groupStep;		// groupNo
 }

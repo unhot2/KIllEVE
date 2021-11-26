@@ -26,13 +26,19 @@
 						</tr>
 						<th:block th:if="${list != null}">
 							<tr th:each="qna : ${list}">
-								<td th:text="${qna.boardNum}"></td>
-								<td>
+								<td th:text="${qna.groupNo}"></td>
+								<td style="text-align: left;">
 									<th:block th:if="${#strings.equals(qna.chkSecret,'secret')}">
 										<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum}, chkSecret = ${qna.chkSecret})}">비밀글 입니다 <i class="fas fa-lock"></i></a>
 									</th:block>
-									<th:block th:unless="${#strings.equals(qna.chkSecret,'secret')}">
+									<th:block th:if="${#strings.equals(qna.chkSecret,'public')}">
 										<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum}, chkSecret = ${qna.chkSecret})}" th:text="${qna.title}"></a>								
+									</th:block>
+									<th:block th:if="${#strings.equals(qna.chkSecret,'reply')}">
+										<i class="fas fa-reply-all" style="transform: rotate(180deg );"></i>
+										<img src="http://img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_re.gif">
+										<a th:href="@{/community/qna/{boardNum}(boardNum = ${qna.boardNum}, chkSecret = ${qna.chkSecret})}" th:text="${qna.title}"></a>
+										<i class="fas fa-lock"></i>								
 									</th:block>
 								</td>
 								<td th:text="${qna.userName}"></td>

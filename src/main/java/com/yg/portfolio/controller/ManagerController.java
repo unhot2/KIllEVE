@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yg.portfolio.model.Notice;
+import com.yg.portfolio.model.Qna;
 import com.yg.portfolio.service.CommunityService;
 import com.yg.portfolio.service.ManagerService;
 
@@ -57,7 +58,22 @@ public class ManagerController {
 	
 	// 공지사항 글 삭제
 	@PostMapping("/deleteNotice")
-	public @ResponseBody int deleteQna(@RequestParam(value = "boardNum", required = false) Integer boardNum) {
+	public @ResponseBody int deleteNotice(@RequestParam(value = "boardNum", required = false) Integer boardNum) {
 		return managerService.deleteNotice(boardNum);
 	}
+	
+	// QNA 답글 페이지 이동
+	@GetMapping("/qnaReplyForm")
+	public String qnaReplyForm(@RequestParam(value = "boardNum", required = false) Integer boardNum,Model model) {
+		model.addAttribute("detail",communityService.qnaDetail(boardNum));
+		return "/manager/qnaReplyForm";
+	}
+	
+	// QNA 답글 작성
+	@PostMapping("/writeReplyQna")
+	public String writeReplyQna(Qna qna) {
+		managerService.writeReplyQna(qna);
+		return "/community/qna";
+	}
+	
 }

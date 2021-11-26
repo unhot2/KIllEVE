@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yg.portfolio.model.Notice;
+import com.yg.portfolio.model.Qna;
 import com.yg.portfolio.repository.ManagerRepository;
 
 @Service
@@ -37,5 +38,12 @@ public class ManagerService {
 	// 공지사항 글 삭제
 	public int deleteNotice(Integer boardNum) {
 		return managerRepository.deleteNotice(boardNum);
+	}
+	
+	// QNA 답글 작성
+	public int writeReplyQna(Qna qna) {
+		qna.setTitle("킬이브에서 답변드립니다");
+		qna.setChkSecret("secret");
+		return managerRepository.writeReplyQna(qna);
 	};
 }

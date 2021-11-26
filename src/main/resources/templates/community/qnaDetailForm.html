@@ -41,7 +41,12 @@
 					</table>
 					<div class="qna-bottom">
 						<a th:href="@{/community/qna}" class="writeBtn">글목록</a>
-						<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN' or session.userId == detail.userId}">
+						<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN'}">
+							<a th:href="@{/community/qnaForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
+							<a onClick="deleteQna()" style="float: right;">글삭제</a>
+							<a th:href="@{/manager/qnaReplyForm(boardNum = ${detail.boardNum})}" style="float: right;">답변작성</a>
+						</th:block>
+						<th:block th:if="${session.userId == detail.userId}">
 							<a th:href="@{/community/qnaForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
 							<a onClick="deleteQna()" style="float: right;">글삭제</a>
 						</th:block>

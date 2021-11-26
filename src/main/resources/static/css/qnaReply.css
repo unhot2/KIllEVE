@@ -40,14 +40,11 @@
     display: block;
     width: 37px;
     height: 35px;
-    text-align: center;
 }
 .qna-table {
     border-top: 2px solid black;
-    border-bottom: 2px solid black;
     width: 100%;
     font-size: 14px;
-    text-align: center;
 }
 
 .qna-table a {
@@ -63,6 +60,11 @@
 
 .qna-table th {
 	background-color: #eceaea;
+	padding-left : 12px;
+	width: 129px;
+}
+
+.qna-table td {
 	padding-left : 12px;
 }
 

@@ -28,4 +28,30 @@
 		DELETE FROM notice
 		 WHERE boardNum		= #{boardNum}
 	</delete>
+	
+	<insert id="writeReplyQna">
+		INSERT INTO qna (
+			   groupNo
+			 , groupStep
+			 , userId
+			 , userName
+			 , title
+			 , content
+			 , password
+			 , chkSecret
+			 )
+		VALUES (
+			   #{groupNo}
+			 , (SELECT groupStep
+			 	  FROM qna as A
+			 	 WHERE boardNum = #{groupNo}) +1
+			 , #{userId}
+			 , #{userName}
+			 , #{title}
+			 , #{content}
+			 , #{password}
+			 , "reply")
+	</insert>
+	
+	
 </mapper>
