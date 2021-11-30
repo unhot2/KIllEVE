@@ -42,7 +42,8 @@ public class ManagerService {
 	
 	// QNA 답글 작성
 	public int writeReplyQna(Qna qna) {
-		qna.setTitle("킬이브에서 답변드립니다");
+		System.out.println("답변작성 서비스");
+		qna.setTitle("'킬이브'에서 답변드립니다");
 		qna.setChkSecret("secret");
 		return managerRepository.writeReplyQna(qna);
 	};

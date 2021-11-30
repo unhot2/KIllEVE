@@ -52,6 +52,9 @@ public class CommunityController {
 			@RequestParam(value = "search", required = false) String search,
 			@RequestParam(value = "searchKind", required = false) String searchKind,
 			@RequestParam(value = "currentPage", required = false) Integer currentPage) {
+		System.out.println("search값 : "+search);
+		System.out.println("searchKind값 : "+searchKind);
+		System.out.println("currentPage값 : "+currentPage);
 		if (search == null || search.isEmpty()) {
 			List<Qna> list = communityService.qna(currentPage, model);
 			model.addAttribute("list",list);
@@ -70,6 +73,7 @@ public class CommunityController {
 			@RequestParam(value = "chkSecret", required = false) String chkSecret) {
 		if (chkSecret.equals("secret") || chkSecret.equals("reply")) {
 			model.addAttribute("boardNum",boardNum);
+			
 			return "/community/qnaCheckPw";
 		} else {
 			model.addAttribute("detail",communityService.qnaDetail(boardNum));

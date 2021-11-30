@@ -46,7 +46,7 @@
 							<a onClick="deleteQna()" style="float: right;">글삭제</a>
 							<a th:href="@{/manager/qnaReplyForm(boardNum = ${detail.boardNum})}" style="float: right;">답변작성</a>
 						</th:block>
-						<th:block th:if="${session.userId == detail.userId}">
+						<th:block th:if="${session.userRole == 'ROLE_USER' and session.userId == detail.userId}">
 							<a th:href="@{/community/qnaForm(boardNum = ${detail.boardNum})}" style="float: right;">글수정</a>
 							<a onClick="deleteQna()" style="float: right;">글삭제</a>
 						</th:block>

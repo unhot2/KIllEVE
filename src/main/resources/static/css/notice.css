@@ -129,7 +129,8 @@
 
 .buttonBox {
 	position: relative;
-	right : -689px;
+	right : -691px;
+	display: flex;
 }
 
 .searchKind {

@@ -72,8 +72,9 @@ public class ManagerController {
 	// QNA 답글 작성
 	@PostMapping("/writeReplyQna")
 	public String writeReplyQna(Qna qna) {
+		System.out.println("답변작성 컨트롤러");
 		managerService.writeReplyQna(qna);
-		return "/community/qna";
+		return "redirect:/community/qna";
 	}
 	
 }

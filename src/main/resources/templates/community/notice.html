@@ -79,11 +79,11 @@
 								<button>SEARCH</button>
 							</form>
 						</div>
-						<div class="buttonBox">
-							<a th:href="@{/community/notice}" style="float: right;">글목록</a>
+						<div class="buttonBox" align="right">
 							<th:block th:if="${session.userRole == 'ROLE_MANAGER' or session.userRole == 'ROLE_ADMIN'}">
-								<a th:href="@{/manager/noticeForm}" style="float: right;">글작성</a>
+								<a th:href="@{/manager/noticeForm}">글작성</a>
 							</th:block>
+							<a th:href="@{/community/notice}">글목록</a>
 						</div>
 					</div>
 				</div>
