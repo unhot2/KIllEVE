@@ -71,5 +71,98 @@ section {
 }
 
 
+/*컴포넌트*/
+.flex-container {
+	max-width: 1200px;
+	margin: 80px auto;
+}
+.main-content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content : space-between;
+}
+
+.component img{
+	max-width: 100%;
+	display : block;
+}
+
+.component .description {
+	text-align: center;
+	padding : 1rem;
+	margin-bottom: 2rem;
+	background-color: #ffffff;
+}
+
+.description h3{
+	margin : 0;
+	font-size: 1.3rem;
+	line-height: 1.5;
+	font-weight: 700;
+}
+
+.description .here {
+	color : red;
+}
+
+.description .button {
+	display : block;
+	text-decoration: none;
+	background-color: #008fd1;
+	padding : 0.6rem 2rem;
+	margin-top : 1rem;
+	color : white;
+}
+
+@media (min-width : 480px){
+	.component {
+		flex : 0 0 calc(50% - 1rem);
+	}
+}
+@media (min-width : 768px){
+	.component {
+		flex : 0 0 calc(25% - 1rem);
+	}
+}
+
+/*컴포넌트 타이틀*/
+.best {
+    padding: 10px 0;
+    border-bottom: 1px solid black;
+    width: 58px;
+    margin: 34px auto;
+    font-size: 25px;
+    text-align: center;
+}
+
+.quickMenu {
+    position: fixed;
+    width: 65px;
+    height: 212px;
+    right: 25px;
+    top: 664px;
+    background: #f3efef;
+    border-radius: 5%;
+}
 
 
+.quickKakao {
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    right: 30px;
+    top: 815px;
+    background: #f3efef;
+    border-radius: 50%;
+}
+
+.quickInsta {
+    position: fixed;
+    width: 53px;
+    height: 53px;
+    right: 31px;
+    top: 757px;
+    background: #f3efef;
+    border-radius: 50%;
+    padding: 3px;
+}

@@ -29,6 +29,8 @@ $(function() {
 	});
 });
 
+
+/* slick 설정 */
 $(function() {
 	$('#slider-div').slick({
 		slide: 'div',        //슬라이드 되어야 할 태그 ex) div, li 
