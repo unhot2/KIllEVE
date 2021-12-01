@@ -1,5 +1,6 @@
-/*일정이상 스크롤이 내려가면 클래스를 추가하거나 제거해주는 FUNCTION*/
 $(function() {
+	
+	/*일정이상 스크롤이 내려가면 클래스를 추가하거나 제거해주는 FUNCTION*/
 	var lastScroll = 0;
 	$(window).scroll(function(event) {
 		var scroll = $(this).scrollTop();
@@ -14,10 +15,8 @@ $(function() {
 		}
 		lastScroll = scroll;
 	});
-});
-
-/*커뮤니티 드롭다운*/
-$(function() {
+	
+	/*커뮤니티 드롭다운*/
 	$('#drop-Btn').hover(function() {
 		$('#drop-content').css('display', 'block');
 	}, function() {
@@ -27,11 +26,9 @@ $(function() {
 			$('#drop-content').css('display', 'none');
 		});
 	});
-});
 
 
-/* slick 설정 */
-$(function() {
+	/* slick 설정 */
 	$('#slider-div').slick({
 		slide: 'div',        //슬라이드 되어야 할 태그 ex) div, li 
 		infinite: true,     //무한 반복 옵션     
@@ -50,6 +47,6 @@ $(function() {
 		draggable: true,     //드래그 가능 여부 
 
 	});
-})
-
+ });
+ 
 

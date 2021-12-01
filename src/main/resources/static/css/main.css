@@ -88,8 +88,7 @@ section {
 }
 
 .component .description {
-	text-align: center;
-	padding : 1rem;
+	padding : 1rem 0;
 	margin-bottom: 2rem;
 	background-color: #ffffff;
 }

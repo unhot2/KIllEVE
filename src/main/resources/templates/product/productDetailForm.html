@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+	<meta charset="utf-8" />
+</head>
+
+<body>
+	<section layout:fragment="content">
+		<p th:text="${detail.productNo}"></p>
+		<p th:text="${detail.category}"></p>
+		<p th:text="${detail.productName}"></p>
+		<p th:text="${detail.price}"></p>
+		<p th:text="${detail.stock}"></p>
+		<div th:each="product : ${imgDetail}">
+			<img
+				th:src="@{/img/product/{productNo}/{fileName}(productNo=${product.productNo}, fileName=${product.fileName})}">
+		</div>
+	</section>
+</body>
+
+</html>

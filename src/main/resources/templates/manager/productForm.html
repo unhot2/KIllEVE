@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+	<meta charset="utf-8" />
+	<link th:href="@{/css/product.css}" rel="stylesheet">
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<section>
+			<div class="container">
+				<!--<p>상품등록</p>
+				<form method="post" action="/manager/productSave" enctype="multipart/form-data">
+					<input type="text" name="productName">
+					<input type="number" name="price">
+					<input type="number" name="stock">
+					<input multiple type="file" name="files">
+					<button>submit</button>
+				</form>-->
+				<div class="product-content">
+					<div class="product-title">
+						PRODUCT SAVE<br>
+						<span class="qna-sub-title">상품 등록</span>
+					</div>
+					<div class="product-body">
+						<form method="post" action="/manager/productSave" enctype="multipart/form-data">
+							<table class="product-write-table">
+								<tr>
+									<th>상품명</th>
+									<td><input type="text" class="product-input" name="productName"></td>
+								</tr>
+								<tr>
+									<th>카테고리</th>
+									<td>
+										<input id="category1" name="category" value="outer" type="radio" checked>
+										<label for="category1">OUTER</label>
+										<input id="category2" name="category" value="top" type="radio">
+										<label for="category2">TOP</label>
+										<input id="category3" name="category" value="pants" type="radio">
+										<label for="category3">PANTS</label>
+										<input id="category4" name="category" value="shoes" type="radio">
+										<label for="category4">SHOES</label>
+									</td>
+								</tr>
+								<tr>
+									<th>가격</th>
+									<td>
+										<input type="number" class="product-input" name="price" min="0" max="1000000"
+											required>
+									</td>
+								</tr>
+								<tr>
+									<th>재고</th>
+									<td><input type="number" class="product-input" name="stock" min="0" max="10000"
+											required></td>
+								</tr>
+								<tr>
+									<th>상세이미지</th>
+									<td><input multiple type="file" name="files"></td>
+								</tr>
+							</table>
+							<div class="product-bottom">
+								<button>상품등록</button>
+								<a th:href="@{/}" class="writeBtn">취소</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+
+</html>

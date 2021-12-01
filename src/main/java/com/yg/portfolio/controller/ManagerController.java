@@ -1,5 +1,10 @@
 package com.yg.portfolio.controller;
 
+import java.io.File;
+import java.util.List;
+
+import javax.swing.filechooser.FileSystemView;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yg.portfolio.model.Notice;
+import com.yg.portfolio.model.Product;
 import com.yg.portfolio.model.Qna;
 import com.yg.portfolio.service.CommunityService;
 import com.yg.portfolio.service.ManagerService;
@@ -77,4 +84,27 @@ public class ManagerController {
 		return "redirect:/community/qna";
 	}
 	
+	// 상품 등록 폼
+	@GetMapping("/productForm")
+	public String productForm() {
+		return "/manager/productForm";
+	}
+	
+	// 상품 등록
+	@PostMapping("/productSave")
+	public String productSave(@RequestParam("files") List<MultipartFile> files
+			, Product product) throws Exception {
+			System.out.println(product.getProductName());
+//		  String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
+//		  System.out.println("rootPath 값 : "+rootPath);
+//		  String basePath = rootPath + "/" + "multi"; // 파일 업로드(여러개) 처리 부분 
+		  for(MultipartFile file : files) { 
+			  System.out.println("file값  :"+file.getOriginalFilename());
+//			  String originalName = file.getOriginalFilename(); 
+//			  String filePath = basePath + "/" + originalName; 
+//			  File dest = new File(filePath);
+//			  file.transferTo(dest); 
+		  }
+	    return "redirect:/";
+	}
 }

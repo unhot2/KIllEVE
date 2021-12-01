@@ -11,10 +11,10 @@
 
 <body>
 	<div layout:fragment="content">
-		<section>
+		<section id="#">
 			<div id="slider-div">
 				<div>
-					<img src="/img/banner/1.jpeg">
+					<img src="/img/banner/1.png">
 				</div>
 				<div>
 					<img src="/img/banner/2.jpeg">
@@ -36,11 +36,13 @@
 				<p class="best">BEST</p>
 				<div class="main-content">
 					<article class="component">
+						<a th:href="@{/product/detail/{productNo}(productNo= 1)}">
 						<img src="https://www.byslim.com/web/product/medium/202110/dbb715288d9405bc6190a130a0c895a6.jpg">
+						</a>
 						<div class="description">
-							<h3>카드 컴포넌트 만들기</h3>
-							<p> 여기에 내용입력하세요 </p>
-							<p class="here"> 여기에 세부내용 입력하세요</p>
+							<h3>[wool] 울 캐시 세미오버 싱글코트OT</h3>
+							<p> (3 SIZE) 95~105 </p>
+							<p class="here">￦88,900</p>
 						</div>
 					</article>
 					<article class="component">
@@ -160,7 +162,7 @@
 							<p class="here"> 여기에 세부내용 입력하세요</p>
 						</div>
 					</article>
-					<article class="component">
+					<article class="component" id="bottom">
 						<img src="https://www.byslim.com/web/product/medium/202110/dbb715288d9405bc6190a130a0c895a6.jpg">
 						<div class="description">
 							<h3>카드 컴포넌트 만들기</h3>
@@ -171,7 +173,9 @@
 				</div>
 			</div>
 			<div class="quickMenu">
-				<img src="/img/kakaoIcon.png" class="quickKakao">			
+				<a href="#"><img src="https://www.byslim.com/morenvyimg/scroll_top.png"></a>
+				<a href="#bottom"><img src="https://www.byslim.com/morenvyimg/scroll_bottom.png"></a>
+				<img src="/img/kakaoIcon.png" class="quickKakao">
 				<img src="/img/instaIcon.png" class="quickInsta">			
 			</div>
 		</section>
