@@ -5,12 +5,14 @@
 <head>
 	<meta charset="utf-8" />
 	<link th:href="@{/css/product.css}" rel="stylesheet">
-	<script th:src="@{/js/product.js}"></script>
+	<link th:href="@{/css/manager.css}" rel="stylesheet">
+	<script th:src="@{/js/manager.js}"></script>
 </head>
 
 <body>
 	<section layout:fragment="content">
 		<dl>
+			<!--상품등록 메뉴-->
 			<dt>
 				<p>상품등록</p>
 			</dt>
@@ -55,21 +57,17 @@
 									</tr>
 									<tr>
 										<th>대표이미지</th>
-										<!--<td><input multiple type="file" name="files"></td>-->
 										<td>
 											<div class="image-container">
-												<img style="width: 130px; border: 1px solid gray; margin: 11px 0;"
-													id="preview-image"
-													src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-												<input style="display: block;" type="file" id="input-image">
+												<img id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+												<input style="display: block;" type="file" id="input-image" name="mainFile">
 											</div>
 										</td>
 									</tr>
 									<tr>
 										<th>상세</th>
-										<!--<td><input multiple type="file" name="files"></td>-->
 										<td>
-											<input type="file" id="input-imgs" multiple />
+											<input type="file" id="input-imgs" name="files" multiple />
 											<div id="imgs_wrap" class="imgs_wrap">
 											</div>
 										</td>
@@ -84,18 +82,21 @@
 					</div>
 				</div>
 			</dd>
+			<!--할인등록 메뉴-->
 			<dt class="disableTab">
 				<p>할인등록</p>
 			</dt>
 			<dd class="hidden">
 				할인등록
 			</dd>
+			<!--회원관리 메뉴-->
 			<dt class="disableTab">
 				<p>회원관리</p>
 			</dt>
 			<dd class="hidden">
 				회원관리
 			</dd>
+			<!--주문관리 메뉴-->
 			<dt class="disableTab">
 				<p>주문관리</p>
 			</dt>

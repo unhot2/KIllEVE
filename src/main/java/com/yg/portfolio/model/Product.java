@@ -1,7 +1,5 @@
 package com.yg.portfolio.model;
 
-import java.util.List;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,4 +11,6 @@ public class Product {
 	private String productName;
 	private int price;
 	private int stock;
+	private String mainImage;
+	
 }

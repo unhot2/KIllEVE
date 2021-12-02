@@ -85,21 +85,29 @@ public class ManagerController {
 	}
 	
 	// 상품 등록 폼
-	@GetMapping("/productForm")
+	@GetMapping("/managerMenu")
 	public String productForm() {
-		return "/manager/productForm";
+		return "/manager/managerMenu";
 	}
 	
 	// 상품 등록
 	@PostMapping("/productSave")
 	public String productSave(@RequestParam("files") List<MultipartFile> files
+			, @RequestParam("mainFile") MultipartFile mainFile
 			, Product product) throws Exception {
-			System.out.println(product.getProductName());
+			System.err.println("======================== 상품 등록 넘어온 값 ========================");
+			System.out.println("상품명 : "+product.getProductName());
+			System.out.println("카테고리 : "+product.getCategory());
+			System.out.println("가격 : "+product.getPrice());
+			System.out.println("재고 : "+product.getStock());
+			System.out.println("대표이미지 명 : "+mainFile.getOriginalFilename());
+			product.setMainImage(mainFile.getOriginalFilename());
+			System.out.println("저장된 대표이미지 명 : "+product.getMainImage());
 //		  String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
 //		  System.out.println("rootPath 값 : "+rootPath);
 //		  String basePath = rootPath + "/" + "multi"; // 파일 업로드(여러개) 처리 부분 
 		  for(MultipartFile file : files) { 
-			  System.out.println("file값  :"+file.getOriginalFilename());
+			  System.out.println("상세 이미지 명  :"+file.getOriginalFilename());
 //			  String originalName = file.getOriginalFilename(); 
 //			  String filePath = basePath + "/" + originalName; 
 //			  File dest = new File(filePath);

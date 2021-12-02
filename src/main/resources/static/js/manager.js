@@ -1,7 +1,11 @@
 $(function() {
-	// 관리자 페이지 category-bar, footer 감춤
+	// 관리자 페이지 CSS 변경
 	$('.category-bar').addClass('hidden');
+	$('.index-header').addClass('hidden');
 	$('footer').addClass('hidden');
+	$('.header_top').css({'border-bottom':'1px solid #5c5c5c','background-color':'#5c5c5c'});
+	$('.navlog img').css({'width':'59%','top':'15px','left':'540px'})
+	$('.guide_nav').css({'position':'relative','right':'-304px'})
 	
 	/*관리자 메뉴 탭설정*/
 	var $menuEle = $('dt');
