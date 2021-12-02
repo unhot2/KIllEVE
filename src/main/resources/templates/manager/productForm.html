@@ -5,72 +5,104 @@
 <head>
 	<meta charset="utf-8" />
 	<link th:href="@{/css/product.css}" rel="stylesheet">
+	<script th:src="@{/js/product.js}"></script>
 </head>
 
 <body>
-	<div layout:fragment="content">
-		<section>
-			<div class="container">
-				<!--<p>상품등록</p>
-				<form method="post" action="/manager/productSave" enctype="multipart/form-data">
-					<input type="text" name="productName">
-					<input type="number" name="price">
-					<input type="number" name="stock">
-					<input multiple type="file" name="files">
-					<button>submit</button>
-				</form>-->
-				<div class="product-content">
-					<div class="product-title">
-						PRODUCT SAVE<br>
-						<span class="qna-sub-title">상품 등록</span>
-					</div>
-					<div class="product-body">
-						<form method="post" action="/manager/productSave" enctype="multipart/form-data">
-							<table class="product-write-table">
-								<tr>
-									<th>상품명</th>
-									<td><input type="text" class="product-input" name="productName"></td>
-								</tr>
-								<tr>
-									<th>카테고리</th>
-									<td>
-										<input id="category1" name="category" value="outer" type="radio" checked>
-										<label for="category1">OUTER</label>
-										<input id="category2" name="category" value="top" type="radio">
-										<label for="category2">TOP</label>
-										<input id="category3" name="category" value="pants" type="radio">
-										<label for="category3">PANTS</label>
-										<input id="category4" name="category" value="shoes" type="radio">
-										<label for="category4">SHOES</label>
-									</td>
-								</tr>
-								<tr>
-									<th>가격</th>
-									<td>
-										<input type="number" class="product-input" name="price" min="0" max="1000000"
-											required>
-									</td>
-								</tr>
-								<tr>
-									<th>재고</th>
-									<td><input type="number" class="product-input" name="stock" min="0" max="10000"
-											required></td>
-								</tr>
-								<tr>
-									<th>상세이미지</th>
-									<td><input multiple type="file" name="files"></td>
-								</tr>
-							</table>
-							<div class="product-bottom">
-								<button>상품등록</button>
-								<a th:href="@{/}" class="writeBtn">취소</a>
-							</div>
-						</form>
+	<section layout:fragment="content">
+		<dl>
+			<dt>
+				<p>상품등록</p>
+			</dt>
+			<dd>
+				<div class="container">
+					<div class="product-content">
+						<div class="product-title">
+							PRODUCT SAVE<br>
+							<span class="qna-sub-title">상품 등록</span>
+						</div>
+						<div class="product-body">
+							<form method="post" action="/manager/productSave" enctype="multipart/form-data">
+								<table class="product-write-table">
+									<tr>
+										<th>상품명</th>
+										<td><input type="text" class="product-input" name="productName"></td>
+									</tr>
+									<tr>
+										<th>카테고리</th>
+										<td>
+											<input id="category1" name="category" value="outer" type="radio" checked>
+											<label for="category1">OUTER</label>
+											<input id="category2" name="category" value="top" type="radio">
+											<label for="category2">TOP</label>
+											<input id="category3" name="category" value="pants" type="radio">
+											<label for="category3">PANTS</label>
+											<input id="category4" name="category" value="shoes" type="radio">
+											<label for="category4">SHOES</label>
+										</td>
+									</tr>
+									<tr>
+										<th>가격</th>
+										<td>
+											<input type="number" class="product-input" name="price" min="0"
+												max="1000000" required>
+										</td>
+									</tr>
+									<tr>
+										<th>재고</th>
+										<td><input type="number" class="product-input" name="stock" min="0" max="10000"
+												required></td>
+									</tr>
+									<tr>
+										<th>대표이미지</th>
+										<!--<td><input multiple type="file" name="files"></td>-->
+										<td>
+											<div class="image-container">
+												<img style="width: 130px; border: 1px solid gray; margin: 11px 0;"
+													id="preview-image"
+													src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+												<input style="display: block;" type="file" id="input-image">
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>상세</th>
+										<!--<td><input multiple type="file" name="files"></td>-->
+										<td>
+											<input type="file" id="input-imgs" multiple />
+											<div id="imgs_wrap" class="imgs_wrap">
+											</div>
+										</td>
+									</tr>
+								</table>
+								<div class="product-bottom">
+									<button>상품등록</button>
+									<a th:href="@{/}" class="writeBtn">취소</a>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-	</div>
+			</dd>
+			<dt class="disableTab">
+				<p>할인등록</p>
+			</dt>
+			<dd class="hidden">
+				할인등록
+			</dd>
+			<dt class="disableTab">
+				<p>회원관리</p>
+			</dt>
+			<dd class="hidden">
+				회원관리
+			</dd>
+			<dt class="disableTab">
+				<p>주문관리</p>
+			</dt>
+			<dd class="hidden">
+				주문관리
+			</dd>
+	</section>
 </body>
 
 </html>
