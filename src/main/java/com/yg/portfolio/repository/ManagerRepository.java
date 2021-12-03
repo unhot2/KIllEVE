@@ -4,6 +4,7 @@ package com.yg.portfolio.repository;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.yg.portfolio.model.Notice;
+import com.yg.portfolio.model.Product;
 import com.yg.portfolio.model.Qna;
 
 
@@ -21,5 +22,9 @@ public interface ManagerRepository {
 	
 	// QNA 답글 작성
 	public int writeReplyQna(Qna qna);
+
+	public void productSave(Product product);
+
+	public void productImgSave(String fileName);
 	
 }

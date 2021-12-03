@@ -1,10 +1,6 @@
 package com.yg.portfolio.controller;
 
-import java.io.File;
 import java.util.List;
-
-import javax.swing.filechooser.FileSystemView;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,6 +81,7 @@ public class ManagerController {
 	}
 	
 	// 상품 등록 폼
+	
 	@GetMapping("/managerMenu")
 	public String productForm() {
 		return "/manager/managerMenu";
@@ -103,15 +100,10 @@ public class ManagerController {
 			System.out.println("대표이미지 명 : "+mainFile.getOriginalFilename());
 			product.setMainImage(mainFile.getOriginalFilename());
 			System.out.println("저장된 대표이미지 명 : "+product.getMainImage());
-//		  String rootPath = FileSystemView.getFileSystemView().getHomeDirectory().toString();
-//		  System.out.println("rootPath 값 : "+rootPath);
-//		  String basePath = rootPath + "/" + "multi"; // 파일 업로드(여러개) 처리 부분 
+			managerService.productSave(product);
 		  for(MultipartFile file : files) { 
 			  System.out.println("상세 이미지 명  :"+file.getOriginalFilename());
-//			  String originalName = file.getOriginalFilename(); 
-//			  String filePath = basePath + "/" + originalName; 
-//			  File dest = new File(filePath);
-//			  file.transferTo(dest); 
+			  managerService.productImgSave(file.getOriginalFilename());
 		  }
 	    return "redirect:/";
 	}

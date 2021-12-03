@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yg.portfolio.model.Notice;
+import com.yg.portfolio.model.Product;
 import com.yg.portfolio.model.Qna;
 import com.yg.portfolio.repository.ManagerRepository;
 
@@ -46,5 +47,15 @@ public class ManagerService {
 		qna.setTitle("'킬이브'에서 답변드립니다");
 		qna.setChkSecret("secret");
 		return managerRepository.writeReplyQna(qna);
+	}
+
+	public void productSave(Product product) {
+		managerRepository.productSave(product);
+	}
+
+	public void productImgSave(String fileName) {
+		managerRepository.productImgSave(fileName);
 	};
+	
+	
 }

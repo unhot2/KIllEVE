@@ -38,8 +38,7 @@
 			 , title
 			 , content
 			 , password
-			 , chkSecret
-			 )
+			 , chkSecret )
 		VALUES (
 			   #{groupNo}
 			 , (SELECT groupStep
@@ -51,6 +50,30 @@
 			 , #{content}
 			 , #{password}
 			 , "reply")
+	</insert>
+	
+	<insert id="productSave">
+		INSERT INTO product (
+			   category
+			 , productName
+			 , price
+			 , stock
+			 , mainImage )
+		VALUES (
+			   #{category}
+			 , #{productName}
+			 , #{price}
+			 , #{stock}
+			 , #{mainImage} )
+	</insert>
+	
+	<insert id="productImgSave" parameterType="ProductImg">
+		INSERT INTO productImg (
+			   productNo
+			 , fileName )
+		VALUES (
+			   (SELECT MAX(productNo) from product)
+			 , #{fileName} )
 	</insert>
 	
 	
