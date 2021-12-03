@@ -56,13 +56,17 @@
 		INSERT INTO product (
 			   category
 			 , productName
-			 , price
+			 , discountRate
+			 , consumerPrice
+			 , salePrice
 			 , stock
 			 , mainImage )
 		VALUES (
 			   #{category}
 			 , #{productName}
-			 , #{price}
+			 , #{discountRate}
+			 , #{consumerPrice}
+			 , #{salePrice}
 			 , #{stock}
 			 , #{mainImage} )
 	</insert>

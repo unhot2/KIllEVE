@@ -120,6 +120,11 @@
 .product-input {
 	border: 1px solid #d5d5d5;
 	padding-left: 12px;
+	width: 82px;
+}
+.product-input-title {
+	border: 1px solid #d5d5d5;
+	padding-left: 12px;
 	width: 300px;
 }
 

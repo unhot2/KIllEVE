@@ -1,0 +1,53 @@
+.product-container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.centerAlign {
+	text-align: center;
+}
+
+.product-head {
+	display:flex;
+	margin : 50px 0;
+}
+
+.product-head-img {
+	width : 40%;	
+}
+.product-head-img img {
+	width : 100%;	
+}
+
+.product-head-info {
+    padding:0 75px;
+    width: 60%;
+}
+
+.product-detail-table {
+    font-size: 14px;
+}
+
+.product-detail-table  .consumerPrice{
+    text-decoration: line-through;
+}
+
+.product-detail-table th {
+    width: 31%;
+    padding: 13px 0;
+}
+
+.saleIcon {
+    width: 51px;
+    background: red;
+    text-align: center;
+    color: #ffdcdc;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
+.infoHr {
+	height: 4px !important;
+    color: black;
+    opacity: 1;
+}

@@ -4,18 +4,72 @@
 
 <head>
 	<meta charset="utf-8" />
+	<link th:href="@{/css/productDetail.css}" rel="stylesheet">
+	<script th:src="@{/js/productDetail.js}"></script>
 </head>
 
 <body>
 	<section layout:fragment="content">
-		<p th:text="${detail.productNo}"></p>
-		<p th:text="${detail.category}"></p>
-		<p th:text="${detail.productName}"></p>
-		<p th:text="${detail.price}"></p>
-		<p th:text="${detail.stock}"></p>
-		<div th:each="product : ${imgDetail}">
-			<img
-				th:src="@{/img/product/{productNo}/{fileName}(productNo=${product.productNo}, fileName=${product.fileName})}">
+		<div class="product-container">
+			<div class="product-head">
+				<div class="product-head-img">
+					<img
+						th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
+				</div>
+				<div class="product-head-info">
+					<div>
+						<h2 th:text="${detail.productName}"></h2>
+					</div>
+					<hr class="infoHr">
+					<div>
+						<table class="product-detail-table">
+							<tr>
+								<th>소비자가</th>
+								<td><span th:text="'￦'+${detail.consumerPrice}+'원'" id="consumerPrice"
+										class="consumerPrice"></span></td>
+							</tr>
+							<tr>
+								<th>할인율</th>
+								<td><span th:text="${detail.discountRate}+'%'" id="discountRate"></span></td>
+							</tr>
+							<tr>
+								<th>판매가</th>
+								<td><span th:text="'￦'+${detail.salePrice}+'원'" id="salePrice"></span></td>
+							</tr>
+							<tr>
+								<th>상품명</th>
+								<td><span th:text="${detail.productName}"></span></td>
+							</tr>
+							<tr>
+								<th>색상</th>
+								<td><select name="option1" id="product_option_id1" required>
+										<option value="*" selected="">- [필수] 옵션선택 -</option>
+										<option value="**" disabled="">-------------------</option>
+										<option value="블랙">블랙</option>
+										<option value="카키">카키</option>
+										<option value="차콜">차콜</option>
+									</select></td>
+							</tr>
+							<tr>
+								<th>사이즈</th>
+								<td><select name="option1" id="product_option_id1" required>
+										<option value="*" selected="">- [필수] 옵션선택 -</option>
+										<option value="**" disabled="">-------------------</option>
+										<option value="블랙">블랙</option>
+										<option value="카키">카키</option>
+										<option value="차콜">차콜</option>
+									</select></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="product-container centerAlign">
+			<div th:each="product : ${imgDetail}">
+				<img
+					th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${product.productNo}, fileName=${product.fileName})}">
+			</div>
 		</div>
 	</section>
 </body>

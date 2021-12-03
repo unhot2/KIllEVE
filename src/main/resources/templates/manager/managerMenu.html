@@ -28,7 +28,7 @@
 								<table class="product-write-table">
 									<tr>
 										<th>상품명</th>
-										<td><input type="text" class="product-input" name="productName"></td>
+										<td><input type="text" class="product-input-title" name="productName"></td>
 									</tr>
 									<tr>
 										<th>카테고리</th>
@@ -44,28 +44,62 @@
 										</td>
 									</tr>
 									<tr>
-										<th>가격</th>
+										<th>소비자가</th>
 										<td>
-											<input type="number" class="product-input" name="price" min="0"
-												max="1000000" required>
+											<input type="number" class="product-input" id="consumerPrice"
+												name="consumerPrice" min="0" max="1000000" required>
+										</td>
+									</tr>
+									<tr>
+										<th>할인율</th>
+										<td>
+											<input type="number" class="product-input" id="discountRate"
+												name="discountRate" min="0" max="100" value="0" required> %
+										</td>
+									</tr>
+									<tr>
+										<th>판매가</th>
+										<td>
+											<input type="number" class="product-input" id="salePrice" name="salePrice"
+												min="0" max="1000000" readOnly required>
 										</td>
 									</tr>
 									<tr>
 										<th>재고</th>
-										<td><input type="number" class="product-input" name="stock" min="0" max="10000"
-												required></td>
+										<td><input type="number" class="product-input" name="stock" min="1" max="10000"
+												value="1" required></td>
+									</tr>
+									<tr>
+										<th>색상</th>
+										<td>
+											<div id="colorList">
+											</div>
+											<input type="text" class="product-input" id="colorInput">
+											<span id="add">추가</span>
+										</td>
+									</tr>
+									<tr>
+										<th>사이즈</th>
+										<td>
+											<div id="colorList">
+											</div>
+											<input type="text" class="product-input" id="colorInput">
+											<span id="add">추가</span>
+										</td>
 									</tr>
 									<tr>
 										<th>대표이미지</th>
 										<td>
 											<div class="image-container">
-												<img id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-												<input style="display: block;" type="file" id="input-image" name="mainFile">
+												<img id="preview-image"
+													src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+												<input style="display: block;" type="file" id="input-image"
+													name="mainFile">
 											</div>
 										</td>
 									</tr>
 									<tr>
-										<th>상세</th>
+										<th>상세이미지</th>
 										<td>
 											<input type="file" id="input-imgs" name="files" multiple />
 											<div id="imgs_wrap" class="imgs_wrap">

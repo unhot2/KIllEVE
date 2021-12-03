@@ -28,5 +28,10 @@ $(function() {
 	});
  });
  
+ /*가격 천단위 구분기호 (정규식 사용)*/
+function priceToString(price) {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+ 
 
 
