@@ -49,12 +49,24 @@ public class ManagerService {
 		return managerRepository.writeReplyQna(qna);
 	}
 
+	// 상품등록
 	public void productSave(Product product) {
 		managerRepository.productSave(product);
 	}
 
+	// 상세이미지 등록
 	public void productImgSave(String fileName) {
 		managerRepository.productImgSave(fileName);
+	}
+
+	// 컬러등록
+	public void productColorSave(String colorName) {
+		managerRepository.productColorSave(colorName);
+	};
+	
+	// 사이즈등록
+	public void productSizeSave(String sizeName) {
+		managerRepository.productSizeSave(sizeName);
 	};
 	
 	

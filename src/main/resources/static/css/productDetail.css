@@ -26,6 +26,7 @@
 
 .product-detail-table {
     font-size: 14px;
+    width : 100%;
 }
 
 .product-detail-table  .consumerPrice{
@@ -33,10 +34,77 @@
 }
 
 .product-detail-table th {
-    width: 31%;
+    width: 15%;
     padding: 13px 0;
 }
 
+.selectTr {
+	border-top : 1px solid #b4b4b4;
+	border-bottom: 1px solid #b4b4b4;
+}
+
+/*안내문구*/
+.guideText {
+    font-size: 13px;
+    margin: 5px 0;
+    color: #4b4a4a;
+}
+
+.total-table {
+	width: 100%;
+	font-size : 13px;
+}
+
+.total-table tr {
+	width: 100%;
+	border-top : 1px solid black;
+	border-bottom : 1px solid black;
+	height: 58px;
+}
+
+.totalTd1 {
+	width: 60%;
+}
+.totalTd2 {
+	width: 20%;
+	text-align: center;
+}
+.totalTd3 {
+	width: 20%;
+	text-align: right;
+}
+
+.quantityArea {
+	width: 65px;
+}
+
+.quantity {
+    display: inline-block;
+    position: relative;
+    width: 44px;
+    height : 21px;
+    vertical-align: top;
+}
+.upBtn {
+    position: relative;
+    top: -6px;
+    left: -5px;
+    text-decoration: none;
+}
+
+.downBtn {
+    position: relative;
+    top: 5px;
+    left: -30px;
+    text-decoration: none;
+}
+
+/*할인율 영역*/
+.discountRate {
+	font-weight: 700;
+	color : red;
+}
+/*saleIcon 영역*/
 .saleIcon {
     width: 51px;
     background: red;
@@ -46,8 +114,14 @@
     border-radius: 6px;
 }
 
+/*상품설명 선 영역*/
 .infoHr {
 	height: 4px !important;
     color: black;
     opacity: 1;
+}
+
+/*색상,사이즈 선택 영역*/
+.selectBox {
+	width:100%;
 }

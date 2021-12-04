@@ -39,19 +39,122 @@ $(function() {
 	
 	// 상품등록 컬러추가
 	var colorList = [];
-	$('#add').click(function() {
-		colorList.push($('#colorInput').val());
-		var html = '<div class="colorList-area"><span class="colorName">' + $('#colorInput').val() + '</span><span id="cancleBtn" class="cancleBtn">X</span></div>';
-		$('#colorList').append(html)
+	$('#colorAdd').click(function() {
+		if($('#colorInput').val() != ''){
+			var color = $('#colorInput').val()
+			colorList.push(color);
+			var html = '<div class="listArea"><span class="nameArea">' + color + '</span><span id="colorRemoveBtn" class="cancelBtn">X</span></div>';
+			$('#addColorList').append(html)
+		}
+		else {
+			alert("공백을 입력할 수 없습니다.")
+		}
 	})
 	
 	// 상품등록 컬러삭제
-	$(document).on('click', '#cancleBtn', function(event) {
+	$(document).on('click', '#colorRemoveBtn', function(event) {
 		event.target.parentElement.remove()
 		var text = event.target.parentNode.innerText.replace('X','');
 		colorList.pop('text')
 	})
-
+	
+	// 상품등록 사이즈추가
+	var sizeList = [];
+	$('#sizeAdd').click(function() {
+		if($('#sizeInput').val() != ''){
+			var size = $('#sizeInput').val()
+			sizeList.push(size);
+			var html = '<div class="listArea"><span class="nameArea">' + size + '</span><span id="sizeRemoveBtn" class="cancelBtn">X</span></div>';
+			$('#addSizeList').append(html)
+		}
+		else {
+			alert("공백을 입력할 수 없습니다.")
+		}
+	})
+	
+	// 상품등록 사이즈삭제
+	$(document).on('click', '#sizeRemoveBtn', function(event) {
+		event.target.parentElement.remove()
+		var text = event.target.parentNode.innerText.replace('X','');
+		sizeList.pop('text')
+	})
+	
+	// 상품등록 AJAX
+	$('#productSubmit').click(function(){
+		/*validation*/
+		// 상품명
+		if(!$('#productName').val()){
+			alert("상품명을 입력하셔야 합니다.")
+			$('#productName').focus();
+			return;
+		}
+		// 소비자가
+		if(!Number($('#consumerPrice').val())){
+			alert("소비자가를 입력하셔야 합니다.")
+			$('#consumerPrice').focus();
+			return;
+		}
+		// 색상정보
+		if(colorList.length == 0){
+			alert("색상정보를 등록하셔야 합니다.")
+			$('#colorInput').focus();
+			return;
+		}
+		// 사이즈정보
+		if(sizeList.length == 0){
+			alert("사이즈 정보를 등록하셔야 합니다.")
+			$('#sizeInput').focus();
+			return;
+		}
+		// 메인이미지
+		if(!$('#input-image')[0].files.length){
+			alert("메인이미지를 등록하셔야 합니다.")
+			$('#input-image').focus();
+			return;
+		}
+		// 상세이미지
+		if(!$('#input-imgs')[0].files.length){
+			alert("상세이미지를 등록하셔야 합니다.")
+			$('#input-imgs').focus();
+			return;
+		}
+		var productName = $('#productName').val()
+		var category = $('input[name="category"]:checked').val();
+		var consumerPrice = Number($('#consumerPrice').val())
+		var discountRate = Number($('#discountRate').val())
+		var salePrice = Number($('#salePrice').val())
+		var stock = Number($('#stock').val())
+		var mainImage = document.getElementById('input-image').files[0].name;
+		var files = [];
+		var fileList = document.getElementById('input-imgs').files;
+		for(var i = 0; i < fileList.length; i++){
+			files.push(fileList[i].name);
+		}
+		
+		$.ajax({             
+    	type: "POST",          
+        url: "/manager/productSave",        
+        data: {	
+			'category'		: category,
+			'productName'	: productName,
+			'discountRate'	: discountRate,
+			'consumerPrice'	: consumerPrice,
+			'salePrice'		: salePrice,
+			'stock'			: stock,
+			'mainImage'		: mainImage,
+			'files'			: files,
+			'colorList'		: colorList,
+			'sizeList'		: sizeList
+		},          
+        success: function (data) { 
+        	console.log("상품등록 성공")       
+        	location.href="/";   
+        },          
+        error: function (e) {  
+            console.log("상품등록 실패")      
+         }     
+		});  
+	})
 });
 
 

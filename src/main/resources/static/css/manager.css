@@ -75,11 +75,11 @@ dd.hidden {
 	max-width : 200px;
 }
 
-.colorList {
+.addList {
 	display:flex;
 }
 
-.colorList-area {
+.listArea {
     background: #c2c2c2;
     padding: 6px;
     text-align: center;
@@ -90,10 +90,10 @@ dd.hidden {
     margin-bottom: 5px;
 }
 
-.colorName {
+.nameArea {
 	padding : 0 5px;
 }
-.cancleBtn {
+.cancelBtn {
     color: black;
     background: #969696;
     width: 17px;
@@ -105,3 +105,8 @@ dd.hidden {
     font-size: 7px;
 }
 
+input[type='button'] {
+    width: 42px;
+    height: 25px;
+    font-size: 12px;
+}

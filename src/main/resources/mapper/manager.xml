@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yg.portfolio.repository.ManagerRepository">
 
+	<!-- 공지사항 작성 -->
 	<insert id="writeNotice">
 		INSERT INTO notice (
 			   userId
@@ -15,6 +16,7 @@
 			 , #{content})
 	</insert>
 	
+	<!-- 공지사항 수정 -->
 	<update id="updateNotice">
 		UPDATE notice
 		   SET title		= #{title}
@@ -24,11 +26,13 @@
 		 WHERE boardNum 	= #{boardNum}
 	</update>
 	
+	<!-- 공지사항 삭제 -->
 	<delete id="deleteNotice">
 		DELETE FROM notice
 		 WHERE boardNum		= #{boardNum}
 	</delete>
 	
+	<!-- QNA 답글 작성 -->
 	<insert id="writeReplyQna">
 		INSERT INTO qna (
 			   groupNo
@@ -52,6 +56,7 @@
 			 , "reply")
 	</insert>
 	
+	<!-- 상품등록 -->
 	<insert id="productSave">
 		INSERT INTO product (
 			   category
@@ -71,6 +76,7 @@
 			 , #{mainImage} )
 	</insert>
 	
+	<!-- 상품 상세이미지 등록 -->
 	<insert id="productImgSave" parameterType="ProductImg">
 		INSERT INTO productImg (
 			   productNo
@@ -78,6 +84,26 @@
 		VALUES (
 			   (SELECT MAX(productNo) from product)
 			 , #{fileName} )
+	</insert>
+	
+	<!-- 상품 컬러 등록 -->
+	<insert id="productColorSave" parameterType="ProductColor">
+		INSERT INTO productColor (
+			   productNo
+			 , colorName )
+		VALUES (
+			   (SELECT MAX(productNo) from product)
+			 , #{colorName} )
+	</insert>
+	
+	<!-- 상품 사이즈 등록 -->
+	<insert id="productSizeSave" parameterType="ProductSize">
+		INSERT INTO productSize (
+			   productNo
+			 , sizeName )
+		VALUES (
+			   (SELECT MAX(productNo) from product)
+			 , #{sizeName} )
 	</insert>
 	
 	

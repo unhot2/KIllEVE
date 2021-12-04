@@ -13,8 +13,7 @@
 		<div class="product-container">
 			<div class="product-head">
 				<div class="product-head-img">
-					<img
-						th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
+					<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
 				</div>
 				<div class="product-head-info">
 					<div>
@@ -25,12 +24,11 @@
 						<table class="product-detail-table">
 							<tr>
 								<th>소비자가</th>
-								<td><span th:text="'￦'+${detail.consumerPrice}+'원'" id="consumerPrice"
-										class="consumerPrice"></span></td>
+								<td><span th:text="'￦'+${detail.consumerPrice}+'원'" id="consumerPrice" class="consumerPrice"></span></td>
 							</tr>
 							<tr>
 								<th>할인율</th>
-								<td><span th:text="${detail.discountRate}+'%'" id="discountRate"></span></td>
+								<td><span th:text="${detail.discountRate}+'%'" id="discountRate" class="discountRate"></span></td>
 							</tr>
 							<tr>
 								<th>판매가</th>
@@ -40,35 +38,62 @@
 								<th>상품명</th>
 								<td><span th:text="${detail.productName}"></span></td>
 							</tr>
-							<tr>
+							<tr class="selectTr">
 								<th>색상</th>
-								<td><select name="option1" id="product_option_id1" required>
+								<td>
+									<select name="option1" id="select-color" class="selectBox" required>
 										<option value="*" selected="">- [필수] 옵션선택 -</option>
 										<option value="**" disabled="">-------------------</option>
-										<option value="블랙">블랙</option>
-										<option value="카키">카키</option>
-										<option value="차콜">차콜</option>
-									</select></td>
+										<span th:each="color : ${color}">
+											<option th:value="${color.colorName}" th:text="${color.colorName}"></option>
+										</span>
+									</select>
+								</td>
 							</tr>
-							<tr>
+							<tr class="selectTr">
 								<th>사이즈</th>
-								<td><select name="option1" id="product_option_id1" required>
+								<td>
+									<select name="option1" id="select-size" class="selectBox" required>
 										<option value="*" selected="">- [필수] 옵션선택 -</option>
 										<option value="**" disabled="">-------------------</option>
-										<option value="블랙">블랙</option>
-										<option value="카키">카키</option>
-										<option value="차콜">차콜</option>
-									</select></td>
+										<span th:each="size : ${size}">
+											<option th:value="${size.sizeName}" th:text="${size.sizeName}"></option>
+										</span>
+									</select>
+								</td>
 							</tr>
 						</table>
+						<div class="guideText">(최소주문수량 1개 이상)</div>
+						<div class="totalProduct">
+							<table class="total-table">
+							<tr>
+								<td class="totalTd1"><b>[wool] 울 캐시 세미오버 싱글코트OT</b><br>-블랙/105(XL)</td>
+								<td class="totalTd2">
+									<span class="quantityArea">
+										<input type="text" id="quantity" name="" class="quantity" value="1">
+										<a href="#none" class="upBtn">
+											<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif" alt="수량증가">
+										</a>
+										<a href="#none" class="downBtn">
+											<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif" id="option_box1_down" class="option_box_down" alt="수량감소">
+										</a>
+									</span>
+									<a href="#none" class="delete"><img src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif" alt="삭제" id="option_box1_del" class="option_box_del"></a>
+								</td>
+								<td class="totalTd3"><b>￦89,600</b></td>
+							</tr>
+							</table>
+						</div>
+						<div class="total-price">
+							총 상품금액 (수향) : ₩77,900원 (1개)
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="product-container centerAlign">
 			<div th:each="product : ${imgDetail}">
-				<img
-					th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${product.productNo}, fileName=${product.fileName})}">
+				<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${product.productNo}, fileName=${product.fileName})}">
 			</div>
 		</div>
 	</section>

@@ -14,5 +14,17 @@
 		  FROM productImg
 		 WHERE productNo = #{productNo}
 	</select>
+	
+	<select id="productColor" resultType="ProductColor">
+		SELECT productNo,colorName
+		  FROM productColor
+		 WHERE productNo = #{productNo}
+	</select>
+	
+	<select id="productSize" resultType="ProductSize">
+		SELECT productNo,sizeName
+		  FROM productSize
+		 WHERE productNo = #{productNo}
+	</select>
 
 </mapper>

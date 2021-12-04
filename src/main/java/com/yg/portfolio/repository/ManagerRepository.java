@@ -23,8 +23,16 @@ public interface ManagerRepository {
 	// QNA 답글 작성
 	public int writeReplyQna(Qna qna);
 
+	// 상품등록
 	public void productSave(Product product);
 
+	// 이미지등록
 	public void productImgSave(String fileName);
+	
+	// 컬러등록
+	public void productColorSave(String colorName);
+	
+	// 사이즈등록
+	public void productSizeSave(String sizeName);
 	
 }

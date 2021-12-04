@@ -28,7 +28,7 @@
 								<table class="product-write-table">
 									<tr>
 										<th>상품명</th>
-										<td><input type="text" class="product-input-title" name="productName"></td>
+										<td><input type="text" class="product-input-title" id="productName" name="productName" required></td>
 									</tr>
 									<tr>
 										<th>카테고리</th>
@@ -66,25 +66,25 @@
 									</tr>
 									<tr>
 										<th>재고</th>
-										<td><input type="number" class="product-input" name="stock" min="1" max="10000"
+										<td><input type="number" class="product-input" id="stock" name="stock" min="1" max="10000"
 												value="1" required></td>
 									</tr>
 									<tr>
 										<th>색상</th>
 										<td>
-											<div id="colorList">
+											<div id="addColorList" class="addList">
 											</div>
-											<input type="text" class="product-input" id="colorInput">
-											<span id="add">추가</span>
+											<input type="text" class="product-input" id="colorInput" required>
+											<input type="button" id="colorAdd" value="추가"/>
 										</td>
 									</tr>
 									<tr>
 										<th>사이즈</th>
 										<td>
-											<div id="colorList">
+											<div id="addSizeList" class="addList">
 											</div>
-											<input type="text" class="product-input" id="colorInput">
-											<span id="add">추가</span>
+											<input type="text" class="product-input" id="sizeInput" required>
+											<input type="button" id="sizeAdd" value="추가"/>
 										</td>
 									</tr>
 									<tr>
@@ -94,7 +94,7 @@
 												<img id="preview-image"
 													src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
 												<input style="display: block;" type="file" id="input-image"
-													name="mainFile">
+													name="mainFile" required>
 											</div>
 										</td>
 									</tr>
@@ -102,13 +102,13 @@
 										<th>상세이미지</th>
 										<td>
 											<input type="file" id="input-imgs" name="files" multiple />
-											<div id="imgs_wrap" class="imgs_wrap">
+											<div id="imgs_wrap" class="imgs_wrap" required>
 											</div>
 										</td>
 									</tr>
 								</table>
 								<div class="product-bottom">
-									<button>상품등록</button>
+									<a href="#" id="productSubmit">상품등록</a>
 									<a th:href="@{/}" class="writeBtn">취소</a>
 								</div>
 							</form>

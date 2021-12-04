@@ -10,5 +10,19 @@ $(function() {
 	$('#consumerPrice').html(consumerPrice);
 	$('#salePrice').html(salePrice);
 	
+	// 색상변경시 사이즈 초기화 
+	$('#select-color').change(function(){
+		$('#select-size').val('*').prop("selected", true);
+	});
+	
+	$('#select-size').change(function(){
+		if($('#select-color').val() != '*' && $('#select-size').val() != '*'){
+			var html = '<div>둘다 들어감</div>';
+			$('.totalProduct').append(html)	
+			$('#select-color').val('*').prop("selected", true);
+			$('#select-size').val('*').prop("selected", true);		
+		}
+	});
+	
 });
 

@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yg.portfolio.model.Product;
+import com.yg.portfolio.model.ProductColor;
 import com.yg.portfolio.model.ProductImg;
+import com.yg.portfolio.model.ProductSize;
 import com.yg.portfolio.service.ProductService;
 
 @Controller
@@ -25,7 +27,11 @@ public class ProductController {
 		Product detailList = productService.productInfo(productNo);
 		model.addAttribute("detail",detailList);
 		List<ProductImg> imgDetail = productService.productImg(productNo); 
+		List<ProductColor> color = productService.productColor(productNo); 
+		List<ProductSize> size = productService.productSize(productNo); 
 		model.addAttribute("imgDetail",imgDetail);
+		model.addAttribute("color",color);
+		model.addAttribute("size",size);
 		return "/product/productDetailForm";
 	}
 }

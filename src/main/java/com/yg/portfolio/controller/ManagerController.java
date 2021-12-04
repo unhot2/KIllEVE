@@ -89,8 +89,9 @@ public class ManagerController {
 	
 	// 상품 등록
 	@PostMapping("/productSave")
-	public String productSave(@RequestParam("files") List<MultipartFile> files
-			, @RequestParam("mainFile") MultipartFile mainFile
+	public String productSave(@RequestParam(value = "files[]", required = false) List files	
+			, @RequestParam(value= "colorList[]", required = false) List colorList
+			, @RequestParam(value= "sizeList[]", required = false) List sizeList
 			, Product product) throws Exception {
 			System.err.println("======================== 상품 등록 넘어온 값 ========================");
 			System.out.println("상품명 : "+product.getProductName());
@@ -99,14 +100,53 @@ public class ManagerController {
 			System.out.println("소비자가 : "+product.getConsumerPrice());
 			System.out.println("판매가 : "+product.getSalePrice());
 			System.out.println("재고 : "+product.getStock());
-			System.out.println("대표이미지 명 : "+mainFile.getOriginalFilename());
-			product.setMainImage(mainFile.getOriginalFilename());
-			System.out.println("저장된 대표이미지 명 : "+product.getMainImage());
+			System.out.println("대표이미지 명 : "+product.getMainImage());
+			if(colorList.size() > 0) {
+				 for(Object color : colorList) { 
+					  System.out.println("색상 명  :"+color);
+				  }
+			}
+			if(sizeList.size() > 0) {
+				for(Object size : sizeList) { 
+					System.out.println("사이즈 명  :"+size);
+				}
+			}
+			if(files.size() > 0) {
+				for(Object file : files) { 
+					System.out.println("상세 이미지 명  :"+file);
+				}
+			}
 			managerService.productSave(product);
-		  for(MultipartFile file : files) { 
-			  System.out.println("상세 이미지 명  :"+file.getOriginalFilename());
-			  managerService.productImgSave(file.getOriginalFilename());
-		  }
+			for(int i =0; i < colorList.size(); i++) { 
+				managerService.productColorSave((String) colorList.get(i));
+			}
+			for(int i =0; i < sizeList.size(); i++) { 
+				managerService.productSizeSave((String) sizeList.get(i));
+			}
+			for(int i =0; i < files.size(); i++) { 
+				managerService.productImgSave((String) files.get(i));
+			}
 	    return "redirect:/";
 	}
+//	@PostMapping("/productSave")
+//	public String productSave(@RequestParam("files") List<MultipartFile> files
+//			, @RequestParam("mainFile") MultipartFile mainFile
+//			, Product product) throws Exception {
+//		System.err.println("======================== 상품 등록 넘어온 값 ========================");
+//		System.out.println("상품명 : "+product.getProductName());
+//		System.out.println("카테고리 : "+product.getCategory());
+//		System.out.println("할인율 : "+product.getDiscountRate());
+//		System.out.println("소비자가 : "+product.getConsumerPrice());
+//		System.out.println("판매가 : "+product.getSalePrice());
+//		System.out.println("재고 : "+product.getStock());
+//		System.out.println("대표이미지 명 : "+mainFile.getOriginalFilename());
+//		product.setMainImage(mainFile.getOriginalFilename());
+//		System.out.println("저장된 대표이미지 명 : "+product.getMainImage());
+//		managerService.productSave(product);
+//		for(MultipartFile file : files) { 
+//			System.out.println("상세 이미지 명  :"+file.getOriginalFilename());
+//			managerService.productImgSave(file.getOriginalFilename());
+//		}
+//		return "redirect:/";
+//	}
 }
