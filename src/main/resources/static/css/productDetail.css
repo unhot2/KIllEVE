@@ -55,7 +55,7 @@
 	font-size : 13px;
 }
 
-.total-table tbody tr:first-child {
+.total-table tr:first-child {
 	border-top : 1.7px solid #5a5a5a;
 }
 
