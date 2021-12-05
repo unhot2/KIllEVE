@@ -46,7 +46,7 @@
 /*안내문구*/
 .guideText {
     font-size: 13px;
-    margin: 5px 0;
+    margin: 10px 0;
     color: #4b4a4a;
 }
 
@@ -55,10 +55,13 @@
 	font-size : 13px;
 }
 
+.total-table tbody tr:first-child {
+	border-top : 1.7px solid #5a5a5a;
+}
+
 .total-table tr {
 	width: 100%;
-	border-top : 1px solid black;
-	border-bottom : 1px solid black;
+	border-top : 1px solid #d0d0d0;
 	height: 58px;
 }
 
@@ -85,18 +88,32 @@
     height : 21px;
     vertical-align: top;
 }
+
+.quantityBtn {
+	display : inline-flex;
+}
 .upBtn {
     position: relative;
-    top: -6px;
+    top: -4px;
     left: -5px;
     text-decoration: none;
 }
 
 .downBtn {
     position: relative;
-    top: 5px;
+    top: 6px;
     left: -30px;
     text-decoration: none;
+}
+
+.total-price-area {
+    border-top: 1.7px solid #5a5a5a;
+    font-size: 13px;
+    padding: 13px 0;
+}
+
+#totalPrice{
+	font-size:23px;
 }
 
 /*할인율 영역*/

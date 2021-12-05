@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}>
 
 <head>
 	<meta charset="utf-8" />
@@ -17,7 +17,7 @@
 				</div>
 				<div class="product-head-info">
 					<div>
-						<h2 th:text="${detail.productName}"></h2>
+						<h2 id="productName" th:text="${detail.productName}"></h2>
 					</div>
 					<hr class="infoHr">
 					<div>
@@ -65,7 +65,7 @@
 						</table>
 						<div class="guideText">(최소주문수량 1개 이상)</div>
 						<div class="totalProduct">
-							<table class="total-table">
+							<!--<table class="total-table">
 							<tr>
 								<td class="totalTd1"><b>[wool] 울 캐시 세미오버 싱글코트OT</b><br>-블랙/105(XL)</td>
 								<td class="totalTd2">
@@ -82,11 +82,13 @@
 								</td>
 								<td class="totalTd3"><b>￦89,600</b></td>
 							</tr>
-							</table>
+							</table>-->
 						</div>
-						<div class="total-price">
-							총 상품금액 (수향) : ₩77,900원 (1개)
+						<div class="total-price-area">
+							<strong>총 상품금액 (수량) : </strong> ₩
+							<span id="totalPrice">0</span>원 (<span id="quantityText">0</span>개)
 						</div>
+						<div id="test">버튼</div>
 					</div>
 				</div>
 			</div>
