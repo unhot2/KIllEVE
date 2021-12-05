@@ -15,39 +15,33 @@ $(function() {
 		$('#select-size').val('*').prop("selected", true);
 	});
 	
-	$('#test').click(function(){
-		alert($('#salePriceText').text())
-	});
+	// 최종 가격	
+	var totalPrice = [];
+	var totalQuantity = [];
 	
 	// 색상,사이즈 선택 시 최종상품,가격 추가
 	$('#select-size').change(function(){
+		// 상품 가격
+		var salePrice = Number($('#salePrice').text().replace('￦','').replace('원','').replace(',',''));
 		var productName = $('#productName').text();
 		var color = $('#select-color').val();
 		var size = $('#select-size').val();
-		var salePrice = $('#salePrice').text().replace('￦','').replace('원','').replace(',','');
+		var lastIndex = $('.total-product-tr:last').index();
 		if($('#select-color').val() != '*' && $('#select-size').val() != '*'){
-			/*var html = '<table class="total-table">\
-							<tr>\
-								<td class="totalTd1"><b>'+productName+'</b><br>-'+color+'/'+size+'</td>\
-								<td class="totalTd2">\
-									<span class="quantityArea">\
-										<input type="number" id="quantity" name="" class="quantity" value="1" readOnly>\
-										<a href="#none" class="upBtn quantityBtn">\
-											<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif" alt="수량증가">\
-										</a>\
-										<a href="#none" class="downBtn quantityBtn">\
-												<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif" id="option_box1_down" class="option_box_down" alt="수량감소">\
-										</a>\
-									</span>\
-									<a href="#none" class="delete">\
-										<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif" alt="삭제" id="deleteBtn" class="option_box_del">\
-									</a>\
-								</td>\
-								<td class="totalTd3"><b class="salePriceText">￦'+priceToString(salePrice)+'원</b></td>\
-							</tr>\
-							</table>';*/
+			console.log("lastIndex값:"+lastIndex)
+			var insertColor = $('#select-color').val();
+			var inserSize = $('#select-size').val();
+			for(var i=0; i <= lastIndex ;i++){
+				if($('.colorText').eq(i).text() == insertColor && $('.sizeText').eq(i).text() == inserSize){
+					alert('이미 등록된 상품입니다.')
+					$('#select-size').val('*').prop("selected", true);
+					return;
+				}
+				console.log($('.colorText').eq(i).text());
+				console.log($('.sizeText').eq(i).text());
+			}
 			var html = '<tr class="total-product-tr">\
-							<td class="totalTd1"><b>'+productName+'</b><br>-'+color+'/'+size+'</td>\
+							<td class="totalTd1"><b>'+productName+'</b><br>-<span class="colorText">'+color+'</span>/<span class="sizeText">'+size+'</span></td>\
 							<td class="totalTd2">\
 								<span class="quantityArea">\
 									<input type="number" id="quantity" name="" class="quantity" value="1" readOnly>\
@@ -64,38 +58,44 @@ $(function() {
 							</td>\
 							<td class="totalTd3"><b class="salePriceText">￦'+priceToString(salePrice)+'원</b></td>\
 						</tr>';
-			$('.total-table').append(html)
-			/*$('.totalProduct').append(html)*/
-			$('#totalPrice').text(priceToString(salePrice));
-			$('#quantityText').text($('#quantity').val());	
+			$('.total-table').append(html);
+			totalPrice.push(salePrice);
+			totalPriceSet(totalPrice);
+			totalQuantity.push(Number($('.quantity').val()));
+			totalQuantitySet(totalQuantity);
 			$('#select-color').val('*').prop("selected", true);
 			$('#select-size').val('*').prop("selected", true);		
 		}
 	});
 	
+	
 	// totalProduct 수량증가
 	$(document).on('click','.upBtn', function(){
+		// 상품 가격
+		var salePrice = Number($('#salePrice').text().replace('￦','').replace('원','').replace(',',''));
 		var index = $('.upBtn').index(this);
 		var quantity = parseInt($('.quantity').eq(index).val());
-		console.log("증가버튼 index :"+index)
-		console.log("증가버튼 : "+quantity)
-		$('.quantity').eq(index).val(quantity+1)
-		var salePrice = $('#salePrice').text().replace('￦','').replace('원','').replace(',','');
-		$('.salePriceText').eq(index).text('￦'+priceToString(salePrice*(quantity+1))+'원');
-		/*$('#totalPrice').text(priceToString(salePrice*(quantity+1)))*/
+		$('.quantity').eq(index).val(quantity+1);
+		totalPrice[index] = salePrice*(quantity+1);
+		totalQuantity[index] = Number($('.quantity').eq(index).val());
+		$('.salePriceText').eq(index).text('￦'+priceToString(totalPrice[index])+'원');
+		totalPriceSet(totalPrice);
+		totalQuantitySet(totalQuantity);
 	});
 	
 	// totalProduct 수량감소
 	$(document).on('click','.downBtn', function(){
+		// 상품 가격
+		var salePrice = Number($('#salePrice').text().replace('￦','').replace('원','').replace(',',''));
 		var index = $('.downBtn').index(this);
 		var quantity = parseInt($('.quantity').eq(index).val());
-		console.log("감소버튼 index :"+index)
-		console.log("감소버튼 : "+quantity)
 		if(quantity > 1){
-			$('.quantity').eq(index).val(quantity-1)	
-			var salePrice = $('#salePrice').text().replace('￦','').replace('원','').replace(',','');
-			$('.salePriceText').eq(index).text('￦'+priceToString(salePrice*(quantity-1))+'원');
-			/*$('#totalPrice').text(priceToString(salePrice*(quantity-1)))*/
+			$('.quantity').eq(index).val(quantity-1)
+			totalPrice[index] = salePrice*(quantity-1);
+			totalQuantity[index] = Number($('.quantity').eq(index).val());
+			$('.salePriceText').eq(index).text('￦'+priceToString(totalPrice[index])+'원');
+			totalPriceSet(totalPrice)
+			totalQuantitySet(totalQuantity)
 		}
 		else {
 			alert('최소 주문수량은 1개 입니다.');
@@ -106,13 +106,30 @@ $(function() {
 	$(document).on('click','.deleteBtn', function(){
 		var index = $('.deleteBtn').index(this)
 		$('.total-product-tr').eq(index).remove();
+		totalPrice.splice(index,1);
+		totalQuantity.splice(index,1)
+		totalPriceSet(totalPrice)
+		totalQuantitySet(totalQuantity)
 	});
-	
-	
-	$(document).on('change','#quantity',function(){
-		alert('바뀜')
-/*		var d = $('#salePriceText').text()
-		$('#totalPrice').text($('#salePriceText').text())
-*/	})
 });
+
+// 최종가격 입력 함수
+function totalPriceSet(totalPrice){
+	var index = $('.total-product-tr:last').index();
+	var sum = 0;
+	for(var i=0; i <= index; i++){
+		sum += totalPrice[i];
+	}
+	$('#totalPrice').text(priceToString(sum));
+}
+
+// 최종수량 입력 함수
+function totalQuantitySet(totalQuantity){
+	var index = $('.total-product-tr:last').index();
+	var sumQuantity = 0;
+	for(var i=0; i <= index; i++){
+		sumQuantity += totalQuantity[i]
+	}
+	$('#quantityText').text(sumQuantity);
+}
 
