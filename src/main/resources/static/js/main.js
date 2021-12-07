@@ -42,6 +42,10 @@ function isEmpty(str) {
 		return false;
 }
 
+function trimPrice(price){
+	return Number(price.replace('￦', '').replace('원', '').replace(',', ''));
+}
+
 
 
 

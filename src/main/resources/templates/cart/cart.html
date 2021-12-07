@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<script th:src="@{/js/notice.js}"></script>
+	<script th:src="@{/js/cart.js}"></script>
 	<link th:href="@{/css/cart.css}" rel="stylesheet">
 </head>
 
@@ -18,12 +18,14 @@
 				<div class="cartList-line">
 					<div class="listDiv">장바구니 목록</div>
 				</div>
+				<div class="guideText">
+					<span>*10만원 이상 배송비 무료</span>
+				</div>
 				<div class="cart-body">
-					<div>장바구니가 비어있습니다.</div>
 					<div>
 						<table class="cart-table">
 							<tr>
-								<td style="width:5%;"></td>
+								<td style="width:5%;"><input type="checkbox" id="checkAll"></td>
 								<td style="width:12%;">이미지</td>
 								<td style="width:37%;">상품정보</td>
 								<td style="width:9%;">판매가</td>
@@ -32,10 +34,73 @@
 								<td style="width:9%;">합계</td>
 								<td style="width:9%;">삭제</td>
 							</tr>
-								
+							<th:block th:if="${#lists.isEmpty(cartList)}">
+								<tr>
+									<td colspan="100" style="height:148px; font-size:15px;">
+										<div>장바구니가 비어있습니다.</div>
+									</td>
+								</tr>
+							</th:block>
+							<th:block th:unless="${#lists.isEmpty(cartList)}">
+								<tr th:each="cartList : ${cartList}" class="cartList-tr">
+									<td>
+										<input type="checkbox" class="checkBox">
+										<input type="hidden" class="cartNo" th:value="${cartList.cartNo}">
+									</td>
+									<td>
+										<a th:href="@{/product/detail/{productNo}(productNo=${cartList.productNo})}">
+											<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${cartList.category},productNo=${cartList.productNo}, fileName=${cartList.mainImage})}" class="mainImage">
+										</a>
+									</td>
+									<td style="text-align: left;">
+										<b th:text="${cartList.productName}"></b><br>
+										-<span class="color" th:text="${cartList.color}"></span>/
+										<span class="size" th:text="${cartList.size}"></span>
+									</td>
+									<td>
+										<b><span class="salePrice" th:text="${cartList.salePrice}"></span></b>
+									</td>
+									<td>
+										<div>
+											<input type="number" class="quantity" th:value="${cartList.quantity}" readOnly>
+											<a class="upBtn quantityBtn">
+												<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif" alt="수량증가">
+											</a>
+											<a class="downBtn quantityBtn">
+												<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif" alt="수량감소">
+											</a><br>
+										</div>
+									</td>
+									<td>
+										<span class="deliveryPrice"></span>
+									</td>
+									<td>
+										<b><span class="totalPrice" th:text="${cartList.totalPrice}"></span></b>
+									</td>
+									<td>
+										<button class="deleteBtn">X</button>
+									</td>
+								</tr>
+							</th:block>
 						</table>
 					</div>
 				</div>
+				<th:block th:unless="${#lists.isEmpty(cartList)}">
+					<div>
+						<table class="total-table">
+							<tr>
+								<td class="col-3">총 상품금액</td>
+								<td class="col-3">총 배송비</td>
+								<td class="col-6">결제예정금액</td>
+							</tr>
+							<tr>
+								<td id="totalPrice"></td>
+								<td id="deliveryPrice"></td>
+								<td id="totalPay"></td>
+							</tr>
+						</table>
+					</div>
+				</th:block>
 				<div class="cartBtnArea">
 					<a>전체상품주문</a>
 					<a>선택상품주문</a>

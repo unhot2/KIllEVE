@@ -128,7 +128,8 @@ $(function() {
 						productNo: $('#productNo').val(),
 						color: $('.totalTd1 > span.colorText').eq(i).text(),
 						size: $('.totalTd1 > span.sizeText').eq(i).text(),
-						quantity: totalQuantity[i]
+						quantity: totalQuantity[i],
+						userId : sessionId
 					};
 					productList.push(data);
 				}
@@ -142,9 +143,10 @@ $(function() {
 					},
 					success: function(res) {
 						console.log("장바구니 저장");
+						location.href="/cart/cartList?userId="+sessionId;
 					},
 					error: function(request, status, error) {
-						console.log("장바구니 저장실패")
+						console.log("장바구니 저장실패");
 					}
 				})
 			}

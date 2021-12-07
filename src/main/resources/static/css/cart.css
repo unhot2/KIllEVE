@@ -30,13 +30,22 @@
 
 .cart-body {
     text-align: center;
-    margin: 40px 0;
+    margin: 40px 0 0 0;
     font-size: 13px;
     color:#333333;
 }
 
 .cart-table {
 	width : 100%;
+}
+
+.cart-table .mainImage{
+	width : 100px;
+	padding : 5px 0;
+}
+
+.cart-table tr:first-child{
+    border-top: 2px solid;
 }
 
 .cart-table tr{
@@ -46,12 +55,6 @@
     font-size : 12px;
     text-align: center;
 }
-
-.cart-table td{
-}
-
-
-
 
 
 .cartBtnArea {
@@ -64,4 +67,55 @@
     background: #282828;
     padding: 10px 21px;
     font-size: 12px;
+    margin-top : 25px;
+}
+
+
+.quantity {
+    display: inline-block;
+    position: relative;
+    width: 44px;
+    height : 21px;
+    vertical-align: top;
+}
+
+.quantityBtn {
+	display : inline-flex;
+}
+.upBtn {
+    position: relative;
+    top: -3px;
+    left: -5px;
+    text-decoration: none;
+}
+
+.downBtn {
+    position: relative;
+    top: 7px;
+    left: -30px;
+    text-decoration: none;
+}
+
+.deleteBtn {
+	border: 1px solid #b4b0b0;
+}
+
+.total-table {
+	width : 100%;
+}
+
+.total-table tr {
+	    height: 46px;
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #d6d1d1;
+    font-weight: bold;
+}
+
+.guideText {
+    position: absolute;
+    top: 482px;
+    right: 306px;
+    font-size: 12px;
+    color: gray;
 }

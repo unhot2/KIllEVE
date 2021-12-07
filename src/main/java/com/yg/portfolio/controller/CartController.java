@@ -1,12 +1,15 @@
 package com.yg.portfolio.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +25,18 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
-	// 장바구니 
+	// 장바구니 목록
 	@GetMapping("/cartList")
-	public String cartList() {
+	public String cartList(String userId, Model model) {
+		List<Cart> cartList = cartService.cartList(userId);
+		model.addAttribute("cartList",cartList);
 		return "/cart/cart";
 	}
 	
+	// 장바구니 등록
 	@PostMapping("/cartSave")
 	@ResponseBody
-	public String cartSave(@RequestParam(value="cartList") String cartlist) throws ParseException {
+	public void cartSave(@RequestParam(value="cartList") String cartlist) throws ParseException {
 		JSONParser jsonParser = new JSONParser();
 		// JSON ARRAY로 변환
 		JSONArray jsonList = (JSONArray)jsonParser.parse(cartlist);
@@ -44,6 +50,7 @@ public class CartController {
 			testCart.setSize((String)jsonObject.get("size"));
 			testCart.setColor((String)jsonObject.get("color"));
 			testCart.setQuantity(Integer.parseInt(String.valueOf(jsonObject.get("quantity"))));
+			testCart.setUserId((String)jsonObject.get("userId"));
 			// saveList에 저장
 			saveList.add(testCart);
 		}
@@ -52,7 +59,20 @@ public class CartController {
 			// 장바구니 저장
 			cartService.cartSave(list);
 		}
-		return "redirect:/cart/cartList";
 	}
 	
+	// 장바구니 상품삭제
+	@PostMapping("/cartDelete")
+	public void cartDelete(@RequestParam(value="cartNo") String cartNo) {
+		cartService.cartDelete(cartNo);
+	}
+	
+	// 장바구니 수량수정
+	@PostMapping("/cartUpdate")
+	@ResponseBody
+	public void cartUpdate(@RequestParam(value="cartNo") String cartNo, @RequestParam(value="quantity") int quantity) {
+		System.out.println("cartNo :" +cartNo);
+		System.out.println("quantity :" +quantity);
+		cartService.cartUpdate(cartNo, quantity);
+	}
 }
