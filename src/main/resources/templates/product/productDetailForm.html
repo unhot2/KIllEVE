@@ -13,9 +13,12 @@
 		<div class="product-container">
 			<div class="product-head">
 				<div class="product-head-img">
-					<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
+					<img
+						th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
 				</div>
 				<div class="product-head-info">
+					<input type='hidden' id="productNo" th:value="${detail.productNo}">
+					<input type='hidden' id="userId" th:value="${session.userId}">
 					<div>
 						<h2 id="productName" th:text="${detail.productName}"></h2>
 					</div>
@@ -24,11 +27,13 @@
 						<table class="product-detail-table">
 							<tr>
 								<th>소비자가</th>
-								<td><span th:text="'￦'+${detail.consumerPrice}+'원'" id="consumerPrice" class="consumerPrice"></span></td>
+								<td><span th:text="'￦'+${detail.consumerPrice}+'원'" id="consumerPrice"
+										class="consumerPrice"></span></td>
 							</tr>
 							<tr>
 								<th>할인율</th>
-								<td><span th:text="${detail.discountRate}+'%'" id="discountRate" class="discountRate"></span></td>
+								<td><span th:text="${detail.discountRate}+'%'" id="discountRate"
+										class="discountRate"></span></td>
 							</tr>
 							<tr>
 								<th>판매가</th>
@@ -72,13 +77,23 @@
 							<strong>총 상품금액 (수량) : </strong> ₩
 							<span id="totalPrice">0</span>원 (<span id="quantityText">0</span>개)
 						</div>
+						<div style="display: flex;">
+							<div class="cartBtn">
+								<span id="cartBtn">CART</span>
+							</div>
+							<div class='buyBtn'>
+								<span id="buyBtn">BUY IT NOW</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="product-container centerAlign">
 			<div th:each="product : ${imgDetail}">
-				<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${product.productNo}, fileName=${product.fileName})}">
+				<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${product.productNo}, fileName=${product.fileName})}"
+					class="detailArea">
 			</div>
 		</div>
 	</section>

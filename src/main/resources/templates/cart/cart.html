@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/layout}">
+
+<head>
+	<meta charset="utf-8" />
+	<script th:src="@{/js/notice.js}"></script>
+	<link th:href="@{/css/cart.css}" rel="stylesheet">
+</head>
+
+<body>
+	<section layout:fragment="content">
+		<div class="container">
+			<div class="cart-content">
+				<div class="cart-title">
+					CART
+				</div>
+				<div class="cartList-line">
+					<div class="listDiv">장바구니 목록</div>
+				</div>
+				<div class="cart-body">
+					<div>장바구니가 비어있습니다.</div>
+					<div>
+						<table class="cart-table">
+							<tr>
+								<td style="width:5%;"></td>
+								<td style="width:12%;">이미지</td>
+								<td style="width:37%;">상품정보</td>
+								<td style="width:9%;">판매가</td>
+								<td style="width:9%;">수량</td>
+								<td style="width:9%;">배송비</td>
+								<td style="width:9%;">합계</td>
+								<td style="width:9%;">삭제</td>
+							</tr>
+								
+						</table>
+					</div>
+				</div>
+				<div class="cartBtnArea">
+					<a>전체상품주문</a>
+					<a>선택상품주문</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

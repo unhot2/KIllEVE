@@ -142,3 +142,45 @@
 .selectBox {
 	width:100%;
 }
+
+.detailArea {
+	width : 50%;
+}
+
+.cartBtn {
+    width: 248px;
+    height: 49px;
+    border: 1px solid black;
+    text-align: center;
+    margin-right: 34px;
+    display : table;
+}
+
+.cartBtn a {
+   display: table-cell;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.cartBtn span {
+    font-weight: bold;
+    color: #605f5f;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.buyBtn {
+    width: 428px;
+    height: 49px;
+    border: 1px solid black;
+    text-align: center;
+    display: table;
+}
+
+.buyBtn span{
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: bold;
+    color: #ffffff;
+    background: #000000;
+}
