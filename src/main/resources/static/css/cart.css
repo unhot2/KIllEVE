@@ -5,27 +5,13 @@
     padding : 23px 0;
 }
 
+.cart-sub-title {
+    font-size: 15px;
+    font-weight: 100;
+}
+
 .cart-content {
 	padding:50px 0;
-}
-
-.cartList-line {
-    border-bottom: 1px solid;	
-}
-
-.listDiv {
-    width: 171px;
-    height: 35px;
-    text-align: center;
-    border-top: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    background: white;
-    position: relative;
-    top: 1px;
-    font-size: 14px;
-    display: table-cell;
-    vertical-align: middle;
 }
 
 .cart-body {
@@ -62,7 +48,7 @@
 	color : white;
 }
 
-.cartBtnArea a{
+.cartBtnArea div{
     display: inline-block;
     background: #282828;
     padding: 10px 21px;
@@ -114,7 +100,7 @@
 
 .guideText {
     position: absolute;
-    top: 482px;
+    top: 476px;
     right: 306px;
     font-size: 12px;
     color: gray;

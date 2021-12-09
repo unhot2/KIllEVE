@@ -1,0 +1,154 @@
+.order-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    padding : 23px 0;
+}
+
+.order-sub-title {
+    font-size: 15px;
+    font-weight: 100;
+}
+
+/*안내문구*/
+.guideInfo {
+    color: #f76560;
+    font-size: 11px;
+    background: #fff;
+    padding-left: 0px;
+    border: 0;
+    margin-top: 20px;
+}
+
+.guideInfo li {
+	text-align: left;
+	list-style: none;
+	padding: 0 0 0 23px;
+	background: url("//img.echosting.cafe24.com/skin/base/common/ico_info.gif") no-repeat 0 1px;
+}
+
+.order-content {
+	padding:50px 0;
+}
+
+.order-body {
+    text-align: center;
+    margin: 40px 0 0 0;
+    font-size: 13px;
+    color:#333333;
+}
+
+.order-table {
+	width : 100%;
+}
+
+.order-table .mainImage{
+	width : 100px;
+	padding : 5px 0;
+}
+
+.order-table tr:first-child{
+    border-top: 2px solid;
+}
+
+.order-table tr{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    height: 34px;
+    font-size : 12px;
+    text-align: center;
+}
+
+.total-price-area {
+    text-align: right;
+    height: 46px;
+    border-bottom: 1px solid #d3d2d2;
+}
+
+.total-price-area span {
+    display: inline-block;
+    padding-top: 11px;	
+}
+
+.total-price-area strong {
+	padding-left:12px;
+}
+
+.totalPay {
+	font-size:15px;
+}
+
+/*주문서*/
+
+.form-group {
+  display:flex;
+  margin : 16px 0;
+  width : 100%;
+}
+.join-table {
+	width : 100%;	
+}
+
+.join-table > tbody > tr {
+	font-size : 12px;
+	color : #575757;
+	border-top: 1px solid #dfdfdf;
+	border-bottom: 1px solid #dfdfdf;
+	
+}
+.join-table > tbody > tr > th {
+    width: 108px;
+    background-color: #efefef;
+    padding: 11px 14px;
+    text-align: left;
+	
+}
+.join-table > tbody > tr > td {
+	width : 773px;
+	padding : 11px 14px;
+	text-align: left;
+}
+
+.requiredText {
+    display: inline-block;
+    position: relative;
+    left: 1145px;
+    top: 27px;
+    font-size: 12px;
+    color: #575757;
+}
+
+.join-table .joinInput {
+	width : 190px;
+	border: 1px solid #d5d5d5;
+}
+
+.join-table .joinCheckInput {
+	width: 13px;
+    border: 1px solid #d5d5d5;
+    position: relative;
+    top: 5px;
+}
+.join-table span {
+	padding : 2px 5px;
+}
+
+.emailSelectBox {
+    padding-left: 5px;
+    margin-left: 10px;
+}
+
+.findAddr {
+    border: 1px solid #d4d2d2;
+}
+
+/*배송정보 선택 radio 버튼*/
+.deliveryChoice {
+    position: relative;
+    top: 2px;
+}
+
+.deliveryMessage {
+    width: 100%;
+    border: 1px solid #dfdfdf;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.yg.portfolio.repository.OrderRepository">
+
+	<select id="orderDetail" resultType="Order">
+		SELECT cartNo
+			 , (SELECT productName FROM product WHERE productNo = A.productNo) as productName
+			 , productNo
+			 , size
+			 , color
+			 , quantity
+			 , userId
+			 , (SELECT salePrice 
+			 	  FROM product 
+			 	 WHERE productNo = A.productNo) as salePrice 
+			 , (SELECT salePrice * A.quantity 
+			 	  FROM product 
+			 	 WHERE productNo = A.productNo) as totalPrice 
+			 , (SELECT mainImage 
+			 	  FROM product 
+			 	 WHERE productNo = A.productNo) as mainImage 
+			 , (SELECT category 
+			 	  FROM product 
+			 	 WHERE productNo = A.productNo) as category 
+		  FROM cart A
+		 WHERE cartNo = #{cartNo}
+	</select>
+	
+</mapper>

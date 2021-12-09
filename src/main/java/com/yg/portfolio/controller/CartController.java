@@ -71,8 +71,6 @@ public class CartController {
 	@PostMapping("/cartUpdate")
 	@ResponseBody
 	public void cartUpdate(@RequestParam(value="cartNo") String cartNo, @RequestParam(value="quantity") int quantity) {
-		System.out.println("cartNo :" +cartNo);
-		System.out.println("quantity :" +quantity);
 		cartService.cartUpdate(cartNo, quantity);
 	}
 }

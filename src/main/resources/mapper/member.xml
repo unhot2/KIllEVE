@@ -13,6 +13,7 @@
 		   SET userName			= #{userName} 
 		     , password			= #{password} 
 		     , email			= #{email}
+		     , emailProvider	= #{emailProvider}
 		     , phone			= #{phone}
 		     , gender			= #{gender}
 		     , emailReceiveYn	= #{emailReceiveYn}

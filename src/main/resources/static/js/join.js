@@ -59,6 +59,20 @@ $(function() {
 
 
 	})
+	
+	// 이메일 제공자 설정
+	$('#emailProviderSelect').change(function(){
+		var provider = $('#emailProviderSelect').val();
+		console.log("provider값 : "+provider);
+		if(provider != '*'){
+			$('#emailProvider').val(provider);
+			$('#emailProvider').attr('readOnly',true);
+		}
+		else {
+			$('#emailProvider').val('');
+			$('#emailProvider').attr('readOnly',false);
+		}
+	})
 });
 
 // 전체동의 버튼

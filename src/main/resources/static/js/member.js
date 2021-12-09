@@ -22,8 +22,20 @@ $(function() {
 		else {
 			$(".chkPwdMatch").html("비밀번호가 일치합니다.").css({ "color": "green" })
 		}
-
-
+	})
+	
+	// 이메일 제공자 설정
+	$('#emailProviderSelect').change(function(){
+		var provider = $('#emailProviderSelect').val();
+		console.log("provider값 : "+provider);
+		if(provider != '*'){
+			$('#emailProvider').val(provider);
+			$('#emailProvider').attr('readOnly',true);
+		}
+		else {
+			$('#emailProvider').val('');
+			$('#emailProvider').attr('readOnly',false);
+		}
 	})
 });
 

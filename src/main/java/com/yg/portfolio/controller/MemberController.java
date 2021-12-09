@@ -30,6 +30,7 @@ public class MemberController {
 		System.out.println("password 정보 :"+info.getPassword());
 		System.out.println("username 정보 :"+info.getUserName());
 		System.out.println("email 정보 :"+info.getEmail());
+		System.out.println("email제공자 정보 :"+info.getEmailProvider());
 		System.out.println("phone 정보 :"+info.getPhone());
 		System.out.println("gender 정보 :"+info.getGender());
 		System.out.println("email Yn 정보 :"+info.getEmailReceiveYn());
@@ -70,6 +71,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 회원탈퇴 
 	@GetMapping("memberWithdrawal")
 	public String memberWithdrawal(User user) {
 		memberService.memberWithdrawal(user);

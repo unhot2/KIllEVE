@@ -93,6 +93,7 @@ public class UserController {
 		System.out.println("들어온값 password : " + user.getPassword());
 		System.out.println("들어온값 username: " + user.getUserName());
 		System.out.println("들어온값 email : " + user.getEmail());
+		System.out.println("들어온값 email제공자 : " + user.getEmailProvider());
 		System.out.println("들어온값 phone : " + user.getPhone());
 		System.out.println("들어온값 gender : " + user.getGender());
 		System.out.println("들어온값 email yn : " + user.getEmailReceiveYn());

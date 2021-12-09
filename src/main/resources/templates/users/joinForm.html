@@ -141,7 +141,18 @@
 										이메일
 									</th>
 									<td>
-										<input type="email" class="joinInput" id="email" name="email" data-rule-required="true" maxlength="40">
+										<input type="text" class="joinInput" id="email" name="email" data-rule-required="true" maxlength="40"><span> @ </span>
+										<input type="text" class="joinInput" id="emailProvider" name="emailProvider" data-rule-required="true" maxlength="40">
+										<select class="joinInput emailSelectBox addLeftMargin" id="emailProviderSelect" name="emailProviderSelect" required>
+											<option value="*" selected>직접입력</option>
+											<option value="naver.com">naver.com</option>
+											<option value="daum.net">daum.net</option>
+											<option value="kakao.com">kakao.com</option>
+											<option value="gmail.com">gmail.com</option>
+											<option value="yahoo.com">yahoo.com</option>
+											<option value="nate.com">nate.com</option>
+											<option value="hotmail.com">hotmail.com</option>
+										</select>
 									</td>
 								</tr>
 								<tr>

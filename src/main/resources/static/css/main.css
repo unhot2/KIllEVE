@@ -165,3 +165,7 @@ section {
     border-radius: 50%;
     padding: 3px;
 }
+
+.addLeftMargin {
+	margin-left : 12px;
+}

@@ -18,6 +18,7 @@
 		INSERT INTO user (		<!-- id는 auto_increment => 생략 -->
 			   createDate		<!-- 가입일자 --> 
 		     , email			<!-- 이메일 -->
+		     , emailProvider	<!-- 이메일 -->
 		     , password			<!-- 비밀번호 -->
 			 , role				<!-- 권한 -->
 		     , userName			<!-- 유저이름 -->
@@ -35,6 +36,7 @@
 		VALUES (
 			   now()
 			 , #{email}
+			 , #{emailProvider}
 			 , #{password}
 			 , #{role}
 			 , #{userName}
@@ -55,6 +57,7 @@
 		INSERT INTO user (		<!-- id는 auto_increment => 생략 -->
 			 createDate			<!-- 가입일자 --> 
 		     , email			<!-- 이메일 -->
+		     , emailProvider	<!-- 이메일 -->
 		     , password			<!-- 비밀번호 -->
 			 , role				<!-- 권한 -->
 		     , userName			<!-- 유저이름 -->
@@ -66,6 +69,7 @@
 		VALUES (
 			   now()
 			 , #{email}
+			 , #{emailProvider}
 			 , #{password}
 			 , #{role}
 			 , #{userName}
