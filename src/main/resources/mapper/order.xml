@@ -26,4 +26,35 @@
 		 WHERE cartNo = #{cartNo}
 	</select>
 	
+	<insert id="orderSave">
+		INSERT INTO `order` (
+			   userId
+			 , name
+			 , amount
+			 , delivery_price
+			 , delivery_name
+			 , delivery_tel
+			 , delivery_postcode
+			 , delivery_addr
+			 , delivery_message
+			 , imp_uid
+			 , merchant_uid
+			 , paid_at
+			 , receipt_url )
+		VALUES (
+			   #{userId}
+			 , #{name}
+			 , #{amount}
+			 , #{delivery_price}
+			 , #{delivery_name}
+			 , #{delivery_tel}
+			 , #{delivery_postcode}
+			 , #{delivery_addr}
+			 , #{delivery_message}
+			 , #{imp_uid}
+			 , #{merchant_uid}
+			 , #{paid_at}
+			 , #{receipt_url} )
+	</insert>
+	
 </mapper>

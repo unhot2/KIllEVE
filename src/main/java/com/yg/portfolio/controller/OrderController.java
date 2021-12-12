@@ -10,10 +10,16 @@ import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.yg.portfolio.model.KakaoPay;
 import com.yg.portfolio.model.Order;
 import com.yg.portfolio.model.OrderList;
 import com.yg.portfolio.model.User;
+import com.yg.portfolio.service.CartService;
 import com.yg.portfolio.service.MemberService;
 import com.yg.portfolio.service.OrderService;
 
@@ -26,6 +32,9 @@ public class OrderController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	// 주문서 상세정보
 	@GetMapping("/orderDetail")
@@ -47,8 +56,27 @@ public class OrderController {
 		return "/order/orderForm";
 	}
 
-	@GetMapping("/orderForm")
-	public String orderForm2() {
-		return "/order/orderForm";
+	@PostMapping("/kakaoPayment")
+	public @ResponseBody String kakaoPayment(KakaoPay kakaopay, @RequestParam("test") List<String> test) {
+		orderService.orderSave(kakaopay);
+		// 장바구니 목록 삭제
+		for (String cartNo : test) {
+			System.out.println("넘어온 cartNo값  :"+cartNo);
+			cartService.cartDelete(cartNo);
+		}
+		System.out.println(kakaopay.getUserId());
+		System.out.println(kakaopay.getName());
+		System.out.println(kakaopay.getAmount());
+		System.out.println(kakaopay.getDelivery_price());
+		System.out.println(kakaopay.getDelivery_name());
+		System.out.println(kakaopay.getDelivery_tel());
+		System.out.println(kakaopay.getDelivery_postcode());
+		System.out.println(kakaopay.getDelivery_addr());
+		System.out.println(kakaopay.getDelivery_message());
+		System.out.println(kakaopay.getImp_uid());
+		System.out.println(kakaopay.getMerchant_uid());
+		System.out.println(kakaopay.getPaid_at());
+		System.out.println(kakaopay.getReceipt_url());
+		return kakaopay.getMerchant_uid();
 	}
 }

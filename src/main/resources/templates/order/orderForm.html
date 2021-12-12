@@ -8,6 +8,7 @@
 	<link th:href="@{/css/order.css}" rel="stylesheet">
 	<!--다음 주소 API-->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 
 <body>
@@ -33,13 +34,14 @@
 						</tr>
 						<tr th:each="orderList, index: ${orderList}" class="orderList-tr">
 							<td>
+								<input type="hidden" class="cartNo" th:value="${orderList.cartNo}">
 								<a th:href="@{/product/detail/{productNo}(productNo=${orderList.productNo})}">
 									<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${orderList.category},productNo=${orderList.productNo}, fileName=${orderList.mainImage})}"
 										class="mainImage">
 								</a>
 							</td>
 							<td style="text-align: left; padding-left:15px;">
-								<b th:text="${orderList.productName}"></b><br>
+								<b th:text="${orderList.productName}" class="productName"></b><br>
 								-<span class="color" th:text="${orderList.color}"></span>/
 								<span class="size" th:text="${orderList.size}"></span>
 							</td>
@@ -78,6 +80,7 @@
 										alt="필수">
 								</th>
 								<td>
+									<input type="hidden" name="userId" th:value="${memberInfo.userId}">
 									<input type="text" class="joinInput onlyHangul" id="name" name="userName"
 										data-rule-required="true" maxlength="15" th:value="${memberInfo.userName}">
 									<span>한글만 입력 가능합니다.</span>
@@ -222,10 +225,13 @@
 									배송메세지
 								</th>
 								<td>
-									<textarea></textarea>
+									<textarea class="deliveryMessage"></textarea>
 								</td>
 							</tr>
 						</table>
+					</div>
+					<div>
+					    <button onClick="kakaoPay()">카카오페이로 결제하기</button>
 					</div>
 				</div>
 			</div>

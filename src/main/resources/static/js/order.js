@@ -75,8 +75,7 @@ function totalPriceSet(totalPriceArray) {
 	}
 	else {
 		deliveryPrice = 2500;
-		$('.deliveryPrice').text('￦' + deliveryPrice + '원');
-		$('#deliveryPrice').text('+ ￦' + deliveryPrice + '원');
+		$('#deliveryPrice').text(' ￦' + deliveryPrice + '원');
 	}
 	$('#totalPrice').text('￦' + priceToString(sum) + '원');
 	$('#totalPay').text('￦' + priceToString(sum + deliveryPrice) + '원');
@@ -115,4 +114,108 @@ function deliveryfindAddr() {
 		}
 	}).open();
 };
+
+function kakaoPay(){
+	if(!$('input[name="deliveryUserName"]').val()){
+		alert('주문자명을 입력해주세요');
+		$('input[name="deliveryUserName"]').focus();
+		return;
+	}
+	if(!$('input[name="deliveryPhone"]').val()){
+		alert('휴대폰 번호를 입력해주세요');
+		$('input[name="deliveryPhone"]').focus();
+		return;
+	}
+	if(!$('input[name="deliveryZipCode"]').val()){
+		alert('우편번호를 입력해주세요');
+		return;
+	}
+	if(!$('input[name="deliveryAddress"]').val()){
+		alert('기본주소를 입력해주세요');
+		return;
+	}
+	if(!$('input[name="deliveryDetailAddress"]').val()){
+		alert('상세주소를 입력해주세요');
+		$('input[name="deliveryDetailAddress"]').focus();
+		return;
+	}
+	var count = $('.orderList-tr:last').index();
+	var name;
+	if(count > 1) {
+		name = $('.productName').eq(0).text()+' 외 '+(count-1)+'건';
+	}
+	else {
+		name = $('.productName').eq(0).text();	
+	}
+	var userId	= $('input[name="userId"]').val();
+	var amount = trimPrice($('#totalPay').text());
+	if(trimPrice($('#deliveryPrice').text()) == '2500'){
+		var delivery_price = 1;
+	}
+	else {
+		var delivery_price = 0;
+	}
+	var buyer_name = $('input[name="userName"]').val();
+	var buyer_tel = $('input[name="phone"]').val();
+	var buyer_postcode = $('input[name="zipCode"]').val();
+	var buyer_addr = $('input[name="address"]').val() + $('input[name="detailAddress"]').val();
+	var buyer_email = $('input[name="email"]').val() +'@'+$('input[name="emailProvider"]').val();
+	var delivery_name = $('input[name="deliveryUserName"]').val();
+	var delivery_tel = $('input[name="deliveryPhone"]').val();
+	var delivery_postcode = $('input[name="deliveryZipCode"]').val();
+	var delivery_addr = $('input[name="deliveryAddress"]').val() + $('input[name="deliveryDetailAddress"]').val();
+	var delivery_message = $('.deliveryMessage').val();
+	var cnt = $('.orderList-tr:last').index();
+	var cartList = [];
+	for(var i=0; i < cnt; i++){
+		cartList.push($('.cartNo').eq(i).val());
+	}
+	
+IMP.init('imp85558424'); 
+   IMP.request_pay({
+       pg : 'kakaopay',
+       pay_method : 'card',
+       merchant_uid : 'merchant_' + new Date().getTime(),
+       name : name,
+       amount : amount,
+       buyer_email : buyer_email,
+       buyer_name : buyer_name,
+       buyer_tel : buyer_tel,
+       buyer_addr : buyer_addr,
+       buyer_postcode : buyer_postcode
+      }, function(rsp) {
+			console.log(rsp)
+    	  if(rsp.success){
+    		 $.ajax({
+    	            url : "/order/kakaoPayment",
+    	            method : 'POST',
+    	            traditional : true,
+    	            data : {
+						userId : userId,
+						name : name,
+						amount : amount,
+						delivery_price :delivery_price, 
+					    delivery_name : delivery_name,
+					    delivery_tel : delivery_tel,
+					    delivery_postcode : delivery_postcode,
+					    delivery_addr : delivery_addr,
+					    delivery_message : delivery_message,
+					    imp_uid : rsp.imp_uid,
+					    merchant_uid : rsp.merchant_uid,
+					    paid_at : rsp.paid_at,
+					    receipt_url : rsp.receipt_url,
+					    test : cartList
+					},
+    	            success : function(data) {
+						console.log(data)
+						location.href="/"
+    				}
+  				});
+    		}
+    	  else{
+    		  alert('결제에 실패하였습니다.')
+    	  }
+	});
+};
+
 
