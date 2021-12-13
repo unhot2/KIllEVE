@@ -20,4 +20,9 @@ public class OrderService {
 	public void orderSave(KakaoPay kakaopay) {
 		orderRepository.orderSave(kakaopay);
 	}
+
+	public void orderList(String userId) {
+		orderRepository.orderList(userId);
+		
+	}
 }

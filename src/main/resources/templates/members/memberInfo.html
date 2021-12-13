@@ -5,15 +5,15 @@
 <head>
 	<meta charset="utf-8" />
 	<script th:src="@{/js/member.js}"></script>
-	<script th:inline="javascript">
+	<script type="text/javascript" th:inline="javascript">
 		var birthYear;
 		var birthMonth;
 		var birthDay;
 		/*<![CDATA[*/
-		birthYear = /*[[${userInfo.birthYear}]]*/
-			birthMonth = /*[[${userInfo.birthMonth}]]*/
-			birthDay = /*[[${userInfo.birthDay}]]*/
-	/*]]>*/
+			birthYear=/*[[${userInfo.birthYear}]]*/
+			birthMonth=/*[[${userInfo.birthMonth}]]*/
+			birthDay=/*[[${userInfo.birthDay}]]*/
+		/*]]>*/
 	</script>
 	<link href="/css/join.css" rel="stylesheet">
 	<!--다음 주소 API-->
@@ -239,4 +239,5 @@
 		</section>
 	</div>
 </body>
+
 </html>

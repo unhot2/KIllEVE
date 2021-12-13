@@ -42,10 +42,8 @@
 								<th:block th:unless="${#lists.isEmpty(cartList)}">
 									<tr th:each="cartList, index: ${cartList}" class="cartList-tr">
 										<td>
-											<input type="checkbox" class="checkBox"
-												th:name="|orderList[${index.index}].check|">
-											<input type="hidden" class="cartNo"
-												th:name="|orderList[${index.index}].cartNo|"
+											<input type="checkbox" class="checkBox"	th:name="|orderList[${index.index}].check|">
+											<input type="hidden" class="cartNo"	th:name="|orderList[${index.index}].cartNo|"
 												th:value="${cartList.cartNo}">
 										</td>
 										<td>

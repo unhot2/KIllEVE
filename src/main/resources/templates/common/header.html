@@ -21,7 +21,8 @@
 								<span th:text="${session.userName}"></span>
 								<span style="font-size: 14px;">님</span>
 							</li>
-							<li><a th:href="@{/members/memberInfo(userId=${session.userId})}"><span>마이페이지</span></a>
+							<li><a th:href="@{/members/myPage}"><span>마이페이지</span></a>
+							<!--<li><a th:href="@{/members/memberInfo(userId=${session.userId})}"><span>마이페이지</span></a>-->
 							</li>
 							<li>
 								<a th:href="@{#}" id="drop-Btn">커뮤니티</a>

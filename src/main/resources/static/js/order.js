@@ -208,7 +208,7 @@ IMP.init('imp85558424');
 					},
     	            success : function(data) {
 						console.log(data)
-						location.href="/"
+						location.href="/order/orderList"
     				}
   				});
     		}

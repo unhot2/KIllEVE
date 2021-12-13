@@ -21,10 +21,16 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	// 마이페이지
+	@GetMapping("/myPage")
+	public String myPage(Model model) {
+		return "/members/myPage";
+	}
+	
 	// 회원정보 조회
 	@GetMapping("/memberInfo")
 	public String memberInfo(Model model, User user) {
-		System.out.println("method 들어옴 ---------------------------------------------");
+		System.out.println("memberInfo method 들어옴 ---------------------------------------------");
 		User info = memberService.memberInfo(user);
 		System.out.println("userId 정보 :"+info.getUserId());
 		System.out.println("password 정보 :"+info.getPassword());

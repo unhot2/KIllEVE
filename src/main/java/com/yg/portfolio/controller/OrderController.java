@@ -36,6 +36,13 @@ public class OrderController {
 	@Autowired
 	private CartService cartService;
 	
+	// 주문내역
+	@GetMapping("/orderList")
+	public String orderList(User user, Model model, HttpSession session) {
+		orderService.orderList((String) session.getAttribute("userId"));
+		return "/order/orderList";
+	}
+	
 	// 주문서 상세정보
 	@GetMapping("/orderDetail")
 	public String orderForm(OrderList list, Model model, HttpSession session) {

@@ -15,6 +15,9 @@ public interface OrderRepository {
 
 	// 주문 저장
 	void orderSave(KakaoPay kakaopay);
+	
+	// 주문내역
+	void orderList(String userId);
 
 	
 }
