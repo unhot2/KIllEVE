@@ -19,8 +19,9 @@
 				<form action="/order/directOrderDetail" id="productDetailForm">
 					<input type='hidden' class="productNo" name="productNo" th:value="${detail.productNo}">
 					<input type='hidden' id="userId" th:value="${session.userId}">
-					<input type='hidden' id="category" th:value="${detail.category}">
-					<input type='hidden' id="mainImage" th:value="${detail.mainImage}">
+					<input type='hidden' id="category" name="category" th:value="${detail.category}">
+					<input type='hidden' id="mainImage" name="mainImage" th:value="${detail.mainImage}">
+					<input type='hidden' name="salePrice" th:value="${detail.salePrice}">
 					<div>
 						<h2 id="productName" th:text="${detail.productName}"></h2>
 					</div>
@@ -82,7 +83,7 @@
 								<span id="cartBtn">CART</span>
 							</div>
 							<div class='buyBtn'>
-								<button type="submit">BUY IT NOW</button>
+								<span id="buyBtn">BUY IT NOW</span>
 							</div>
 						</div>
 					</div>

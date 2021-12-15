@@ -160,6 +160,21 @@ $(function() {
 			alert("담을 상품이 없습니다.")
 		}
 	});
+	
+	$('#buyBtn').click(function(){
+		var sessionId = $('#userId').val(); 
+		if(isEmpty(sessionId)){
+			alert("로그인 후 이용가능합니다.")
+			return;
+		}
+		productCnt = $('.total-product-tr:last').index();
+		if (productCnt >= 0) {
+			$('#productDetailForm').submit();
+		}
+		else {
+			alert("담을 상품이 없습니다.")
+		}
+	})
 
 });
 
