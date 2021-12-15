@@ -1,3 +1,8 @@
+// 최종 가격	
+var totalPrice = [];
+var totalQuantity = [];
+var count = 0;
+
 $(function() {
 	/*SALE 버튼 추가*/
 	if ($('#discountRate').text().replace('%', '') > 0) {
@@ -14,10 +19,6 @@ $(function() {
 	$('#select-color').change(function() {
 		$('#select-size').val('*').prop("selected", true);
 	});
-
-	// 최종 가격	
-	var totalPrice = [];
-	var totalQuantity = [];
 
 	// 색상,사이즈 선택 시 최종상품,가격 추가
 	$('#select-size').change(function() {
@@ -38,10 +39,12 @@ $(function() {
 				}
 			}
 			var html = '<tr class="total-product-tr">\
-							<td class="totalTd1"><b>'+ productName + '</b><br>-<span class="colorText">' + color + '</span>/<span class="sizeText">' + size + '</span></td>\
+							<td class="totalTd1"><input type="hidden" name="orderFormList['+count+'].productName" value="'+productName+'"><b class="productNameText">'+ productName + '</b>\
+							<input type="hidden" name="orderFormList['+count+'].color" value="'+color+'"><br>-<span class="colorText">' + color + '</span>\
+							<input type="hidden" name="orderFormList['+count+'].size" value="'+size+'">/<span class="sizeText">' + size + '</span></td>\
 							<td class="totalTd2">\
 								<span class="quantityArea">\
-									<input type="number" id="quantity" name="" class="quantity" value="1" readOnly>\
+									<input type="number" id="quantity" name="orderFormList['+count+'].quantity" class="quantity" value="1" readOnly>\
 									<a class="upBtn quantityBtn">\
 										<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif" alt="수량증가">\
 									</a>\
@@ -62,6 +65,7 @@ $(function() {
 			totalQuantitySet(totalQuantity);
 			$('#select-color').val('*').prop("selected", true);
 			$('#select-size').val('*').prop("selected", true);
+			count++;
 		}
 	});
 
@@ -133,8 +137,6 @@ $(function() {
 					};
 					productList.push(data);
 				}
-				for (list in productList) {
-				}
 				$.ajax({
 					type: "POST",
 					url: "/cart/cartSave",
@@ -157,11 +159,7 @@ $(function() {
 		else {
 			alert("담을 상품이 없습니다.")
 		}
-	})
-
-	$('#buyBtn').click(function() {
-		alert('클릭')
-	})
+	});
 
 });
 
@@ -184,4 +182,3 @@ function totalQuantitySet(totalQuantity) {
 	}
 	$('#quantityText').text(sumQuantity);
 }
-

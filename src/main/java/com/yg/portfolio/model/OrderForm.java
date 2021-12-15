@@ -5,10 +5,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Order {
+public class OrderForm {
 	private int cartNo;			// 장바구니 번호
 	private int productNo; 		// 상품번호
-	private int quantity;		// 재고량
+	private int quantity;		// 수량
 	private String color;		// 색상	
 	private String size;		// 사이즈
 	private String productName;	// 상품명

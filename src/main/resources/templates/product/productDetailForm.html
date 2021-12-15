@@ -13,12 +13,14 @@
 		<div class="product-container">
 			<div class="product-head">
 				<div class="product-head-img">
-					<img
-						th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
+					<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
 				</div>
 				<div class="product-head-info">
-					<input type='hidden' id="productNo" th:value="${detail.productNo}">
+				<form action="/order/directOrderDetail" id="productDetailForm">
+					<input type='hidden' class="productNo" name="productNo" th:value="${detail.productNo}">
 					<input type='hidden' id="userId" th:value="${session.userId}">
+					<input type='hidden' id="category" th:value="${detail.category}">
+					<input type='hidden' id="mainImage" th:value="${detail.mainImage}">
 					<div>
 						<h2 id="productName" th:text="${detail.productName}"></h2>
 					</div>
@@ -44,7 +46,7 @@
 							<tr class="selectTr">
 								<th>색상</th>
 								<td>
-									<select name="option1" id="select-color" class="selectBox" required>
+									<select id="select-color" class="selectBox" required>
 										<option value="*" selected="">- [필수] 옵션선택 -</option>
 										<option value="**" disabled="">-------------------</option>
 										<span th:each="color : ${color}">
@@ -56,7 +58,7 @@
 							<tr class="selectTr">
 								<th>사이즈</th>
 								<td>
-									<select name="option1" id="select-size" class="selectBox" required>
+									<select id="select-size" class="selectBox" required>
 										<option value="*" selected="">- [필수] 옵션선택 -</option>
 										<option value="**" disabled="">-------------------</option>
 										<span th:each="size : ${size}">
@@ -80,14 +82,14 @@
 								<span id="cartBtn">CART</span>
 							</div>
 							<div class='buyBtn'>
-								<span id="buyBtn">BUY IT NOW</span>
+								<button type="submit">BUY IT NOW</button>
 							</div>
 						</div>
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>
-
 		<div class="product-container centerAlign">
 			<div th:each="product : ${imgDetail}">
 				<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${product.productNo}, fileName=${product.fileName})}"

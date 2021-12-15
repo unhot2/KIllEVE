@@ -42,15 +42,12 @@
 								<th:block th:unless="${#lists.isEmpty(cartList)}">
 									<tr th:each="cartList, index: ${cartList}" class="cartList-tr">
 										<td>
-											<input type="checkbox" class="checkBox"	th:name="|orderList[${index.index}].check|">
-											<input type="hidden" class="cartNo"	th:name="|orderList[${index.index}].cartNo|"
-												th:value="${cartList.cartNo}">
+											<input type="checkbox" class="checkBox"	th:name="|orderFormList[${index.index}].check|">
+											<input type="hidden" class="cartNo"	th:name="|orderFormList[${index.index}].cartNo|" th:value="${cartList.cartNo}">
 										</td>
 										<td>
-											<a
-												th:href="@{/product/detail/{productNo}(productNo=${cartList.productNo})}">
-												<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${cartList.category},productNo=${cartList.productNo}, fileName=${cartList.mainImage})}"
-													class="mainImage">
+											<a th:href="@{/product/detail/{productNo}(productNo=${cartList.productNo})}">
+												<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${cartList.category},productNo=${cartList.productNo}, fileName=${cartList.mainImage})}" class="mainImage">
 											</a>
 										</td>
 										<td style="text-align: left;">
@@ -63,15 +60,12 @@
 										</td>
 										<td>
 											<div>
-												<input type="number" class="quantity" th:value="${cartList.quantity}"
-													readOnly>
+												<input type="number" class="quantity" th:value="${cartList.quantity}" readOnly>
 												<a class="upBtn quantityBtn">
-													<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif"
-														alt="수량증가">
+													<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_up.gif" alt="수량증가">
 												</a>
 												<a class="downBtn quantityBtn">
-													<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif"
-														alt="수량감소">
+													<img src="//img.echosting.cafe24.com/design/skin/default/product/btn_count_down.gif" alt="수량감소">
 												</a><br>
 											</div>
 										</td>

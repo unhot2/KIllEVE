@@ -61,9 +61,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			userEntity.setPassword(bCryptPasswordEncoder.encode("killeve"));
 			String test = oAuth2UserInfo.getEmail();
 			String [] email = test.split("@");
-			for (String string : email) {
-				System.out.println(string);
-			}
 			userEntity.setEmail(email[0]);
 			userEntity.setEmailProvider(email[1]);
 			userEntity.setRole("ROLE_USER");

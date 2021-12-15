@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class OrderList {
-	private List<Order> orderList;
+public class OrderFormList {
+	private List<OrderForm> orderFormList;
 }
 

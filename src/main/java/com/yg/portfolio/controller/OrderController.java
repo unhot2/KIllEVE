@@ -5,19 +5,25 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yg.portfolio.model.Cart;
 import com.yg.portfolio.model.KakaoPay;
-import com.yg.portfolio.model.Order;
-import com.yg.portfolio.model.OrderList;
+import com.yg.portfolio.model.OrderForm;
+import com.yg.portfolio.model.OrderFormList;
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.service.CartService;
 import com.yg.portfolio.service.MemberService;
@@ -35,6 +41,8 @@ public class OrderController {
 	
 	@Autowired
 	private CartService cartService;
+
+	private int chk;
 	
 	// 주문내역
 	@GetMapping("/orderList")
@@ -45,21 +53,86 @@ public class OrderController {
 	
 	// 주문서 상세정보
 	@GetMapping("/orderDetail")
-	public String orderForm(OrderList list, Model model, HttpSession session) {
-		int chk = 0;
-		List<Order> orderList = new ArrayList<Order>();
-		// 장바구니에서 가져온 CartNo 리스트
-		for (Order order : list.getOrderList()) {
-			if(order.getCheck() != null) { // checkBox가 체크되었을 경우
-				int cartNo = order.getCartNo();
-				orderList.add(orderService.orderDetail(cartNo)); // cart에 담긴 정보 가져와서 orderList에 추가
+	public String orderFormCart(OrderFormList list, Model model, HttpSession session
+			, @RequestParam(value="buyList", required = false) String buyList) throws ParseException {
+		if(list.getOrderFormList() != null) {
+			System.out.println("!=null 들어옴");
+			int chk = 0;
+			List<OrderForm> orderList = new ArrayList<OrderForm>();
+			// 장바구니에서 가져온 CartNo 리스트
+			for (OrderForm order : list.getOrderFormList()) {
+				if(order.getCheck() != null) { // checkBox가 체크되었을 경우
+					int cartNo = order.getCartNo();
+					orderList.add(orderService.orderDetail(cartNo)); // cart에 담긴 정보 가져와서 orderList에 추가
+				}
+				chk++;
 			}
-			chk++;
+			User user = new User();
+			user.setUserId((String) session.getAttribute("userId"));
+			model.addAttribute("memberInfo",memberService.memberInfo(user));
+			model.addAttribute("orderList",orderList);
 		}
-		User user = new User();
-		user.setUserId((String) session.getAttribute("userId"));
-		model.addAttribute("memberInfo",memberService.memberInfo(user));
-		model.addAttribute("orderList",orderList);
+		if(buyList != null) {
+			System.out.println("buyList != null 들어옴");
+			JSONParser jsonParser = new JSONParser();
+			// JSON ARRAY로 변환
+			JSONArray jsonList = (JSONArray)jsonParser.parse(buyList);
+			ArrayList<OrderForm> orderList = new ArrayList<OrderForm>();
+			for (Object object : jsonList) {
+				// JSON ARRAY에 들어있는 오브젝트를 JSON OBJECT로 변환
+				JSONObject jsonObject = (JSONObject) object;
+				// CART 에 저장
+				OrderForm order = new OrderForm();
+				System.out.println("상품번호 : "+String.valueOf(jsonObject.get("productNo")));
+				System.out.println("상품명 : "+String.valueOf(jsonObject.get("productName")));
+				System.out.println("사이즈 : "+String.valueOf(jsonObject.get("size")));
+				System.out.println("색상 : "+String.valueOf(jsonObject.get("color")));
+				System.out.println("수량 : "+String.valueOf(jsonObject.get("quantity")));
+				System.out.println("주문자 : "+String.valueOf(jsonObject.get("userId")));
+				System.out.println("카테고리 : "+String.valueOf(jsonObject.get("category")));
+				System.out.println("메인이미지 : "+String.valueOf(jsonObject.get("mainImage")));
+				System.out.println("최종가격 : "+String.valueOf(jsonObject.get("totalPrice")));
+				System.out.println("판매가 : "+String.valueOf(jsonObject.get("salePrice")));
+				order.setProductNo(Integer.parseInt(String.valueOf(jsonObject.get("productNo"))));
+				order.setProductName(String.valueOf(jsonObject.get("productName")));
+				order.setSize((String)jsonObject.get("size"));
+				order.setColor((String)jsonObject.get("color"));
+				order.setQuantity(Integer.parseInt(String.valueOf(jsonObject.get("quantity"))));
+				order.setUserId((String)jsonObject.get("userId"));
+				order.setSalePrice(Integer.parseInt(String.valueOf(jsonObject.get("salePrice"))));
+				order.setTotalPrice(Integer.parseInt(String.valueOf(jsonObject.get("totalPrice"))));
+				order.setCategory(String.valueOf(jsonObject.get("category")));
+				order.setUserId(String.valueOf(jsonObject.get("userId")));
+				order.setMainImage(String.valueOf(jsonObject.get("mainImage")));
+				orderList.add(order);
+			}
+			User user = new User();
+			user.setUserId((String) session.getAttribute("userId"));
+			model.addAttribute("memberInfo",memberService.memberInfo(user));
+			model.addAttribute("orderList",orderList);
+		}
+		return "/order/orderForm";
+	}
+
+	// 주문서 상세정보
+	@GetMapping("/directOrderDetail")
+	public String orderFormBuy(OrderFormList list, Model model, HttpSession session
+			, @RequestParam(value="productNo") String productNo) throws ParseException {
+			System.out.println("direct 들어옴");
+			List<OrderForm> orderList = new ArrayList<OrderForm>();
+			System.out.println("상품번호 :"+productNo);
+			// 장바구니에서 가져온 CartNo 리스트
+			for (OrderForm order : list.getOrderFormList()) {
+				System.out.println("상품명 :"+order.getProductName());
+				System.out.println("사이즈 :"+order.getSize());
+				System.out.println("색상 :"+order.getColor());
+				System.out.println("수량 :"+order.getQuantity());
+			}
+			User user = new User();
+			user.setUserId((String) session.getAttribute("userId"));
+			System.out.println("id값 : "+(String) session.getAttribute("userId"));
+			model.addAttribute("memberInfo",memberService.memberInfo(user));
+			model.addAttribute("orderList",orderList);
 		return "/order/orderForm";
 	}
 
