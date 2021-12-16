@@ -57,4 +57,47 @@
 			 , #{receipt_url} )
 	</insert>
 	
+	<insert id="orderDetailSave">
+		INSERT INTO orderDetail (
+			   merchant_uid
+			 , productNo
+			 , quantity
+			 , color
+			 , size
+			 , totalPrice )
+		VALUES (
+			   #{merchant_uid}
+			 , #{productNo}
+			 , #{quantity}
+			 , #{color}
+			 , #{size}
+			 , #{totalPrice} )
+	</insert>
+	
+	<select id="checkPayment" resultType="KakaoPay">
+		SELECT * 
+		  FROM `order`
+		 WHERE merchant_uid = #{merchant_uid}
+	</select>
+	
+	<select id="productDetails" resultType="OrderDetail">
+		SELECT merchant_uid
+			 , productNo
+			 , quantity
+			 , color
+			 , size
+			 , totalPrice
+			 , (SELECT category
+			 	  FROM product
+			 	 WHERE productNo = A.productNo) as category
+			 , (SELECT mainImage
+			 	  FROM product
+			 	 WHERE productNo = A.productNo) as mainImage
+			 , (SELECT productName
+			 	  FROM product
+			 	 WHERE productNo = A.productNo) as productName
+		  FROM orderdetail A
+		 WHERE merchant_uid = #{merchant_uid}
+	</select>
+	
 </mapper>

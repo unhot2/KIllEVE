@@ -35,6 +35,7 @@
 						<tr th:each="orderList, index: ${orderList}" class="orderList-tr">
 							<td>
 								<input type="hidden" class="cartNo" th:value="${orderList.cartNo}">
+								<input type="hidden" class="productNo" th:value="${orderList.productNo}">
 								<a th:href="@{/product/detail/{productNo}(productNo=${orderList.productNo})}">
 									<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${orderList.category},productNo=${orderList.productNo}, fileName=${orderList.mainImage})}"
 										class="mainImage">
@@ -232,7 +233,7 @@
 					</div>
 					<div class="t">
 						<div class="btnDiv">
-							<span>카카오페이로 결제하기</span>
+							<span id="kakaoPay">카카오페이로 결제하기</span>
 						</div>
 						<div class="btnDiv">
 							<span>취소</span>

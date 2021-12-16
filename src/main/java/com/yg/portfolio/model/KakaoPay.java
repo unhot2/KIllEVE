@@ -1,5 +1,6 @@
 package com.yg.portfolio.model;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +17,8 @@ public class KakaoPay {
 	private String delivery_addr;		// 수신자 주소
 	private String delivery_message;;	// 배송메세지
 	private String imp_uid;				// 아임포트 고유 결제번호
-	private String merchant_uid;			// 가맹점 고유 주문번호
-	private String paid_at;			// 결제승인시각
-	private String receipt_url;				// 매출전표 url
+	private String merchant_uid;		// 가맹점 고유 주문번호
+	private String paid_at;				// 결제승인시각
+	private String receipt_url;			// 매출전표 url
 }
 

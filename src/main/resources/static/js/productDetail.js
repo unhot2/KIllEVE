@@ -129,7 +129,7 @@ $(function() {
 				var lastIndex = $('.total-product-tr:last').index();
 				for (var i = 0; i <= lastIndex; i++) {
 					var data = {
-						productNo: $('#productNo').val(),
+						productNo: $('.productNo').val(),
 						color: $('.totalTd1 > span.colorText').eq(i).text(),
 						size: $('.totalTd1 > span.sizeText').eq(i).text(),
 						quantity: totalQuantity[i],
@@ -161,6 +161,7 @@ $(function() {
 		}
 	});
 	
+	// 바로구매 버튼
 	$('#buyBtn').click(function(){
 		var sessionId = $('#userId').val(); 
 		if(isEmpty(sessionId)){
@@ -169,7 +170,13 @@ $(function() {
 		}
 		productCnt = $('.total-product-tr:last').index();
 		if (productCnt >= 0) {
-			$('#productDetailForm').submit();
+			var chk = confirm("바로구매 하시겠습니까?");
+			if(chk){
+				$('#productDetailForm').submit();
+			}
+			else {
+				retrun;
+			}
 		}
 		else {
 			alert("담을 상품이 없습니다.")

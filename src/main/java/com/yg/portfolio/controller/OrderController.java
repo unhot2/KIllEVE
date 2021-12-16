@@ -1,6 +1,9 @@
 package com.yg.portfolio.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yg.portfolio.model.Cart;
 import com.yg.portfolio.model.KakaoPay;
+import com.yg.portfolio.model.OrderDetail;
 import com.yg.portfolio.model.OrderForm;
 import com.yg.portfolio.model.OrderFormList;
 import com.yg.portfolio.model.User;
@@ -51,10 +55,7 @@ public class OrderController {
 	
 	// 주문서 상세정보
 	@GetMapping("/orderDetail")
-	public String orderFormCart(OrderFormList list, Model model, HttpSession session
-//			, @RequestParam(value="buyList", required = false) String buyList
-			){
-//		if(list.getOrderFormList() != null) {
+	public String orderFormCart(OrderFormList list, Model model, HttpSession session){
 			System.out.println("!=null 들어옴");
 			List<OrderForm> orderList = new ArrayList<OrderForm>();
 			// 장바구니에서 가져온 CartNo 리스트
@@ -68,46 +69,6 @@ public class OrderController {
 			user.setUserId((String) session.getAttribute("userId"));
 			model.addAttribute("memberInfo",memberService.memberInfo(user));
 			model.addAttribute("orderList",orderList);
-//		}
-//		if(buyList != null) {
-//			System.out.println("buyList != null 들어옴");
-//			JSONParser jsonParser = new JSONParser();
-//			// JSON ARRAY로 변환
-//			JSONArray jsonList = (JSONArray)jsonParser.parse(buyList);
-//			ArrayList<OrderForm> orderList = new ArrayList<OrderForm>();
-//			for (Object object : jsonList) {
-//				// JSON ARRAY에 들어있는 오브젝트를 JSON OBJECT로 변환
-//				JSONObject jsonObject = (JSONObject) object;
-//				// CART 에 저장
-//				OrderForm order = new OrderForm();
-//				System.out.println("상품번호 : "+String.valueOf(jsonObject.get("productNo")));
-//				System.out.println("상품명 : "+String.valueOf(jsonObject.get("productName")));
-//				System.out.println("사이즈 : "+String.valueOf(jsonObject.get("size")));
-//				System.out.println("색상 : "+String.valueOf(jsonObject.get("color")));
-//				System.out.println("수량 : "+String.valueOf(jsonObject.get("quantity")));
-//				System.out.println("주문자 : "+String.valueOf(jsonObject.get("userId")));
-//				System.out.println("카테고리 : "+String.valueOf(jsonObject.get("category")));
-//				System.out.println("메인이미지 : "+String.valueOf(jsonObject.get("mainImage")));
-//				System.out.println("최종가격 : "+String.valueOf(jsonObject.get("totalPrice")));
-//				System.out.println("판매가 : "+String.valueOf(jsonObject.get("salePrice")));
-//				order.setProductNo(Integer.parseInt(String.valueOf(jsonObject.get("productNo"))));
-//				order.setProductName(String.valueOf(jsonObject.get("productName")));
-//				order.setSize((String)jsonObject.get("size"));
-//				order.setColor((String)jsonObject.get("color"));
-//				order.setQuantity(Integer.parseInt(String.valueOf(jsonObject.get("quantity"))));
-//				order.setUserId((String)jsonObject.get("userId"));
-//				order.setSalePrice(Integer.parseInt(String.valueOf(jsonObject.get("salePrice"))));
-//				order.setTotalPrice(Integer.parseInt(String.valueOf(jsonObject.get("totalPrice"))));
-//				order.setCategory(String.valueOf(jsonObject.get("category")));
-//				order.setUserId(String.valueOf(jsonObject.get("userId")));
-//				order.setMainImage(String.valueOf(jsonObject.get("mainImage")));
-//				orderList.add(order);
-//			}
-//			User user = new User();
-//			user.setUserId((String) session.getAttribute("userId"));
-//			model.addAttribute("memberInfo",memberService.memberInfo(user));
-//			model.addAttribute("orderList",orderList);
-//		}
 		return "/order/orderForm";
 	}
 
@@ -119,17 +80,9 @@ public class OrderController {
 			, @RequestParam(value="mainImage") String mainImage
 			, @RequestParam(value="salePrice") int salePrice) throws ParseException {
 			List<OrderForm> orderList = new ArrayList<OrderForm>();
-//			System.out.println("상품번호 :"+productNo);
-//			System.out.println("카테고리 :"+category);
-//			System.out.println("메인이미지 :"+mainImage);
-//			System.out.println("판매가 :"+salePrice);
 			// 장바구니에서 가져온 CartNo 리스트
 			for (OrderForm order : list.getOrderFormList()) {
 				OrderForm saveList = new OrderForm();
-//				System.out.println("상품명 :"+order.getProductName());
-//				System.out.println("사이즈 :"+order.getSize());
-//				System.out.println("색상 :"+order.getColor());
-//				System.out.println("수량 :"+order.getQuantity());
 				saveList.setProductNo(productNo);
 				saveList.setProductName(order.getProductName());
 				saveList.setSize(order.getSize());
@@ -143,33 +96,76 @@ public class OrderController {
 			}
 			User user = new User();
 			user.setUserId((String) session.getAttribute("userId"));
-			System.out.println("id값 : "+(String) session.getAttribute("userId"));
 			model.addAttribute("memberInfo",memberService.memberInfo(user));
 			model.addAttribute("orderList",orderList);
 		return "/order/orderForm";
 	}
 
 	@PostMapping("/kakaoPayment")
-	public @ResponseBody String kakaoPayment(KakaoPay kakaopay, @RequestParam("test") List<String> test) {
+	public @ResponseBody String kakaoPayment(KakaoPay kakaopay
+			, @RequestParam("cartList") List<String> cartList
+			, @RequestParam("productList") String productList) throws ParseException {
+		// 결제정보 등록
 		orderService.orderSave(kakaopay);
+		
 		// 장바구니 목록 삭제
-		for (String cartNo : test) {
-//			System.out.println("넘어온 cartNo값  :"+cartNo);
+		if(cartList !=null) {
+			for (String cartNo : cartList) {
+			System.out.println("넘어온 cartNo값  :"+cartNo);
 			cartService.cartDelete(cartNo);
+			}
 		}
-//		System.out.println(kakaopay.getUserId());
-//		System.out.println(kakaopay.getName());
-//		System.out.println(kakaopay.getAmount());
-//		System.out.println(kakaopay.getDelivery_price());
-//		System.out.println(kakaopay.getDelivery_name());
-//		System.out.println(kakaopay.getDelivery_tel());
-//		System.out.println(kakaopay.getDelivery_postcode());
-//		System.out.println(kakaopay.getDelivery_addr());
-//		System.out.println(kakaopay.getDelivery_message());
-//		System.out.println(kakaopay.getImp_uid());
-//		System.out.println(kakaopay.getMerchant_uid());
-//		System.out.println(kakaopay.getPaid_at());
-//		System.out.println(kakaopay.getReceipt_url());
+		
+		if(productList !=null) {
+			JSONParser jsonParser = new JSONParser();
+			// JSON ARRAY로 변환
+			JSONArray jsonList = (JSONArray)jsonParser.parse(productList);
+			for (Object object : jsonList) {
+				// JSON ARRAY에 들어있는 오브젝트를 JSON OBJECT로 변환
+				JSONObject jsonObject = (JSONObject) object;
+				// CART 에 저장
+				OrderDetail detail = new OrderDetail();
+				detail.setMerchant_uid(kakaopay.getMerchant_uid());
+				detail.setProductNo(Integer.parseInt(String.valueOf(jsonObject.get("productNo"))));
+				detail.setSize((String)jsonObject.get("size"));
+				detail.setColor((String)jsonObject.get("color"));
+				detail.setQuantity(Integer.parseInt(String.valueOf(jsonObject.get("quantity"))));
+				detail.setTotalPrice(Integer.parseInt(String.valueOf(jsonObject.get("totalPrice"))));
+				System.out.println("uid : "+detail.getMerchant_uid());
+				System.out.println("productNo : "+detail.getProductNo());
+				System.out.println("size : "+detail.getSize());
+				System.out.println("color : "+detail.getColor());
+				System.out.println("quantity : "+detail.getQuantity());
+				System.out.println("totalPrice : "+detail.getTotalPrice());
+				orderService.orderDetailSave(detail);
+			}
+		}
+		System.out.println(kakaopay.getUserId());
+		System.out.println(kakaopay.getName());
+		System.out.println(kakaopay.getAmount());
+		System.out.println(kakaopay.getDelivery_price());
+		System.out.println(kakaopay.getDelivery_name());
+		System.out.println(kakaopay.getDelivery_tel());
+		System.out.println(kakaopay.getDelivery_postcode());
+		System.out.println(kakaopay.getDelivery_addr());
+		System.out.println(kakaopay.getDelivery_message());
+		System.out.println(kakaopay.getImp_uid());
+		System.out.println(kakaopay.getMerchant_uid());
+		System.out.println(kakaopay.getPaid_at());
+		System.out.println(kakaopay.getReceipt_url());
 		return kakaopay.getMerchant_uid();
+	}
+	
+	// 주문확인
+	@GetMapping("/checkPayment")
+	public String checkPayment(@RequestParam(value="merchant_uid") String merchant_uid,Model model) {
+		KakaoPay paymentInfo = orderService.checkPayment(merchant_uid);
+		List<OrderDetail> productList = orderService.productDetails(merchant_uid);
+		Date date = new Date(Long.parseLong(paymentInfo.getPaid_at())*1000L);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss");
+		paymentInfo.setPaid_at(format.format(date));
+		model.addAttribute("payment",paymentInfo);
+		model.addAttribute("productList",productList);
+		return "/order/checkPayment";
 	}
 }

@@ -54,69 +54,9 @@ $(function() {
 		$('#deliveryDetailAddress').val('');
 	});
 	
-})
-
-// 최종가격 입력 함수
-function totalPriceSet(totalPriceArray) {
-	// 인덱스 (현재 저장되있는 상품수)
-	var index = $('.orderList-tr:last').index();
-	// 최종가격
-	var sum = 0;
-	for (var i = 0; i < index; i++) {
-		sum += totalPriceArray[i];
-	}
-	// 10만원이상시 배송료 무료로 세팅
-	if (sum > 100000) {
-		deliveryPrice = 0;
-		for (var j = 0; j < index; j++) {
-			$('.deliveryPrice').text('무료');
-		}
-		$('#deliveryPrice').text('+ ￦0원');
-	}
-	else {
-		deliveryPrice = 2500;
-		$('#deliveryPrice').text(' ￦' + deliveryPrice + '원');
-	}
-	$('#totalPrice').text('￦' + priceToString(sum) + '원');
-	$('#totalPay').text('￦' + priceToString(sum + deliveryPrice) + '원');
-}
-
-function findAddr() {
-	new daum.Postcode({
-		oncomplete: function(data) {
-		var addr = '';
-		if (data.userSelectedType === 'R') {
-			addr = data.roadAddress
-		}
-		else {
-			addr = data.jibunAddress;
-		}
-		// 우편번호와 주소 정보를 해당 필드에 넣는다.
-		document.getElementById('zipCode').value = data.zonecode;
-		document.getElementById('address' ).value = addr;
-		}
-	}).open();
-};
-
-function deliveryfindAddr() {
-	new daum.Postcode({
-		oncomplete: function(data) {
-			var addr = '';
-			if (data.userSelectedType === 'R') {
-				addr = data.roadAddress
-			}
-			else {
-				addr = data.jibunAddress;
-			}
-			// 우편번호와 주소 정보를 해당 필드에 넣는다.
-			document.getElementById('deliveryZipCode').value = data.zonecode;
-			document.getElementById("deliveryAddress").value = addr;
-		}
-	}).open();
-};
-
-function kakaoPay(){
-	if(!$('input[name="deliveryUserName"]').val()){
+	// 카카오페이 결제
+	$('#kakaoPay').click(function(){
+		if(!$('input[name="deliveryUserName"]').val()){
 		alert('주문자명을 입력해주세요');
 		$('input[name="deliveryUserName"]').focus();
 		return;
@@ -145,7 +85,7 @@ function kakaoPay(){
 		name = $('.productName').eq(0).text()+' 외 '+(count-1)+'건';
 	}
 	else {
-		name = $('.productName').eq(0).text();	
+		name = $('.productName').eq(0).text()+' 1건';	
 	}
 	var userId	= $('input[name="userId"]').val();
 	var amount = trimPrice($('#totalPay').text());
@@ -170,52 +110,149 @@ function kakaoPay(){
 	for(var i=0; i < cnt; i++){
 		cartList.push($('.cartNo').eq(i).val());
 	}
+	var productList = [];
+	for(var j=0; j < cnt; j++){
+		var data = {
+			productNo	: $('.productNo').eq(j).val(),
+			color		: $('.color').eq(j).text(),
+			size		: $('.size').eq(j).text(),
+			quantity	: $('.quantity').eq(j).text(),
+			totalPrice	: trimPrice($('.totalPrice').eq(j).text())
+		}
+		productList.push(data);
+	}
+	IMP.init('imp85558424'); 
+	   IMP.request_pay({
+	       pg : 'kakaopay',
+	       pay_method : 'card',
+	       merchant_uid : 'merchant_' + new Date().getTime(),
+	       name : name,
+	       amount : amount,
+	       buyer_email : buyer_email,
+	       buyer_name : buyer_name,
+	       buyer_tel : buyer_tel,
+	       buyer_addr : buyer_addr,
+	       buyer_postcode : buyer_postcode
+	      }, function(rsp) {
+				var sysdate = new Date(rsp.paid_at);
+				console.log(sysdate)
+	    	  if(rsp.success){
+	    		 $.ajax({
+	    	            url : "/order/kakaoPayment",
+	    	            method : 'POST',
+	    	            traditional : true,
+	    	            data : {
+							userId : userId,
+							name : name,
+							amount : amount,
+							delivery_price :delivery_price, 
+						    delivery_name : delivery_name,
+						    delivery_tel : delivery_tel,
+						    delivery_postcode : delivery_postcode,
+						    delivery_addr : delivery_addr,
+						    delivery_message : delivery_message,
+						    imp_uid : rsp.imp_uid,
+						    merchant_uid : rsp.merchant_uid,
+						    paid_at : rsp.paid_at,
+						    receipt_url : rsp.receipt_url,
+						    cartList : cartList,
+						    productList : JSON.stringify(productList)
+						},
+	    	            success : function(data) {
+							console.log(data)
+							location.href="/order/checkPayment?merchant_uid="+data;
+	    				}
+	  				});
+	    		}
+	    	  else{
+	    		  alert('결제에 실패하였습니다.')
+	    	  }
+		});
+	})
 	
-IMP.init('imp85558424'); 
-   IMP.request_pay({
-       pg : 'kakaopay',
-       pay_method : 'card',
-       merchant_uid : 'merchant_' + new Date().getTime(),
-       name : name,
-       amount : amount,
-       buyer_email : buyer_email,
-       buyer_name : buyer_name,
-       buyer_tel : buyer_tel,
-       buyer_addr : buyer_addr,
-       buyer_postcode : buyer_postcode
-      }, function(rsp) {
-			console.log(rsp)
-    	  if(rsp.success){
-    		 $.ajax({
-    	            url : "/order/kakaoPayment",
-    	            method : 'POST',
-    	            traditional : true,
-    	            data : {
-						userId : userId,
-						name : name,
-						amount : amount,
-						delivery_price :delivery_price, 
-					    delivery_name : delivery_name,
-					    delivery_tel : delivery_tel,
-					    delivery_postcode : delivery_postcode,
-					    delivery_addr : delivery_addr,
-					    delivery_message : delivery_message,
-					    imp_uid : rsp.imp_uid,
-					    merchant_uid : rsp.merchant_uid,
-					    paid_at : rsp.paid_at,
-					    receipt_url : rsp.receipt_url,
-					    test : cartList
-					},
-    	            success : function(data) {
-						console.log(data)
-						location.href="/order/orderList"
-    				}
-  				});
-    		}
-    	  else{
-    		  alert('결제에 실패하였습니다.')
-    	  }
-	});
+})
+
+// 최종가격 입력 함수
+function totalPriceSet(totalPriceArray) {
+	// 인덱스 (현재 저장되있는 상품수)
+	var index = $('.orderList-tr:last').index();
+	// 최종가격
+	var sum = 0;
+	for (var i = 0; i < index; i++) {
+		sum += totalPriceArray[i];
+	}
+	// 10만원이상시 배송료 무료로 세팅
+	if (sum > 100000) {
+		deliveryPrice = 0;
+		for (var j = 0; j < index; j++) {
+			$('.deliveryPrice').text('무료');
+		}
+		$('#deliveryPrice').text('+ ￦0원');
+	}
+	else {
+		deliveryPrice = 2500;
+		$('#deliveryPrice').text(' ￦' + deliveryPrice + '원');
+	}
+	$('#totalPrice').text('￦' + priceToString(sum) + '원');
+	$('#totalPay').text('￦' + priceToString(sum + deliveryPrice) + '원');
+}
+
+// 주문정보 주소찾기
+function findAddr() {
+	new daum.Postcode({
+		oncomplete: function(data) {
+		var addr = '';
+		if (data.userSelectedType === 'R') {
+			addr = data.roadAddress
+		}
+		else {
+			addr = data.jibunAddress;
+		}
+		// 우편번호와 주소 정보를 해당 필드에 넣는다.
+		document.getElementById('zipCode').value = data.zonecode;
+		document.getElementById('address' ).value = addr;
+		}
+	}).open();
+};
+
+// 배송정보 주소찾기
+function deliveryfindAddr() {
+	new daum.Postcode({
+		oncomplete: function(data) {
+			var addr = '';
+			if (data.userSelectedType === 'R') {
+				addr = data.roadAddress
+			}
+			else {
+				addr = data.jibunAddress;
+			}
+			// 우편번호와 주소 정보를 해당 필드에 넣는다.
+			document.getElementById('deliveryZipCode').value = data.zonecode;
+			document.getElementById("deliveryAddress").value = addr;
+		}
+	}).open();
 };
 
 
+
+function paymentOpen(url){
+	var nWidth = "500";
+	var nHeight = "850";
+	  
+	// 듀얼 모니터 고려한 윈도우 띄우기
+	var curX = window.screenLeft;
+	var curY = window.screenTop;
+	var curWidth = document.body.clientWidth;
+	var curHeight = document.body.clientHeight;
+	  
+	var nLeft = curX + (curWidth / 2) - (nWidth / 2);
+	var nTop = 70
+	
+	var strOption = "";
+	strOption += "left=" + nLeft + "px,";
+	strOption += "top=" + nTop + "px,";
+	strOption += "width=" + nWidth + "px,";
+	strOption += "height=" + nHeight + "px,";
+	console.log("nTop : "+nTop)
+	window.open(url, "KakaoPay", strOption)
+}
