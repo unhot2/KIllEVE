@@ -19,7 +19,7 @@
 				<div class="order-body">
 					<table class="order-table">
 						<tr>
-							<td style="width:12%;">상품번호</td>
+							<td style="width:12%;">주문번호</td>
 							<td style="width:12%;">거래일시</td>
 							<td style="width:47%;">상품정보</td>
 							<td style="width:7%;">배송비</td>
@@ -30,11 +30,8 @@
 							<td th:text="${payment.merchant_uid}"></td>
 							<td th:text="${payment.paid_at}"></td>
 							<td><b th:text="${payment.name}"></b><br>
-							<th:block th:if="${payment.delivery_price == 1}">
-								<td>￦2,500원</td>
-							</th:block>
-							<th:block th:unless="${payment.delivery_price == 1}">
-								<td>무료</td>
+							<td th:if="${payment.delivery_price == 1}">￦2,500원</td>
+							<td th:unless="${payment.delivery_price == 1}">무료</td>
 							</th:block>
 							<td id="payment-amount" th:text="${payment.amount}"></td>
 							<td>

@@ -26,9 +26,8 @@ public class OrderService {
 	}
 
 	// 주문내역
-	public void orderList(String userId) {
-		orderRepository.orderList(userId);
-		
+	public List<KakaoPay> orderList(String userId) {
+		return orderRepository.orderList(userId);
 	}
 
 	// 주문확인

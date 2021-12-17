@@ -1,29 +1,22 @@
 package com.yg.portfolio.controller;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.yg.portfolio.model.Cart;
 import com.yg.portfolio.model.KakaoPay;
 import com.yg.portfolio.model.OrderDetail;
 import com.yg.portfolio.model.OrderForm;
@@ -49,7 +42,13 @@ public class OrderController {
 	// 주문내역
 	@GetMapping("/orderList")
 	public String orderList(User user, Model model, HttpSession session) {
-		orderService.orderList((String) session.getAttribute("userId"));
+		List<KakaoPay> orderList = orderService.orderList((String) session.getAttribute("userId"));
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd a hh:mm");
+		for (KakaoPay kakaoPay : orderList) {
+			Date date = new Date(Long.parseLong(kakaoPay.getPaid_at())*1000L);
+			kakaoPay.setPaid_at(format.format(date));
+		}
+		model.addAttribute("orderList",orderList);
 		return "/order/orderList";
 	}
 	
@@ -162,10 +161,18 @@ public class OrderController {
 		KakaoPay paymentInfo = orderService.checkPayment(merchant_uid);
 		List<OrderDetail> productList = orderService.productDetails(merchant_uid);
 		Date date = new Date(Long.parseLong(paymentInfo.getPaid_at())*1000L);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd a hh:mm");
 		paymentInfo.setPaid_at(format.format(date));
 		model.addAttribute("payment",paymentInfo);
 		model.addAttribute("productList",productList);
 		return "/order/checkPayment";
+	}
+	
+	// 주문내역 상세정보
+	@GetMapping("/orderDetailList")
+	public @ResponseBody List<OrderDetail> orderDetailList(@RequestParam(value="merchant_uid") String merchant_uid) {
+		System.out.println("orderDetailList 들어옴");
+		List<OrderDetail> productList = orderService.productDetails(merchant_uid);
+		return productList;
 	}
 }

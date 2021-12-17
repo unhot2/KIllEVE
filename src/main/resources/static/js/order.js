@@ -14,6 +14,7 @@ $(function() {
 		totalQuantityArray.push(parseInt($('.quantity').eq(i).text())); // 총수량 배열 추가
 		totalPriceArray.push(Number(salePrice * totalQuantityArray[i])) // 총가격 배열 추가
 		$('.deliveryPrice').eq(i).text('￦' + priceToString(deliveryPrice) + '원') // 배송비 초기값 세팅
+		$('.payment-amount').eq(i).text('￦'+priceToString($('.payment-amount').eq(i).text())+'원'); //orderList.html - 총가격 세팅
 	};
 	totalPriceSet(totalPriceArray); // 최종가격 세팅
 
@@ -134,8 +135,7 @@ $(function() {
 	       buyer_addr : buyer_addr,
 	       buyer_postcode : buyer_postcode
 	      }, function(rsp) {
-				var sysdate = new Date(rsp.paid_at);
-				console.log(sysdate)
+				console.log(rsp)
 	    	  if(rsp.success){
 	    		 $.ajax({
 	    	            url : "/order/kakaoPayment",
@@ -168,6 +168,73 @@ $(function() {
 	    		  alert('결제에 실패하였습니다.')
 	    	  }
 		});
+	})
+	
+	/*상세보기버튼 클릭*/
+	$('.svgIcon').click(function(){
+		if($(this).children().attr('class') == 'addList'){
+			var merchant_uid = $(this).parent().children('.merchant_uid').text()
+			var index = $(this).parent().index();
+			var className = $(this).attr('class')+index+"addTr";
+			var html='';
+			$.ajax({
+	            url : "/order/orderDetailList",
+	            method : 'GET',
+	            async: false,
+	            data : {
+				    merchant_uid : merchant_uid
+				},
+	            success : function(data) {
+					html = '<tr class="'+className+'" style="background: #454545; color: white;">\
+								<td>이미지</td>\
+								<td>상품명</td>\
+								<td>사이즈</td>\
+								<td>색상</td>\
+								<td>판매가</td>\
+								<td>수량</td>\
+								<td>합계</td>\
+							</tr>'
+					for(i in data){
+						html += '<tr class="'+className+'" th:each="product: '+data+'" class="orderList-tr">\
+									<td>\
+										<a href="/product/detail/'+data[i].productNo+'">\
+											<img src="/img/product/'+data[i].category+'/'+data[i].productNo+'/'+data[i].mainImage+'" class="mainImage">\
+										</a>\
+									</td>\
+									<td style="text-align: left; padding-left:15px;">\
+										<b class="productName">'+data[i].productName+'</b><br>\
+									</td>\
+									<td>\
+										<span class="size">'+data[i].size+'</span>\
+									</td>\
+									<td>\
+										<span class="color">'+data[i].color+'</span>\
+									</td>\
+									<td>\
+										<span class="salePrice">￦'+priceToString(data[i].salePrice)+'원</span>\
+									</td>\
+									<td>\
+										<span class="quantity">'+data[i].quantity+'</span>\
+									</td>\
+									<td>\
+										<b><span class="totalPrice">￦'+priceToString(data[i].totalPrice)+'원</span></b>\
+									</td>';
+								
+					}
+					html +=	'</tr>';
+				}
+			});
+			$(this).parent().after(html);
+			var icon ='<span class="hideList"><i class="bi bi-arrow-up-square-fill"></i></span>';
+			$(this).html(icon);
+		}
+		else {
+			$(this).parent().parent().children('.'+$(this).parent().next().attr('class')).remove()
+			var icon ='<span class="addList"><i class="bi bi-arrow-down-square-fill"></i></span>';
+			$(this).html(icon);
+		}
+		
+		
 	})
 	
 })
@@ -234,7 +301,7 @@ function deliveryfindAddr() {
 };
 
 
-
+/*매출전표 새창*/
 function paymentOpen(url){
 	var nWidth = "500";
 	var nHeight = "850";

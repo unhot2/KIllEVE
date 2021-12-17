@@ -87,6 +87,9 @@
 			 , color
 			 , size
 			 , totalPrice
+			 , (SELECT salePrice
+			 	  FROM product
+			 	 WHERE productNo = A.productNo) as salePrice
 			 , (SELECT category
 			 	  FROM product
 			 	 WHERE productNo = A.productNo) as category
@@ -98,6 +101,12 @@
 			 	 WHERE productNo = A.productNo) as productName
 		  FROM orderdetail A
 		 WHERE merchant_uid = #{merchant_uid}
+	</select>
+	
+	<select id="orderList" resultType="KakaoPay">
+		SELECT * 
+		  FROM `order`
+		 WHERE userId = #{userId}
 	</select>
 	
 </mapper>

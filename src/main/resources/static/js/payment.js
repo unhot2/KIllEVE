@@ -1,6 +1,10 @@
 $(function() {
 	// 초기세팅
 	$('#payment-amount').text('￦'+priceToString($('#payment-amount').text())+'원');
+	var cnt = $('.orderList-tr:last').index();
+	for(var i=0; i<cnt; i++){
+		$('.totalPrice').eq(i).text('￦'+priceToString($('.totalPrice').eq(i).text())+'원');	
+	}
 })
 
 // 매출전표

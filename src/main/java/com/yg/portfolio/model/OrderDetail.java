@@ -15,5 +15,6 @@ public class OrderDetail {
 	private String category;		// 카테고리
 	private String mainImage;		// 메인이미지
 	private String productName;		// 상품명
+	private int salePrice;			// 판매가
 }
 

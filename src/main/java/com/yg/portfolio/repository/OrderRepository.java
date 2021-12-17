@@ -20,7 +20,7 @@ public interface OrderRepository {
 	void orderSave(KakaoPay kakaopay);
 	
 	// 주문내역
-	void orderList(String userId);
+	List<KakaoPay> orderList(String userId);
 
 	KakaoPay checkPayment(String merchant_uid);
 	
