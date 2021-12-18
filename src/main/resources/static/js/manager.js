@@ -45,6 +45,8 @@ $(function() {
 			colorList.push(color);
 			var html = '<div class="listArea"><span class="nameArea">' + color + '</span><span id="colorRemoveBtn" class="cancelBtn">X</span></div>';
 			$('#addColorList').append(html)
+			$('#colorInput').val('')
+			$('#colorInput').focus();
 		}
 		else {
 			alert("공백을 입력할 수 없습니다.")
@@ -66,6 +68,8 @@ $(function() {
 			sizeList.push(size);
 			var html = '<div class="listArea"><span class="nameArea">' + size + '</span><span id="sizeRemoveBtn" class="cancelBtn">X</span></div>';
 			$('#addSizeList').append(html)
+			$('#sizeInput').val('')
+			$('#sizeInput').focus();
 		}
 		else {
 			alert("공백을 입력할 수 없습니다.")

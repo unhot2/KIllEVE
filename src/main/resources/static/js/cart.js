@@ -126,14 +126,25 @@ $(function() {
 	
 	// 전체상품주문
 	$('#orderAll').click(function() {
+		var index = $('.cartList-tr:last').index();
 		$('.checkBox').prop('checked', true);
-		$('#cartForm').submit();		
+		var cnt = 0;
+		for(var i=0; i< index; i++){
+			if($('.checkBox').eq(i).is(":checked")){
+				cnt ++;
+			}
+		}
+		if(cnt > 0){
+			$('#cartForm').submit();
+		}
+		else {
+			alert("선택된 상품이 없습니다.");
+		}
 	})
 	
 	// 선택상품주문
 	$('#orderSelect').click(function() {
 		var index = $('.cartList-tr:last').index();
-		console.log("index값 : "+index)
 		var cnt = 0;
 		for(var i=0; i< index; i++){
 			console.log('i값 :'+i)

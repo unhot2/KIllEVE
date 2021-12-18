@@ -11,9 +11,9 @@ body {
 	 display: none; 
 }
 
-
 section {
 	padding-top : 56px;
+	min-height : 570px;
 }
 
 .sectionFiexd{

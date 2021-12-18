@@ -41,7 +41,7 @@ $(function() {
 			var html = '<tr class="total-product-tr">\
 							<td class="totalTd1"><input type="hidden" name="orderFormList['+count+'].productName" value="'+productName+'"><b class="productNameText">'+ productName + '</b>\
 							<input type="hidden" name="orderFormList['+count+'].color" value="'+color+'"><br>-<span class="colorText">' + color + '</span>\
-							<input type="hidden" name="orderFormList['+count+'].size" value="'+size+'">/<span class="sizeText">' + size + '</span></td>\
+							<input type="hidden" name="orderFormList['+count+'].size" value="'+size+'">/ <span class="sizeText">' + size + '</span></td>\
 							<td class="totalTd2">\
 								<span class="quantityArea">\
 									<input type="number" id="quantity" name="orderFormList['+count+'].quantity" class="quantity" value="1" readOnly>\
