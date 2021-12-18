@@ -187,10 +187,10 @@ $(function() {
 	            success : function(data) {
 					html = '<tr class="'+className+'" style="background: #454545; color: white;">\
 								<td>이미지</td>\
+								<td>판매가</td>\
 								<td>상품명</td>\
 								<td>사이즈</td>\
 								<td>색상</td>\
-								<td>판매가</td>\
 								<td>수량</td>\
 								<td>합계</td>\
 							</tr>'
@@ -201,6 +201,9 @@ $(function() {
 											<img src="/img/product/'+data[i].category+'/'+data[i].productNo+'/'+data[i].mainImage+'" class="mainImage">\
 										</a>\
 									</td>\
+									<td>\
+										<span class="salePrice">￦'+priceToString(data[i].salePrice)+'원</span>\
+									</td>\
 									<td style="text-align: left; padding-left:15px;">\
 										<b class="productName">'+data[i].productName+'</b><br>\
 									</td>\
@@ -209,9 +212,6 @@ $(function() {
 									</td>\
 									<td>\
 										<span class="color">'+data[i].color+'</span>\
-									</td>\
-									<td>\
-										<span class="salePrice">￦'+priceToString(data[i].salePrice)+'원</span>\
 									</td>\
 									<td>\
 										<span class="quantity">'+data[i].quantity+'</span>\

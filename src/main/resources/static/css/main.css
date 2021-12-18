@@ -2,7 +2,15 @@
 body {
 	/*font-family: 'Nanum Gothic Coding', monospace;*/
 	font-family: sans-serif, monospace;
+	/*스크롤바 없애기*/
+	-ms-overflow-style: none;
 }
+
+::-webkit-scrollbar {
+	/*스크롤바 없애기*/
+	 display: none; 
+}
+
 
 section {
 	padding-top : 56px;
@@ -136,12 +144,11 @@ section {
 
 .quickMenu {
     position: fixed;
-    width: 65px;
-    height: 212px;
+    width: 55px;
+    /*height: 212px;*/
     right: 25px;
-    top: 664px;
-    background: #f3efef;
-    border-radius: 5%;
+    top: 758px;
+    /*border-radius: 5%;*/
 }
 
 
@@ -159,9 +166,8 @@ section {
     position: fixed;
     width: 53px;
     height: 53px;
-    right: 31px;
-    top: 757px;
-    background: #f3efef;
+    right: 27px;
+    top: 697px;
     border-radius: 50%;
     padding: 3px;
 }
