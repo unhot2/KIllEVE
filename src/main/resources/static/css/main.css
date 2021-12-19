@@ -11,6 +11,11 @@ body {
 	 display: none; 
 }
 
+
+.addLeftMargin {
+	margin-left : 12px;
+}
+
 section {
 	padding-top : 56px;
 	min-height : 570px;
@@ -81,7 +86,7 @@ section {
 
 /*컴포넌트*/
 .flex-container {
-	max-width: 1200px;
+	max-width: 1500px;
 	margin: 80px auto;
 }
 .main-content {
@@ -90,37 +95,37 @@ section {
 	justify-content : space-between;
 }
 
+/*상품카드 이미지*/
 .component img{
 	max-width: 100%;
 	display : block;
 }
 
+/*상품카드 설명영역*/
 .component .description {
+	font-family: "Roboto","Arial","Nanum Gothic","Malgun Gothic","맑은 고딕","Dotum","돋움","Apple SD Gothic Neo","AppleGothic",sans-serif;
 	padding : 1rem 0;
 	margin-bottom: 2rem;
 	background-color: #ffffff;
 }
 
-.description h3{
-	margin : 0;
-	font-size: 1.3rem;
-	line-height: 1.5;
+/*상품카드 상품명*/
+.description .title{
 	font-weight: 700;
+	font-size:13px;
+}
+.description .consumerPrice{
+    text-decoration: line-through;
+    font-size:12px;
+}
+.description .salePrice{
+	font-size:12px;
+}
+.description .stock{
+	font-size: 12px;
 }
 
-.description .here {
-	color : red;
-}
-
-.description .button {
-	display : block;
-	text-decoration: none;
-	background-color: #008fd1;
-	padding : 0.6rem 2rem;
-	margin-top : 1rem;
-	color : white;
-}
-
+/*화면크기에 따른 카드 개수설정*/
 @media (min-width : 480px){
 	.component {
 		flex : 0 0 calc(50% - 1rem);
@@ -133,7 +138,7 @@ section {
 }
 
 /*컴포넌트 타이틀*/
-.best {
+.index-title {
     padding: 10px 0;
     border-bottom: 1px solid black;
     width: 58px;
@@ -142,26 +147,15 @@ section {
     text-align: center;
 }
 
+/*퀵메뉴*/
 .quickMenu {
     position: fixed;
     width: 55px;
-    /*height: 212px;*/
     right: 25px;
     top: 758px;
-    /*border-radius: 5%;*/
 }
 
-
-.quickKakao {
-    position: fixed;
-    width: 55px;
-    height: 55px;
-    right: 30px;
-    top: 815px;
-    background: #f3efef;
-    border-radius: 50%;
-}
-
+/*인스타버튼*/
 .quickInsta {
     position: fixed;
     width: 53px;
@@ -172,6 +166,32 @@ section {
     padding: 3px;
 }
 
-.addLeftMargin {
-	margin-left : 12px;
+/*상품카드 이미지*/
+.card-image-div {
+    width: 359px;
+    overflow: hidden;
+}
+
+/*상품카드 이미지 hover*/
+.card-image:hover {
+	transform: scale(1.1);
+	transition-duration: .5s;
+}
+
+/*hover시 할인율*/
+.discountRate {
+	position: relative;
+	top: 23px;
+	left: 324px;
+	width: 35px;
+	height: 35px;
+	text-align: center;
+	padding-top: 5px;
+	font-weight: bold;
+	font-size: 15px;
+	color: white;
+	z-index: 1;
+	display: inline-block;
+	background: #232323f2;
+	opacity : 0;
 }

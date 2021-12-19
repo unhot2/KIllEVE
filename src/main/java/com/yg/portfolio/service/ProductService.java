@@ -21,6 +21,14 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	public List<Product> productBest() {
+		return productRepository.productBest();
+	}
+	
+	public List<Product> productNew() {
+		return productRepository.productNew();
+	}
+	
 	public Product productInfo(int productNo) {
 		return productRepository.productInfo(productNo);
 	}

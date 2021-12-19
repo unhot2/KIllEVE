@@ -3,6 +3,19 @@
 <mapper
 	namespace="com.yg.portfolio.repository.ProductRepository">
 
+	<select id="productBest" resultType="Product">
+		SELECT *
+		  FROM product
+		 LIMIT 8
+	</select>
+	
+	<select id="productNew" resultType="Product">
+		SELECT *
+		  FROM product
+		  order by productNo desc
+		 LIMIT 8;
+	</select>
+	
 	<select id="productInfo" resultType="Product">
 		SELECT *
 		  FROM product
@@ -25,6 +38,12 @@
 		SELECT productNo,sizeName
 		  FROM productSize
 		 WHERE productNo = #{productNo}
+	</select>
+	
+	<!-- 판매량 많은순 -->
+	<select id="rankProduct" resultType="ProductSize">
+		<!-- 상품번호 그룹으로 묶고 수량을 더한값을 가지고 가장 많은 순으로 정렬 = 가장많이팔린 상품 -->
+		SELECT productNo, sum(quantity) from orderdetail group by productNo order by sum(quantity) desc;
 	</select>
 
 </mapper>

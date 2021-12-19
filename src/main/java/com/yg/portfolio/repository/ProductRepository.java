@@ -17,6 +17,10 @@ import com.yg.portfolio.model.User;
 @Mapper
 public interface ProductRepository {
 	
+	public List<Product> productBest();
+	
+	public List<Product> productNew();
+	
 	public Product productInfo(int productNo);
 
 	public List<ProductImg> productImg(int productNo);
@@ -24,6 +28,5 @@ public interface ProductRepository {
 	public List<ProductColor> productColor(int productNo);
 
 	public List<ProductSize> productSize(int productNo);
-	
 	
 }

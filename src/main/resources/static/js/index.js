@@ -1,4 +1,14 @@
 $(function() {
+	/*초기설정*/
+	var test = ['best','new'];
+	for(var i in test){
+		var index = $('.'+test[i]+'-component:last').index()
+		for(var j=0; j<=index; j++){
+			$('.'+test[i]+'-component .consumerPrice').eq(j).text('￦' + priceToString($('.'+test[i]+'-component .consumerPrice').eq(j).text()) + '원');
+			$('.'+test[i]+'-component .salePrice').eq(j).text('￦' + priceToString($('.'+test[i]+'-component .salePrice').eq(j).text()) + '원');
+		}
+	}
+	
 	/* slick 설정 */
 	$('#slider-div').slick({
 		slide: 'div',        //슬라이드 되어야 할 태그 ex) div, li 
@@ -17,6 +27,23 @@ $(function() {
 		dotsClass: "slick-dots",     //아래 나오는 페이지네이션(점) css class 지정
 		draggable: true,     //드래그 가능 여부 
 	});
+	
+	/*상품 마우스오버시 변경효과*/
+	$('.card-image').hover(function(){
+		var className = $(this).parent().parent().parent().children('.discountRate');
+		console.log(className)
+		var index = $(this).parent().parent().parent().index();
+		console.log( className.eq(index))
+        className.css('opacity',1);
+        className.css('top','36px');
+        className.css('transition','all ease .5s 0s');
+    }, function() {
+		var className = $(this).parent().parent().parent().children('.discountRate');
+		var index = $(this).parent().parent().parent().index();
+        className.css('opacity',0);
+        className.css('top','23px');
+    });
+	
  });
  
 
