@@ -31,9 +31,7 @@ $(function() {
 	/*상품 마우스오버시 변경효과*/
 	$('.card-image').hover(function(){
 		var className = $(this).parent().parent().parent().children('.discountRate');
-		console.log(className)
 		var index = $(this).parent().parent().parent().index();
-		console.log( className.eq(index))
         className.css('opacity',1);
         className.css('top','36px');
         className.css('transition','all ease .5s 0s');
