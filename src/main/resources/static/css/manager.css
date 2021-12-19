@@ -111,14 +111,56 @@ input[type='button'] {
     font-size: 12px;
 }
 
-.addBtn-table {
-	
-}
-
 .addBtn-table tr {
 	border : 0px solid transparent;
 }
 
 .addBtn-table td {
 	text-align: center;
+}
+
+.product-alter-container {
+	max-width: 1700px;
+	margin : 0 auto;
+}
+
+.product-alter-table input {
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 0px;
+    padding-bottom: 7px;
+}
+.product-alter-table {
+    width : 100%;
+    font-size : 14px;
+}
+
+.product-alter-table > tbody > tr:first-child{
+    height : 50px;
+    border-top:2px solid black;
+}
+
+.product-alter-table td{
+    text-align: center;
+}
+
+.product-alter-table th {
+	text-align: center;
+    background-color: #eceaea;
+    padding-left : 12px;
+}
+
+/*number 인풋안에 화살표 없애기*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+button {
+    border: 1px solid gray;
+    background : #eceaea;
+    padding: 3px;
+    width: 52px;
 }

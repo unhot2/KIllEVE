@@ -117,5 +117,9 @@
 			 , #{sizeName} )
 	</insert>
 	
+	<select id="productAllList" resultType="Product">
+		SELECT *
+		  FROM product
+	</select>
 	
 </mapper>

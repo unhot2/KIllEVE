@@ -81,9 +81,10 @@ public class ManagerController {
 	}
 	
 	// 상품 등록 폼
-	
 	@GetMapping("/managerMenu")
-	public String productForm() {
+	public String productForm(Model model) {
+		List<Product> productList = managerService.productAllList();
+		model.addAttribute("productList",productList);
 		return "/manager/managerMenu";
 	}
 	
@@ -133,4 +134,17 @@ public class ManagerController {
 			}
 	    return "redirect:/";
 	}
+	
+	// 상품관리 목록
+	@GetMapping("/productAllList")
+	public @ResponseBody int productAllList(Model model) {
+		List<Product> productList = managerService.productAllList();
+		model.addAttribute("productList",productList);
+		int chk =0;
+		if(productList != null) {
+			chk = 1;
+		}
+		return chk;
+	}
+	
 }

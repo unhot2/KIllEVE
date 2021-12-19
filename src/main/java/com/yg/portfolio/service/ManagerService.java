@@ -1,5 +1,7 @@
 package com.yg.portfolio.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +69,10 @@ public class ManagerService {
 	// 사이즈등록
 	public void productSizeSave(String sizeName) {
 		managerRepository.productSizeSave(sizeName);
+	}
+
+	public List<Product> productAllList() {
+		return managerRepository.productAllList();
 	};
 	
 	

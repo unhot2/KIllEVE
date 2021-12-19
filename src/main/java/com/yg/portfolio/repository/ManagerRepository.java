@@ -1,6 +1,8 @@
 package com.yg.portfolio.repository;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.yg.portfolio.model.Notice;
@@ -34,5 +36,7 @@ public interface ManagerRepository {
 	
 	// 사이즈등록
 	public void productSizeSave(String sizeName);
+
+	public List<Product> productAllList();
 	
 }

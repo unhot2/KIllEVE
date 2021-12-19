@@ -10,10 +10,34 @@ $(function() {
 	/*관리자 메뉴 탭설정*/
 	var $menuEle = $('dt');
 	$menuEle.click(function() {
+		var tab = $(this).children().text();
+		console.log("들어온 탭 : "+tab)
 		$('dt').addClass('disableTab');
 		$(this).removeClass('disableTab');
 		$('dd').addClass('hidden');
 		$(this).next().removeClass('hidden');
+		if(tab =='상품등록'){
+			console.log('상품등록 작업')
+		}
+		else if (tab =='상품관리'){
+			console.log('상품관리 작업')
+			$.ajax({             
+		    type: "GET",          
+		        url: "/manager/productAllList",        
+		        success: function (data) { 
+		        	console.log("상품목록 가져오기"+data)       
+		        },          
+		        error: function (e) {  
+		            console.log("상품목록 가져오기 실패")      
+		         }     
+			})	
+		}
+		else if (tab =='회원관리'){
+			console.log('회원관리 작업')
+		}
+		else if (tab =='주문관리'){
+			console.log('주문관리 작업')
+		}
 	})
 
 	/*관리자 메뉴 메인이미지 미리보기*/
@@ -140,32 +164,32 @@ $(function() {
 		var sale = $('input:checkbox[name="saleYn"]').is(":checked")
 		
 		$.ajax({             
-    	type: "POST",          
-        url: "/manager/productSave",        
-        data: {	
-			'category'		: category,
-			'productName'	: productName,
-			'discountRate'	: discountRate,
-			'consumerPrice'	: consumerPrice,
-			'salePrice'		: salePrice,
-			'stock'			: stock,
-			'mainImage'		: mainImage,
-			'files'			: files,
-			'colorList'		: colorList,
-			'sizeList'		: sizeList,
-			'hotYn'			: hot,
-			'mdPickYn'		: mdPick,
-			'quickYn'		: quick,
-			'bestYn'		: best,
-			'saleYn'		: sale
-		},          
-        success: function (data) { 
-        	console.log("상품등록 성공")       
-        	location.href="/";   
-        },          
-        error: function (e) {  
-            console.log("상품등록 실패")      
-         }     
+	    	type: "POST",          
+	        url: "/manager/productSave",        
+	        data: {	
+				'category'		: category,
+				'productName'	: productName,
+				'discountRate'	: discountRate,
+				'consumerPrice'	: consumerPrice,
+				'salePrice'		: salePrice,
+				'stock'			: stock,
+				'mainImage'		: mainImage,
+				'files'			: files,
+				'colorList'		: colorList,
+				'sizeList'		: sizeList,
+				'hotYn'			: hot,
+				'mdPickYn'		: mdPick,
+				'quickYn'		: quick,
+				'bestYn'		: best,
+				'saleYn'		: sale
+			},          
+	        success: function (data) { 
+	        	console.log("상품등록 성공")       
+	        	location.href="/";   
+	        },          
+	        error: function (e) {  
+	            console.log("상품등록 실패")      
+	         }     
 		});  
 	})
 });

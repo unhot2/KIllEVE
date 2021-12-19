@@ -10,23 +10,6 @@
     font-weight: 100;
 }
 
-/*안내문구*/
-.guideInfo {
-    color: #f76560;
-    font-size: 11px;
-    background: #fff;
-    padding-left: 0px;
-    border: 0;
-    margin-top: 20px;
-}
-
-.guideInfo li {
-	text-align: left;
-	list-style: none;
-	padding: 0 0 0 23px;
-	background: url("//img.echosting.cafe24.com/skin/base/common/ico_info.gif") no-repeat 0 1px;
-}
-
 .order-content {
 	padding:50px 0;
 }
