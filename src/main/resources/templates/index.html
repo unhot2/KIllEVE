@@ -37,17 +37,24 @@
 				<p class="index-title">BEST</p>
 				<div class="main-content">
 					<article class="best-component component" th:each="product, index: ${bestList}">
-						<span th:text="${product.discountRate}+'%'" class="discountRate"></span>
+						<span th:text="${product.discountRate}+'%'" class="card-move-discountRate"></span>
 						<div class="card-image-div">
 							<a th:href="@{/product/detail/{productNo}(productNo= ${product.productNo})}">
 								<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${product.category},productNo=${product.productNo}, fileName=${product.mainImage})}" class="card-image">
 							</a>
 						</div>
 						<div class="description">
-							<div th:text="${product.productName}" class="title"></div>
-							<span th:text="${product.consumerPrice}" class="consumerPrice"></span>
-							<span th:text="${product.salePrice}" class="salePrice"></span>
-							<p th:text="'재고량 : '+${product.stock}" class="stock"></p>
+							<div th:text="${product.productName}" class="card-title"></div>
+							<span th:text="${product.discountRate}+'%'" class="card-discountRate"></span>
+							<span th:text="${product.salePrice}" class="card-salePrice"></span>
+							<span th:text="${product.consumerPrice}" class="card-consumerPrice"></span>
+							<div class="index-btnArea">
+								<span th:if="${product.hotYn}"><img src="/img/btn/hot.png"></span>
+								<span th:if="${product.mdPickYn}"><img src="/img/btn/mdPick.png"></span>
+								<span th:if="${product.quickYn}"><img src="/img/btn/quick.png"></span>
+								<span th:if="${product.bestYn}"><img src="/img/btn/best.png"></span>
+								<span th:if="${product.saleYn}"><img src="/img/btn/sale.png"></span>
+							</div>
 						</div>
 					</article>
 				</div>
@@ -56,17 +63,24 @@
 				<p class="index-title">NEW</p>
 				<div class="main-content">
 					<article class="new-component component" th:each="product, index: ${newList}">
-						<span th:text="${product.discountRate}+'%'" class="discountRate"></span>
+						<span th:text="${product.discountRate}+'%'" class="card-move-discountRate"></span>
 						<div class="card-image-div">
 							<a th:href="@{/product/detail/{productNo}(productNo= ${product.productNo})}">
 								<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${product.category},productNo=${product.productNo}, fileName=${product.mainImage})}" class="card-image">
 							</a>
 						</div>
 						<div class="description">
-							<div th:text="${product.productName}" class="title"></div>
-							<span th:text="${product.consumerPrice}" class="consumerPrice"></span>
-							<span th:text="${product.salePrice}" class="salePrice"></span>
-							<p th:text="'재고량 : '+${product.stock}" class="stock"></p>
+							<div th:text="${product.productName}" class="card-title"></div>
+							<span th:text="${product.discountRate}+'%'" class="card-discountRate"></span>
+							<span th:text="${product.salePrice}" class="card-salePrice"></span>
+							<span th:text="${product.consumerPrice}" class="card-consumerPrice"></span>
+							<div class="index-btnArea">
+								<span th:if="${product.hotYn}"><img src="/img/btn/hot.png"></span>
+								<span th:if="${product.mdPickYn}"><img src="/img/btn/mdPick.png"></span>
+								<span th:if="${product.quickYn}"><img src="/img/btn/quick.png"></span>
+								<span th:if="${product.bestYn}"><img src="/img/btn/best.png"></span>
+								<span th:if="${product.saleYn}"><img src="/img/btn/sale.png"></span>
+							</div>
 						</div>
 					</article>
 				</div>

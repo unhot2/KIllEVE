@@ -85,7 +85,6 @@ $(function() {
 	
 	// 상품등록 AJAX
 	$('#productSubmit').click(function(){
-		/*validation*/
 		// 상품명
 		if(!$('#productName').val()){
 			alert("상품명을 입력하셔야 합니다.")
@@ -134,6 +133,11 @@ $(function() {
 		for(var i = 0; i < fileList.length; i++){
 			files.push(fileList[i].name);
 		}
+		var hot = $('input:checkbox[name="hotYn"]').is(":checked")
+		var mdPick = $('input:checkbox[name="mdPickYn"]').is(":checked")
+		var quick = $('input:checkbox[name="quickYn"]').is(":checked")
+		var best = $('input:checkbox[name="bestYn"]').is(":checked")
+		var sale = $('input:checkbox[name="saleYn"]').is(":checked")
 		
 		$.ajax({             
     	type: "POST",          
@@ -148,7 +152,12 @@ $(function() {
 			'mainImage'		: mainImage,
 			'files'			: files,
 			'colorList'		: colorList,
-			'sizeList'		: sizeList
+			'sizeList'		: sizeList,
+			'hotYn'			: hot,
+			'mdPickYn'		: mdPick,
+			'quickYn'		: quick,
+			'bestYn'		: best,
+			'saleYn'		: sale
 		},          
         success: function (data) { 
         	console.log("상품등록 성공")       

@@ -65,7 +65,13 @@
 			 , consumerPrice
 			 , salePrice
 			 , stock
-			 , mainImage )
+			 , mainImage
+			 , hotYn
+			 , mdPickYn
+			 , quickYn
+			 , bestYn
+			 , saleYn
+			  )
 		VALUES (
 			   #{category}
 			 , #{productName}
@@ -73,7 +79,12 @@
 			 , #{consumerPrice}
 			 , #{salePrice}
 			 , #{stock}
-			 , #{mainImage} )
+			 , #{mainImage}
+			 , #{hotYn}
+			 , #{mdPickYn}
+			 , #{quickYn}
+			 , #{bestYn}
+			 , #{saleYn} )
 	</insert>
 	
 	<!-- 상품 상세이미지 등록 -->

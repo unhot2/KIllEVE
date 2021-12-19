@@ -103,26 +103,31 @@ section {
 
 /*상품카드 설명영역*/
 .component .description {
-	font-family: "Roboto","Arial","Nanum Gothic","Malgun Gothic","맑은 고딕","Dotum","돋움","Apple SD Gothic Neo","AppleGothic",sans-serif;
+	/*font-family: "Roboto","Arial","Nanum Gothic","Malgun Gothic","맑은 고딕","Dotum","돋움","Apple SD Gothic Neo","AppleGothic",sans-serif;*/
+	font-family: 'Poppins',Malgun Gothic, 'ë§‘ì€ ê³ ë”•', Dotum, 'ë‹ì›€', sans-serif;
 	padding : 1rem 0;
-	margin-bottom: 2rem;
 	background-color: #ffffff;
 }
 
 /*상품카드 상품명*/
-.description .title{
+.description .card-title{
 	font-weight: 700;
-	font-size:13px;
+	font-size : 16px;
 }
-.description .consumerPrice{
+
+.description .card-discountRate {
+	color : #ff8e77;
+	font-size : 16px;
+	font-weight: bold;
+}
+
+.description .card-consumerPrice{
     text-decoration: line-through;
     font-size:12px;
 }
-.description .salePrice{
-	font-size:12px;
-}
-.description .stock{
-	font-size: 12px;
+.description .card-salePrice{
+	font-size:15px;
+	font-weight: bold;
 }
 
 /*화면크기에 따른 카드 개수설정*/
@@ -179,7 +184,7 @@ section {
 }
 
 /*hover시 할인율*/
-.discountRate {
+.card-move-discountRate {
 	position: relative;
 	top: 23px;
 	left: 324px;
@@ -194,4 +199,13 @@ section {
 	display: inline-block;
 	background: #232323f2;
 	opacity : 0;
+}
+
+.index-btnArea {
+	display : flex;
+	margin-top : 7px;
+}
+
+.index-btnArea span {
+	margin-right: 10px;
 }

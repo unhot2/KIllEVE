@@ -5,9 +5,9 @@ var count = 0;
 
 $(function() {
 	/*SALE 버튼 추가*/
-	if ($('#discountRate').text().replace('%', '') > 0) {
-		$('.product-head-info').prepend('<div class="saleIcon">SALE</div>');
-	}
+	/*if ($('#discountRate').text().replace('%', '') > 0) {
+		$('.btn-area').prepend('<span class="saleIcon">SALE</span>');
+	}*/
 
 	/*가격 천단위 구분기호 (정규식 사용)*/
 	var consumerPrice = priceToString($('#consumerPrice').html());

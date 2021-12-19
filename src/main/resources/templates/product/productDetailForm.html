@@ -16,6 +16,13 @@
 					<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${detail.category},productNo=${detail.productNo}, fileName=${detail.mainImage})}">
 				</div>
 				<div class="product-head-info">
+				<div class="btn-area">
+					<span th:if="${detail.hotYn}"><img src="/img/btn/hot.png"></span>
+					<span th:if="${detail.mdPickYn}"><img src="/img/btn/mdPick.png"></span>
+					<span th:if="${detail.quickYn}"><img src="/img/btn/quick.png"></span>
+					<span th:if="${detail.bestYn}"><img src="/img/btn/best.png"></span>
+					<span th:if="${detail.saleYn}"><img src="/img/btn/sale.png"></span>
+				</div>
 				<form action="/order/directOrderDetail" id="productDetailForm">
 					<input type='hidden' class="productNo" name="productNo" th:value="${detail.productNo}">
 					<input type='hidden' id="userId" th:value="${session.userId}">

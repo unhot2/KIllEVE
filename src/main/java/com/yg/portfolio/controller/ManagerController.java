@@ -101,6 +101,11 @@ public class ManagerController {
 			System.out.println("판매가 : "+product.getSalePrice());
 			System.out.println("재고 : "+product.getStock());
 			System.out.println("대표이미지 명 : "+product.getMainImage());
+			System.out.println("hot	: "+product.getHotYn());
+			System.out.println("mdpick	: "+product.getMdPickYn());
+			System.out.println("quick	: "+product.getQuickYn());
+			System.out.println("best	: "+product.getBestYn());
+			System.out.println("sale	: "+product.getSaleYn());
 			if(colorList.size() > 0) {
 				 for(Object color : colorList) { 
 					  System.out.println("색상 명  :"+color);

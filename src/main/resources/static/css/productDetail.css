@@ -129,6 +129,7 @@
     color: #ffdcdc;
     font-weight: 700;
     border-radius: 6px;
+    display : inline-block;
 }
 
 /*상품설명 선 영역*/

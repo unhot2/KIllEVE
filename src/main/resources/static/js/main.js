@@ -42,6 +42,7 @@ function isEmpty(str) {
 		return false;
 }
 
+/*가격 TRIM*/
 function trimPrice(price){
 	return Number(price.replace('￦', '').replace('원', '').replace(',', ''));
 }
