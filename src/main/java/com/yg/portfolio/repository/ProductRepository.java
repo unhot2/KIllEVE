@@ -20,6 +20,12 @@ public interface ProductRepository {
 	public List<Product> productBest();
 	
 	public List<Product> productNew();
+
+	public List<Product> productOuter();
+
+	public List<Product> productTop();
+
+	public List<Product> productPants();
 	
 	public Product productInfo(int productNo);
 

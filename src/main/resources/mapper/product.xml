@@ -6,13 +6,34 @@
 	<select id="productBest" resultType="Product">
 		SELECT *
 		  FROM product
-		 LIMIT 8
+		 LIMIT 9
 	</select>
 	
 	<select id="productNew" resultType="Product">
 		SELECT *
 		  FROM product
 		  order by productNo desc
+		 LIMIT 8;
+	</select>
+	
+	<select id="productOuter" resultType="Product">
+		SELECT *
+		  FROM product
+		 WHERE category = 'outer'
+		 LIMIT 8;
+	</select>
+	
+	<select id="productTop" resultType="Product">
+		SELECT *
+		  FROM product
+		 WHERE category = 'top'
+		 LIMIT 8;
+	</select>
+	
+	<select id="productPants" resultType="Product">
+		SELECT *
+		  FROM product
+		 WHERE category = 'pants'
 		 LIMIT 8;
 	</select>
 	

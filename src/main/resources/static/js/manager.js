@@ -254,7 +254,7 @@ $(function() {
 				'stock'			: stock,
 				'hotYn'			: hotYn,
 				'mdPickYn'		: mdPickYn,
-				'quickYn'		: quickYn,
+				'quickYn'		: quickYn, 
 				'bestYn'		: bestYn,
 				'saleYn'		: saleYn
 			},          

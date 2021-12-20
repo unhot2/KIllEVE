@@ -9,6 +9,43 @@ $(function() {
 		}
 	}
 	
+	/*BEST 사진 이미지 변경*/
+	var arrayList = [];
+	for(var i=0; i<= $('.best-component:last').index(); i++){
+		var category = $('.best-component').children('.replaceCategory').eq(i).val();
+		var productNo = $('.best-component').children('.replaceNo').eq(i).val();
+		var mainImage = $('.best-component').children('.replaceMainImage').eq(i).val();
+		var src1 = '/img/product/'+category+'/'+productNo+'/'+mainImage;
+		var src2 = '/img/product/'+category+'/'+productNo+'/'+productNo+'_replace.jpg';
+		var data = {
+			src1 : src1,
+			src2 : src2
+		}
+		arrayList.push(data)
+	}
+	var current ='src1';
+	var cnt = 0;
+	var timer = setInterval(function(){
+		cnt++;
+		if(current == 'src1'){
+			current = 'src2';
+			for(j=0; j<arrayList.length; j++){
+				$('.best-component').eq(j).children().children('.card-image').attr("src",arrayList[j].src2)
+			}
+		}
+		else {
+			current = 'src1';
+			for(j=0; j<arrayList.length; j++){
+				$('.best-component').eq(j).children().children('.card-image').attr("src",arrayList[j].src1)
+			}
+		}
+		/*if(cnt == 14){
+			clearInterval(timer);
+		}*/
+	},2500)
+	
+	
+	
 	/* slick 설정 */
 	$('#slider-div').slick({
 		slide: 'div',        //슬라이드 되어야 할 태그 ex) div, li 

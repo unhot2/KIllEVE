@@ -29,6 +29,18 @@ public class ProductService {
 		return productRepository.productNew();
 	}
 	
+	public List<Product> productOuter() {
+		return productRepository.productOuter();
+	}
+
+	public List<Product> productTop() {
+		return productRepository.productTop();
+	}
+
+	public List<Product> productPants() {
+		return productRepository.productPants();
+	}
+	
 	public Product productInfo(int productNo) {
 		return productRepository.productInfo(productNo);
 	}

@@ -34,7 +34,7 @@ body {
 
 section {
 	padding-top : 56px;
-	min-height : 570px;
+	min-height : 520px;
 }
 
 .sectionFiexd{
@@ -146,6 +146,62 @@ section {
 	font-weight: bold;
 }
 
+.best-description {
+    position: relative;
+    top: -514px;
+    left: 0;
+    font-size: 19px;
+    color: white;
+    height: 500px;
+    background: #0000004d;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.best-description:hover{
+    opacity: 1;
+}
+
+.best-bottom-description {
+    position: relative;
+    top: 384px;
+    left: 14px;
+}
+
+.best-bottom-description .card-discountRate {
+    color: #ff7559;
+    font-size: 16px;
+    font-weight: bold;
+}
+.best-bottom-description .card-salePrice {
+    font-size: 18px;
+    font-weight: bold;
+}
+.best-bottom-description .card-consumerPrice {
+    text-decoration: line-through;
+    font-size: 12px;
+}
+
+
+.best-component {
+	flex : 1 0 33%;
+	height: 500px;
+}
+/*상품카드 이미지*/
+.best-component img{
+	max-width: 100%;
+	display : block;
+};
+
+/*상품카드 설명영역*/
+.best-component .description {
+	/*font-family: "Roboto","Arial","Nanum Gothic","Malgun Gothic","맑은 고딕","Dotum","돋움","Apple SD Gothic Neo","AppleGothic",sans-serif;*/
+	font-family: 'Poppins',Malgun Gothic, 'ë§‘ì€ ê³ ë”•', Dotum, 'ë‹ì›€', sans-serif;
+	padding : 1rem 0;
+	background-color: #ffffff;
+}
+
+
 /*화면크기에 따른 카드 개수설정*/
 @media (min-width : 480px){
 	.component {
@@ -189,7 +245,7 @@ section {
 
 /*상품카드 이미지*/
 .card-image-div {
-    width: 359px;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -217,11 +273,22 @@ section {
 	opacity : 0;
 }
 
+/*카드 추가사항*/
 .index-btnArea {
 	display : flex;
-	margin-top : 7px;
+	margin-top : 14px;
 }
-
 .index-btnArea span {
 	margin-right: 10px;
 }
+
+/*index 카카오배너*/
+.kakaoBanner {
+	text-align: center;
+}
+
+/*index 카카오배너 이미지*/
+.kakaoBanner img {
+	width : 1500px;
+}
+

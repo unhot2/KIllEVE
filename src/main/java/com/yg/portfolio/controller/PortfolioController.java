@@ -17,6 +17,9 @@ public class PortfolioController {
 	public String index(Model model) {
 		model.addAttribute("bestList",productService.productBest());
 		model.addAttribute("newList",productService.productNew());
+		model.addAttribute("outerList",productService.productOuter());
+		model.addAttribute("topList",productService.productTop());
+		model.addAttribute("pantsList",productService.productPants());
 		return "index";
 	}
 	
