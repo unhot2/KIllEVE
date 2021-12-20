@@ -80,7 +80,7 @@ public class ManagerController {
 		return "redirect:/community/qna";
 	}
 	
-	// 상품 등록 폼
+	// 관리자 메뉴
 	@GetMapping("/managerMenu")
 	public String productForm(Model model) {
 		List<Product> productList = managerService.productAllList();
@@ -94,34 +94,6 @@ public class ManagerController {
 			, @RequestParam(value= "colorList[]", required = false) List colorList
 			, @RequestParam(value= "sizeList[]", required = false) List sizeList
 			, Product product) throws Exception {
-			System.err.println("======================== 상품 등록 넘어온 값 ========================");
-			System.out.println("상품명 : "+product.getProductName());
-			System.out.println("카테고리 : "+product.getCategory());
-			System.out.println("할인율 : "+product.getDiscountRate());
-			System.out.println("소비자가 : "+product.getConsumerPrice());
-			System.out.println("판매가 : "+product.getSalePrice());
-			System.out.println("재고 : "+product.getStock());
-			System.out.println("대표이미지 명 : "+product.getMainImage());
-			System.out.println("hot	: "+product.getHotYn());
-			System.out.println("mdpick	: "+product.getMdPickYn());
-			System.out.println("quick	: "+product.getQuickYn());
-			System.out.println("best	: "+product.getBestYn());
-			System.out.println("sale	: "+product.getSaleYn());
-			if(colorList.size() > 0) {
-				 for(Object color : colorList) { 
-					  System.out.println("색상 명  :"+color);
-				  }
-			}
-			if(sizeList.size() > 0) {
-				for(Object size : sizeList) { 
-					System.out.println("사이즈 명  :"+size);
-				}
-			}
-			if(files.size() > 0) {
-				for(Object file : files) { 
-					System.out.println("상세 이미지 명  :"+file);
-				}
-			}
 			managerService.productSave(product);
 			for(int i =0; i < colorList.size(); i++) { 
 				managerService.productColorSave((String) colorList.get(i));
@@ -133,6 +105,14 @@ public class ManagerController {
 				managerService.productImgSave((String) files.get(i));
 			}
 	    return "redirect:/";
+	}
+	
+	// 상품 수정
+	@PostMapping("/productUpdate")
+	@ResponseBody
+	public void productUpdate(Product product) throws Exception {
+		System.out.println(product.toString());
+		int chk = managerService.productUpdate(product);
 	}
 	
 	// 상품관리 목록

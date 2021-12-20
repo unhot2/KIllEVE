@@ -71,8 +71,14 @@ public class ManagerService {
 		managerRepository.productSizeSave(sizeName);
 	}
 
+	// 상품목록 조회
 	public List<Product> productAllList() {
 		return managerRepository.productAllList();
+	}
+	
+	// 상품수정
+	public int productUpdate(Product product) {
+		return managerRepository.productUpdate(product);
 	};
 	
 	

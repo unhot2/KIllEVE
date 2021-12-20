@@ -36,7 +36,11 @@ public interface ManagerRepository {
 	
 	// 사이즈등록
 	public void productSizeSave(String sizeName);
-
+	
+	// 상품목록 조회
 	public List<Product> productAllList();
+
+	// 상품수정
+	public int productUpdate(Product product);
 	
 }

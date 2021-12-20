@@ -50,7 +50,7 @@ $(function() {
 		handleImgsFilesSelect(event)
 	});
 
-	// 상품등록 할인율 계산 -> 판매가 입력
+	// 상품등록 할인율 변경시 판매가 수정
 	$('#discountRate').change(function() {
 		if ($('#consumerPrice').val() != null) {
 			var consumerPrice = $('#consumerPrice').val();
@@ -58,6 +58,40 @@ $(function() {
 			// (소비자가 / 할인율) / 100 후 소수점 버림 후 곱하기 100 = 100자리 밑으로 버림처림 [ex : 28199 -> 28100]  
 			var salePrice = Math.floor((consumerPrice * (1 - (discountRate / 100)) / 100)) * 100;
 			$('#salePrice').attr('value', salePrice);
+		}
+	})
+	
+	// 상품등록 소비자가 변경시 판매가 수정
+	$('#consumerPrice').change(function() {
+		if ($('#discountRate').val() != null) {
+			var consumerPrice = $('#consumerPrice').val();
+			var discountRate = $('#discountRate').val();
+			// (소비자가 / 할인율) / 100 후 소수점 버림 후 곱하기 100 = 100자리 밑으로 버림처림 [ex : 28199 -> 28100]  
+			var salePrice = Math.floor((consumerPrice * (1 - (discountRate / 100)) / 100)) * 100;
+			$('#salePrice').attr('value', salePrice);
+		}
+	})
+	
+	// 상품수정 할인율 변경시 판매가 수정
+	$('.update-discountRate').change(function() {
+		var node = $(this).parent().parent('.update-tr')
+		if ($('.update-consumerPrice').val() != null) {
+			var consumerPrice = node.children().children('.update-consumerPrice').val();
+			var discountRate = node.children().children('.update-discountRate').val();
+			// (소비자가 / 할인율) / 100 후 소수점 버림 후 곱하기 100 = 100자리 밑으로 버림처림 [ex : 28199 -> 28100]  
+			var salePrice = Math.floor((consumerPrice * (1 - (discountRate / 100)) / 100)) * 100;
+			node.children().children('.update-salePrice').attr('value', salePrice);
+		}
+	})
+	// 상품수정 소비자가 변경시 판매가 수정
+	$('.update-consumerPrice').change(function() {
+		var node = $(this).parent().parent('.update-tr')
+		if ($('.update-discountRate').val() != null) {
+			var consumerPrice = node.children().children('.update-consumerPrice').val();
+			var discountRate = node.children().children('.update-discountRate').val();
+			// (소비자가 / 할인율) / 100 후 소수점 버림 후 곱하기 100 = 100자리 밑으로 버림처림 [ex : 28199 -> 28100]  
+			var salePrice = Math.floor((consumerPrice * (1 - (discountRate / 100)) / 100)) * 100;
+			node.children().children('.update-salePrice').attr('value', salePrice);
 		}
 	})
 	
@@ -191,6 +225,49 @@ $(function() {
 	            console.log("상품등록 실패")      
 	         }     
 		});  
+	})
+	
+	/*상품수정*/
+	$('.update-btn').click(function(){
+		var node = $(this).parent().prevAll();
+		var btnNode = $(this).parent().prev().children().children().children('tr:last').children();
+		var productNo = node.children('.update-productNo').val();
+		var productName = node.children('.update-productName').val();
+		var consumerPrice = node.children('.update-consumerPrice').val();
+		var discountRate = node.children('.update-discountRate').val();
+		var salePrice = node.children('.update-salePrice').val();
+		var stock = node.children('.update-stock').val();
+		var hotYn = btnNode.children('input:checkbox[name="hotYn"]').is(':checked');
+		var mdPickYn = btnNode.children('input:checkbox[name="mdPickYn"]').is(':checked');
+		var quickYn = btnNode.children('input:checkbox[name="quickYn"]').is(':checked');
+		var bestYn = btnNode.children('input:checkbox[name="bestYn"]').is(':checked');
+		var saleYn = btnNode.children('input:checkbox[name="saleYn"]').is(':checked');
+		$.ajax({             
+	    	type: "POST",          
+	        url: "/manager/productUpdate",        
+	        data: {	
+				'productNo'		: productNo,
+				'productName'	: productName,
+				'consumerPrice'	: consumerPrice,
+				'discountRate'	: discountRate,
+				'salePrice'		: salePrice,
+				'stock'			: stock,
+				'hotYn'			: hotYn,
+				'mdPickYn'		: mdPickYn,
+				'quickYn'		: quickYn,
+				'bestYn'		: bestYn,
+				'saleYn'		: saleYn
+			},          
+	        success: function (data) { 
+	        	console.log("상품수정 성공") 
+	        	alert("상품정보가 수정되었습니다.")      
+	        	location.href="/manager/managerMenu";   
+	        },          
+	        error: function (e) {  
+	            console.log("상품수정 실패")      
+	         }     
+		});  
+		
 	})
 });
 

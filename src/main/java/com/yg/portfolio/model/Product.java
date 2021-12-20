@@ -19,4 +19,23 @@ public class Product {
 	private Boolean	quickYn;	// 빠른배송 버튼
 	private Boolean bestYn;		// BEST 버튼
 	private Boolean saleYn;		// SALE 버튼
+
+	@Override
+    public String toString() {
+        return "Product.dto 들어온 값 ============================= \r\n"
+        		+ "productNo: " + productNo + "\r\n"
+        		+ "category: " + category + "\r\n"
+        		+ "productName: " + productName + "\r\n"
+        		+ "consumerPrice: "+consumerPrice + "\r\n"
+				+ "discountRate: "+discountRate + "\r\n"
+				+ "salePrice: "+salePrice + "\r\n"
+				+ "sotck: "+stock + "\r\n"
+				+ "mainImage: "+mainImage + "\r\n"
+				+ "hotYn: "+hotYn + "\r\n"
+				+ "mdPickYn: "+mdPickYn + "\r\n"
+				+ "quickYn: "+quickYn + "\r\n"
+				+ "bestYn: "+bestYn + "\r\n"
+				+ "saleYn: "+saleYn;
+    }
+
 }
