@@ -49,7 +49,6 @@
 				<p class="index-title">BEST</p>
 				<div class="main-content">
 					<article class="best-component" th:each="product, index: ${bestList}">
-						<span th:text="${product.discountRate}+'%'" class="card-move-discountRate"></span>
 						<input type="hidden" class="replaceNo" th:value="${product.productNo}">
 						<input type="hidden" class="replaceCategory" th:value="${product.category}">
 						<input type="hidden" class="replaceMainImage" th:value="${product.mainImage}">

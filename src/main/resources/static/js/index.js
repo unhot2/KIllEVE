@@ -42,6 +42,7 @@ $(function() {
 		/*if(cnt == 14){
 			clearInterval(timer);
 		}*/
+		console.log("이미지 교체 실행")
 	},2500)
 	
 	

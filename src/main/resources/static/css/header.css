@@ -7,21 +7,75 @@
     width: 100%;
 }
 
+/*index Log 배너*/
 .index-header {
     width: 100%;
     background: #121212;
-    height: 185px;
+    height: 132px;
     position : relative;
     top : 56px;
+    text-align: center;
 }
 
+/*검색바, 배너로고, 쇼핑몰설명 위치 고정*/
+.searchBar, .shopLogo, .shopDescription {
+	position:absolute;
+}
 
-.index-logo {
+/*배너 검색창*/
+.searchBar {
+    top: 107px;
+    right: 21px;
+    z-index: 1;
+    background: white;
+    padding: 0 24px;
+    margin: 0 12px;
+    border-radius: 17px;
+}
+
+.searchBar > input {
+    background: none;
+    border: 0px;
+    height: 32px;
+    font-size: 14px;
+    padding: 0 6px 2px 0;
+}
+
+.searchBar > input:focus {
+	outline:none;
+}
+/*배너 쇼핑몰 로고*/
+.shopLogo {
+    top: 96px;
+    z-index: 1;
+    width: 80px;
+    left: 23px;
+}
+/*배너 쇼핑몰 설명*/
+.shopDescription {
+    top: 116px;
+    z-index: 1;
+    left: 113px;
+    font-size: 10px;
+    color: white;
+    opacity: 0.4;
+}
+
+/*배너 샵이름*/
+.shop-name-area {
 	height: 100%;
 	text-align: center;
-	padding-top : 28px;
 }
 
+.shop-name{
+    color: white;
+    font-size: 57px;
+    font-weight: 700;
+    padding-top : 19px;
+}
+
+
+/*카테고리바*/
 .category-bar {
     position: relative;
     top: 56px;

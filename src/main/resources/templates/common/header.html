@@ -22,7 +22,6 @@
 								<span style="font-size: 14px;">님</span>
 							</li>
 							<li><a th:href="@{/members/myPage}"><span>마이페이지</span></a>
-							<!--<li><a th:href="@{/members/memberInfo(userId=${session.userId})}"><span>마이페이지</span></a>-->
 							</li>
 							<li>
 								<a th:href="@{#}" id="drop-Btn">커뮤니티</a>
@@ -57,9 +56,12 @@
 					</ul>
 				</div>
 			</div>
+			<feildset class="searchBar"><input type="text" name="search" placeholder="상품명을 검색해보세요"><i class="fas fa-search"></i></feildset>
+			<img src="/img/logo-white.svg" class="shopLogo">
+			<p class="shopDescription">'킬이브'는 남성의 매력을 <br> 극대화할 수 있는 디자인을 선보입니다.</p>
 			<div class="index-header">
-				<div class="index-logo">
-					<img src="/img/logo-white.svg">
+				<div class="shop-name-area">
+					<div class="shop-name">KIIIEVE</div>
 				</div>
 			</div>
 			<div class="category-bar">
