@@ -57,10 +57,10 @@ $(function() {
 	
 	// 카카오페이 결제
 	$('#kakaoPay').click(function(){
-		if(!$('input[name="deliveryUserName"]').val()){
-		alert('주문자명을 입력해주세요');
-		$('input[name="deliveryUserName"]').focus();
-		return;
+	if(!$('input[name="deliveryUserName"]').val()){
+	alert('주문자명을 입력해주세요');
+	$('input[name="deliveryUserName"]').focus();
+	return;
 	}
 	if(!$('input[name="deliveryPhone"]').val()){
 		alert('휴대폰 번호를 입력해주세요');

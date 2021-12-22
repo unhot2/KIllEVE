@@ -61,16 +61,43 @@
 		 WHERE productNo = #{productNo}
 	</select>
 	
-	<select id="search" resultType="Product">
-		SELECT *
-		  FROM productSize
-		 WHERE productName LIKE CONCAT('%',#{search},'%')
+	<select id="searchCnt" resultType="Integer">
+		SELECT count(*)
+		  FROM (SELECT @ROWNUM:=@ROWNUM+1 as num
+		     , A.*
+		  FROM (SELECT *
+			      FROM product, (SELECT @ROWNUM:=0) AS R
+				 WHERE productName LIKE CONCAT('%',#{search},'%')
+				 ORDER BY productNo DESC ) A ) B
 	</select>
 	
-	<!-- 판매량 많은순 -->
-	<select id="rankProduct" resultType="ProductSize">
-		<!-- 상품번호 그룹으로 묶고 수량을 더한값을 가지고 가장 많은 순으로 정렬 = 가장많이팔린 상품 -->
-		SELECT productNo, sum(quantity) from orderdetail group by productNo order by sum(quantity) desc;
+	<select id="search" resultType="Product">
+		SELECT * 
+		  FROM (SELECT @ROWNUM:=@ROWNUM+1 as num
+		     , A.*
+		  FROM (SELECT *
+			      FROM product, (SELECT @ROWNUM:=0) AS R
+				 WHERE productName LIKE CONCAT('%',#{search},'%')
+				 <if test="category != ''">
+				   AND category = #{category}		
+				 </if>
+				 <if test="minPrice > 0 and maxPrice > 0">
+				   AND salePrice BETWEEN #{minPrice} and #{maxPrice}		
+				 </if>
+				 <if test="alignKind == '' or alignKind == null or alignKind == 'recent' ">
+				 ORDER BY productNo DESC 
+				 </if>
+				 <if test="alignKind == 'priceasc'">
+				 ORDER BY salePrice ASC 
+				 </if>
+				 <if test="alignKind == 'price'">
+				 ORDER BY salePrice DESC 
+				 </if>
+				 <if test="alignKind == 'name'">
+				 ORDER BY productName DESC
+				 </if>
+				 ) A ) B
+		 WHERE num BETWEEN #{startPage} and #{endPage}
 	</select>
 
 </mapper>

@@ -14,6 +14,7 @@ import com.yg.portfolio.model.Product;
 import com.yg.portfolio.model.ProductColor;
 import com.yg.portfolio.model.ProductImg;
 import com.yg.portfolio.model.ProductSize;
+import com.yg.portfolio.model.Search;
 import com.yg.portfolio.service.ProductService;
 
 @Controller
@@ -23,6 +24,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	/* 상품 상세정보 조회 */
 	@GetMapping("/detail/{productNo}")
 	public String productDetail(Model model, @PathVariable int productNo) {
 		Product detailList = productService.productInfo(productNo);
@@ -36,10 +38,12 @@ public class ProductController {
 		return "/product/productDetailForm";
 	}
 	
+	/* 상품검색 */
 	@GetMapping("/search")
-	public String search(@RequestParam("search") String search, Model model) {
-		List<ProductSize> searchList = productService.search(search); 
-		model.addAttribute("searchList",searchList);
-		return "/product/productDetailForm";
+	public String search(Search search, Model model
+			,@RequestParam(value = "currentPage", required = false) Integer currentPage) {
+		model.addAttribute("searchList",productService.search(search,currentPage,model));
+		model.addAttribute("prevSearch",search.getSearch());
+		return "/product/search";
 	}
 }

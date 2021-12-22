@@ -11,6 +11,7 @@ import com.yg.portfolio.model.ProductColor;
 import com.yg.portfolio.model.ProductImg;
 import com.yg.portfolio.model.ProductSize;
 import com.yg.portfolio.model.Qna;
+import com.yg.portfolio.model.Search;
 import com.yg.portfolio.model.User;
 
 
@@ -35,6 +36,8 @@ public interface ProductRepository {
 
 	public List<ProductSize> productSize(int productNo);
 
-	public List<ProductSize> search(String search);
+	public int searchCnt(Search search);
 	
+	public List<Product> search(Search search);
+	 	
 }
