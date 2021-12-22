@@ -2,6 +2,9 @@ $(function() {
 	// 관리자 페이지 CSS 변경
 	$('.category-bar').addClass('hidden');
 	$('.index-header').addClass('hidden');
+	$('.searchBar').addClass('hidden');
+	$('.shopLogo').addClass('hidden');
+	$('.shopDescription').addClass('hidden');
 	$('footer').addClass('hidden');
 	$('.header_top').css({ 'border-bottom': '1px solid #5c5c5c', 'background-color': '#5c5c5c' });
 	/*$('.navlog img').css({ 'width': '59%', 'top': '15px', 'left': '540px' })*/
