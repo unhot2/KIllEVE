@@ -4,15 +4,17 @@
 
 <head>
 	<meta charset="utf-8" />
-	<link th:href="@{/css/search.css}" rel="stylesheet">
+	<link th:href="@{/css/product/search.css}" rel="stylesheet">
 	<script th:src="@{/js/search.js}"></script>
 </head>
 
 <body>
 	<div layout:fragment="content">
 		<section>
+			<!--상품검색 결과화면-->
 			<div class="flex-container">
 				<p class="index-title" style="width : 100px">상품검색</p>
+				<!--상세검색 설정영역-->
 				<div class="detailSearchArea">
 					<div class="searchInputArea">
 						<form action="/product/search" class="searchForm">
@@ -73,10 +75,12 @@
 						</form>
 					</div>
 				</div>
+				<!--검색된 상품개수-->
 				<ul class="guideInfo">
 						<li th:if="${totalCount != null}" th:text="${totalCount}+'개의 상품을 찾았습니다'" style='color:black;'></li>
 						<li th:unless="${totalCount != null}" style='color:black;'>0개의 상품을 찾았습니다</li>
 				</ul>
+				<!--검색결과 상품리스트-->
 				<th:block th:if="${#lists.size(searchList) > 0}">
 					<div class="main-content">
 						<article class="search-component component" th:each="product, index: ${searchList}">

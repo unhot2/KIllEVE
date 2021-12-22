@@ -17,15 +17,12 @@ function paymentOpen(url){
 	var curY = window.screenTop;
 	var curWidth = document.body.clientWidth;
 	var curHeight = document.body.clientHeight;
-	  
 	var nLeft = curX + (curWidth / 2) - (nWidth / 2);
 	var nTop = 70
-	
 	var strOption = "";
 	strOption += "left=" + nLeft + "px,";
 	strOption += "top=" + nTop + "px,";
 	strOption += "width=" + nWidth + "px,";
 	strOption += "height=" + nHeight + "px,";
-	console.log("nTop : "+nTop)
 	window.open(url, "KakaoPay", strOption)
 }

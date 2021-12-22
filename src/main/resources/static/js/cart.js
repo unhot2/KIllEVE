@@ -22,7 +22,6 @@ $(function() {
 	$(document).on('click', '.upBtn', function() {
 		var index = $('.upBtn').index(this); // 클릭위치 index
 		var cartNo = $('.cartNo').eq(index).val(); // 장바구니 번호
-		console.log("cartNo : " + cartNo);
 		var salePrice = trimPrice($('.salePrice').eq(index).text()); // 상품가격
 		var quantity = parseInt($('.quantity').eq(index).val()); // 상품수량
 		totalPriceArray[index] = salePrice * (quantity + 1); // 총수량 배열 수정
@@ -147,8 +146,6 @@ $(function() {
 		var index = $('.cartList-tr:last').index();
 		var cnt = 0;
 		for(var i=0; i< index; i++){
-			console.log('i값 :'+i)
-			console.log("체크여부 : "+$('.checkBox').eq(i).is(":checked"));
 			if($('.checkBox').eq(i).is(":checked")){
 				cnt ++;
 			}

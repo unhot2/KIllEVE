@@ -14,7 +14,6 @@ $(function() {
 	var $menuEle = $('dt');
 	$menuEle.click(function() {
 		var tab = $(this).children().text();
-		console.log("들어온 탭 : "+tab)
 		$('dt').addClass('disableTab');
 		$(this).removeClass('disableTab');
 		$('dd').addClass('hidden');

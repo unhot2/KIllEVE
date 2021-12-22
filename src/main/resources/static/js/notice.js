@@ -1,5 +1,5 @@
-// 공지사항 글삭제
 function deleteNotice(){
+	// 공지사항 글삭제
 	var chk = confirm("삭제하시겠습니까?");
 	if(chk){
 		$.ajax({

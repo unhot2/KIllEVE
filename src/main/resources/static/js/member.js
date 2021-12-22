@@ -1,5 +1,5 @@
-// 회원가입 아이디 사용가능여부 조회
 $(function() {
+	/*회원가입 아이디 사용가능여부 조회*/
 	if ($("#password").val() == '' || $("#password").val() == "null") {
 		$(".chkPwd").html("비밀번호를 입력해주세요.")
 	}
@@ -11,7 +11,8 @@ $(function() {
 			$(".chkPwd").html("")
 		}
 	})
-
+	
+	/*비밀번호 체크*/
 	$("#passwordCheck").focusout(function() {
 		if ($('#passwordCheck').val() == '') {
 			$(".chkPwdMatch").html("비밀번호 확인을 입력해주세요.").css({ "color": "#575757" })
@@ -24,10 +25,9 @@ $(function() {
 		}
 	})
 	
-	// 이메일 제공자 설정
+	/*이메일 제공자 설정*/
 	$('#emailProviderSelect').change(function(){
 		var provider = $('#emailProviderSelect').val();
-		console.log("provider값 : "+provider);
 		if(provider != '*'){
 			$('#emailProvider').val(provider);
 			$('#emailProvider').attr('readOnly',true);
@@ -225,7 +225,7 @@ $(function() {
 	});
 });
 
-
+/*다음 주소API 호출*/
 function findAddr() {
 	new daum.Postcode({
 		oncomplete: function(data) {

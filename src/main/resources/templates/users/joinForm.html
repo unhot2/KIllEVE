@@ -5,14 +5,15 @@
 <head>
 	<meta charset="utf-8" />
 	<script src="/js/join.js"></script>
-	<link href="/css/join.css" rel="stylesheet">
+	<link href="/css/user/join.css" rel="stylesheet">
 	<!--다음 주소 API-->
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
-
 <body>
 	<div layout:fragment="content">
+		<!--회원가입 폼-->
 		<th:block th:if="${nomalJoin == null }">
+			<!--회원가입 선택화면-->
 			<section>
 				<div class="join-select"> 
 					<div class="join-form">
@@ -63,6 +64,7 @@
 		<th:block th:if="${nomalJoin != null }">
 			<section>
 				<div class="container">
+					<!--MODAL 창-->
 					<div class="modal fade" id="defaultModal">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -78,22 +80,20 @@
 							</div>
 						</div>
 					</div>
-
+					<!--일반회원 가입-->
 					<form class="join-content" role="form" method="post" action="/users/join">
 						<div class="form-group">
 							<h2>JOIN</h2>
 						</div>
 						<div class="form-group requiredText">
-							<p><img src="//img.echosting.cafe24.com/skin/base/common/ico_required_blue.gif"
-									alt="필수">필수사항</p>
+							<p><img src="//img.echosting.cafe24.com/skin/base/common/ico_required_blue.gif"	alt="필수">필수사항</p>
 						</div>
 						<div class="form-group">
 							<table class="join-table">
 								<tr>
 									<th>
 										아이디
-										<img src="//img.echosting.cafe24.com/skin/base/common/ico_required_blue.gif"
-											alt="필수">
+										<img src="//img.echosting.cafe24.com/skin/base/common/ico_required_blue.gif" alt="필수">
 									</th>
 									<td>
 										<input type="text" class="joinInput onlyAlphabetAndNumber" id="id" name="userId"
@@ -106,8 +106,7 @@
 								<tr>
 									<th> 
 										비밀번호
-										<img src="//img.echosting.cafe24.com/skin/base/common/ico_required_blue.gif"
-											alt="필수">
+										<img src="//img.echosting.cafe24.com/skin/base/common/ico_required_blue.gif" alt="필수">
 									</th>
 									<td>
 										<input type="password" class="joinInput" id="password" name="password" data-rule-required="true" maxlength="30">
@@ -274,6 +273,6 @@
 				</div>
 			</section>
 		</th:block>
+	</div>
 </body>
-
 </html>

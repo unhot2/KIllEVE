@@ -16,18 +16,21 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	/* NEW 카테고리 조회 */
 	@GetMapping("/new")
 	public String categoryNew(@RequestParam(value = "currentPage", required = false) Integer currentPage, Model model) {
 		model.addAttribute("newList",categoryService.categoryNew(currentPage,model));
 		return "/category/new";
 	}
 	
+	/* BEST 카테고리 조회 */ 
 	@GetMapping("/best")
 	public String categoryBest(@RequestParam(value = "currentPage", required = false) Integer currentPage, Model model) {
 		model.addAttribute("bestList",categoryService.categoryBest(currentPage,model));
 		return "/category/best";
 	}
 	
+	/* OUTER 카테고리 조회 */
 	@GetMapping("/outer")
 	public String categoryOuter(Model model
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
@@ -36,6 +39,7 @@ public class CategoryController {
 		return "/category/outer";
 	}
 	
+	/* TOP 카테고리 조회 */
 	@GetMapping("/top")
 	public String categoryTop(Model model
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
@@ -44,6 +48,7 @@ public class CategoryController {
 		return "/category/top";
 	}
 	
+	/* PANTS 카테고리 조회 */
 	@GetMapping("/pants")
 	public String categoryPants(Model model
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
@@ -52,6 +57,7 @@ public class CategoryController {
 		return "/category/pants";
 	}
 	
+	/* SHOES 카테고리 조회 */
 	@GetMapping("/shoes")
 	public String categoryShoes(Model model
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage

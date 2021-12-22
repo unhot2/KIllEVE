@@ -27,7 +27,7 @@ public class ManagerController {
 	@Autowired
 	private CommunityService communityService;
 	
-	// 공지사항 글 작성 Form 이동
+	/* 공지사항 글 작성 Form 이동 */
 	@GetMapping("/noticeForm")
 	public String noticeForm(@RequestParam(value = "boardNum", required = false) Integer boardNum, Model model) {
 		if (boardNum != null) {
@@ -36,51 +36,41 @@ public class ManagerController {
 		return "/manager/noticeForm";
 	}
 	
-	// 공지사항 글 작성
+	/* 공지사항 글 작성 */
 	@PostMapping("/writeNotice")
 	public String writeNotice(Notice notice) {
-		System.out.println("제목 : "+notice.getTitle());
-		System.out.println("작성자 : "+notice.getUserName());
-		System.out.println("내용 : "+notice.getContent());
-		System.out.println("작성자ID : "+notice.getUserId());
 		managerService.writeNotice(notice);
 		return "redirect:/community/notice";
 	}
 	
-	// 공지사항 글 수정
+	/* 공지사항 글 수정 */
 	@PostMapping("/updateNotice")
 	public String updateNotice(Notice notice) {
-		System.out.println("수정 Controller");
-		System.out.println("제목 : "+notice.getTitle());
-		System.out.println("내용 : "+notice.getContent());
-		System.out.println("작성자ID : "+notice.getUserId());
-		System.out.println("번호 : "+notice.getBoardNum());
 		managerService.updateNotice(notice);
 		return "redirect:/community/notice";
 	}
 	
-	// 공지사항 글 삭제
+	/* 공지사항 글 삭제 */
 	@PostMapping("/deleteNotice")
 	public @ResponseBody int deleteNotice(@RequestParam(value = "boardNum", required = false) Integer boardNum) {
 		return managerService.deleteNotice(boardNum);
 	}
 	
-	// QNA 답글 페이지 이동
+	/* QNA 답글 페이지 이동 */
 	@GetMapping("/qnaReplyForm")
 	public String qnaReplyForm(@RequestParam(value = "boardNum", required = false) Integer boardNum,Model model) {
 		model.addAttribute("detail",communityService.qnaDetail(boardNum));
 		return "/manager/qnaReplyForm";
 	}
 	
-	// QNA 답글 작성
+	/* QNA 답글 작성 */
 	@PostMapping("/writeReplyQna")
 	public String writeReplyQna(Qna qna) {
-		System.out.println("답변작성 컨트롤러");
 		managerService.writeReplyQna(qna);
 		return "redirect:/community/qna";
 	}
 	
-	// 관리자 메뉴
+	/* 관리자 메뉴 */
 	@GetMapping("/managerMenu")
 	public String productForm(Model model) {
 		List<Product> productList = managerService.productAllList();
@@ -88,13 +78,12 @@ public class ManagerController {
 		return "/manager/managerMenu";
 	}
 	
-	// 상품 등록
+	/* 상품 등록 */
 	@PostMapping("/productSave")
 	public String productSave(@RequestParam(value = "files[]", required = false) List files	
 			, @RequestParam(value= "colorList[]", required = false) List colorList
 			, @RequestParam(value= "sizeList[]", required = false) List sizeList
 			, Product product) throws Exception {
-			System.out.println(product.toString());
 			managerService.productSave(product);
 			for(int i =0; i < colorList.size(); i++) { 
 				managerService.productColorSave((String) colorList.get(i));
@@ -108,15 +97,14 @@ public class ManagerController {
 	    return "redirect:/";
 	}
 	
-	// 상품 수정
+	/* 상품 수정 */
 	@PostMapping("/productUpdate")
 	@ResponseBody
 	public void productUpdate(Product product) throws Exception {
-		System.out.println(product.toString());
 		int chk = managerService.productUpdate(product);
 	}
 	
-	// 상품관리 목록
+	/* 상품관리 목록 */
 	@GetMapping("/productAllList")
 	public @ResponseBody int productAllList(Model model) {
 		List<Product> productList = managerService.productAllList();

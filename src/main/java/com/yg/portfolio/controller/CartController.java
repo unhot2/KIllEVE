@@ -25,7 +25,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
-	// 장바구니 목록
+	/* 장바구니 목록 */
 	@GetMapping("/cartList")
 	public String cartList(String userId, Model model) {
 		List<Cart> cartList = cartService.cartList(userId);
@@ -33,7 +33,7 @@ public class CartController {
 		return "/cart/cart";
 	}
 	
-	// 장바구니 등록
+	/* 장바구니 등록 */
 	@PostMapping("/cartSave")
 	@ResponseBody
 	public void cartSave(@RequestParam(value="cartList") String cartlist) throws ParseException {
@@ -61,13 +61,13 @@ public class CartController {
 		}
 	}
 	
-	// 장바구니 상품삭제
+	/* 장바구니 상품삭제 */
 	@PostMapping("/cartDelete")
 	public void cartDelete(@RequestParam(value="cartNo") String cartNo) {
 		cartService.cartDelete(cartNo);
 	}
 	
-	// 장바구니 수량수정
+	/* 장바구니 수량수정 */
 	@PostMapping("/cartUpdate")
 	@ResponseBody
 	public void cartUpdate(@RequestParam(value="cartNo") String cartNo, @RequestParam(value="quantity") int quantity) {

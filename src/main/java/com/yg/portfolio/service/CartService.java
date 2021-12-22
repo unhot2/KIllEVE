@@ -13,22 +13,22 @@ public class CartService {
 	@Autowired
 	private CartRepository cartRepository;
 
-	// 장바구니 목록
+	/* 장바구니 목록 */
 	public List<Cart> cartList(String userId) {
 		return cartRepository.cartList(userId);
 	}
 	
-	// 장바구니 저장
+	/* 장바구니 저장 */
 	public void cartSave(Cart list) {
 		cartRepository.cartSave(list);
 	}
 	
-	// 장바구니 삭제
+	/* 장바구니 삭제 */
 	public void cartDelete(String cartNo) {
 		cartRepository.cartDelete(cartNo);
 	}
 	
-	// 장바구니 수정
+	/* 장바구니 수정 */
 	public void cartUpdate(String cartNo, int quantity) {
 		cartRepository.cartUpdate(cartNo, quantity);
 	}

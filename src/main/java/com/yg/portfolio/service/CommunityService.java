@@ -23,6 +23,7 @@ public class CommunityService {
 	int startPage = 0;		// 시작 게시물 번호
 	int endPage = 0;		// 끝 게시물 번호
 	
+	/* 공지사항 조회 */
 	public List<Notice> notice(Integer page, Model model) {
 		totalCount = communityRepository.noticeCnt(); // 공지사항 총 게시물 수 
 		paging(page); //페이징 처리
@@ -32,6 +33,7 @@ public class CommunityService {
 		return noticeList;
 	}
 	
+	/* 공지사항 검색 */
 	public List<Notice> noticeSearch(Integer page, Model model, String search, String searchKind) {
 		totalCount = communityRepository.noticeSearchCnt(search, searchKind); // 공지사항 검색된 게시물 수
 		paging(page); //페이징 처리
@@ -43,11 +45,13 @@ public class CommunityService {
 		return noticeSearchList;
 	}
 	
+	/* 공지사항 상세조회 */
 	public Notice noticeDetail(int boardNum) {
 		communityRepository.noticeCntUp(boardNum);
 		return communityRepository.noticeDetail(boardNum);
 	}
 	
+	/* 페이징 */
 	public void paging(Integer page) {
 		totalPage = totalCount / listCount + (totalCount % listCount > 0 ? 1 : 0);
 		if (page == null) {
@@ -69,6 +73,7 @@ public class CommunityService {
 	}
 	
 	
+	/* QNA 조회 */
 	public List<Qna> qna(Integer page, Model model) {
 		totalCount = communityRepository.qnaCnt(); // 공지사항 총 게시물 수 
 		paging(page); //페이징 처리
@@ -78,6 +83,7 @@ public class CommunityService {
 		return qnaList;
 	}
 	
+	/* QNA 검색 */
 	public List<Notice> qnaSearch(Integer page, Model model, String search, String searchKind) {
 		totalCount = communityRepository.qnaSearchCnt(search, searchKind); // 공지사항 검색된 게시물 수
 		paging(page); //페이징 처리
@@ -89,22 +95,23 @@ public class CommunityService {
 		return qnaSearchList;
 	};
 	
+	/* QNA 상세조회 */
 	public Qna qnaDetail(int boardNum) {
 		communityRepository.qnaCntUp(boardNum);
 		return communityRepository.qnaDetail(boardNum);
 	}
 	
-	// QNA 글 작성
+	/* QNA 글 작성 */
 	public void writeQna(Qna qna) {
 		communityRepository.writeQna(qna);
 	}
 	
-	// QNA 글 수정
+	/* QNA 글 수정 */
 	public void updateQna(Qna qna) {
 		communityRepository.updateQna(qna);
 	}
 	
-	// QNA 글 삭제
+	/* QNA 글 삭제 */
 	public int deleteQna(Integer boardNum) {
 		return communityRepository.deleteQna(boardNum); 
 	}

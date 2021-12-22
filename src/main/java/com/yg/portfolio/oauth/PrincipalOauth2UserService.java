@@ -34,9 +34,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 	// given_name, email 등의 정보
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-//		System.out.println("getClientRegistration : " + userRequest.getClientRegistration()); 
-//		System.out.println("getAccessToken : " + userRequest.getAccessToken().getTokenValue());
-//		System.out.println("getAttributes : " + super.loadUser(userRequest).getAttributes()); 
 		OAuth2User oauth2User = super.loadUser(userRequest);
 
 		// 인터페이스를 통해서 구글,네이버,페이스북마다 각각 다른 값을 하나의 oAuthUserInfo에 담기위한 설정

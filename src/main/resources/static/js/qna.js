@@ -1,5 +1,5 @@
-/*비밀글, 공개글 설정에 따른 비밀번호 input 활성화 여부*/
 $(function() {
+	/*비밀글, 공개글 설정에 따른 비밀번호 input 활성화 여부*/
 	$('#publicBtn').click(function() {
 		$('#password').attr("disabled", true);
 		$('#password').val("");
@@ -8,10 +8,8 @@ $(function() {
 	$('#secretBtn').click(function() {
 		$('#password').attr("disabled", false);
 	});
-});
 
 /*Qna 비밀번호 확인*/
-$(function() {
 	$('#chkPassword').click(function(){
 		var pw = $('#password').val();
 		$.ajax({
@@ -50,17 +48,16 @@ function deleteQna(){
 	var chk = confirm("삭제하시겠습니까?");
 	if(chk){
 		$.ajax({
-		type: "POST",
-		url: "/community/deleteQna",
-		data : {boardNum : $('#boardNum').val()},
-		success: function(res) {
-			console.log(res);
-			location.href="/community/qna";
-		},
-		error: function(data) {
-			console.log("error 발생"+data)
-		}
-	})		
+			type: "POST",
+			url: "/community/deleteQna",
+			data : {boardNum : $('#boardNum').val()},
+			success: function(res) {
+				location.href="/community/qna";
+			},
+			error: function(data) {
+				console.log("error 발생"+data)
+			}
+		})		
 	}
 };
 

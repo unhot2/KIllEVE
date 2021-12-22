@@ -37,22 +37,6 @@ public class UserService implements UserDetailsService {
 			}
 			return new PrincipalDetails(userEntity);
 	}
-//	@Override
-//	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-//		User userEntity = userRepository.findByUserId(userId);
-//		System.out.println("userEntity값 : "+userEntity);
-//		if (userEntity == null) {
-//			try {
-//				throw new BadCredentialsException(String.format("아이디 또는 비밀번호를 확인해주세요"));
-//			} catch (Exception e) {
-//				System.out.println("에러메세지:"+e.getMessage());
-//				return new PrincipalDetails(new User());
-//			}
-//		}
-//		else {
-//			return new PrincipalDetails(userEntity);
-//		}
-//	}
 	
 
 	// 회원가입시 ID에 따라 ROLE 다르게 설정
@@ -70,6 +54,7 @@ public class UserService implements UserDetailsService {
 		return userRepository.join(user);
 	}
 	
+	// 회원가입 아이디 중복체크
 	public int findId(String userId) {
 		return userRepository.findId(userId);
 		

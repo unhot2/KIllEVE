@@ -4,11 +4,12 @@
 
 <head>
 	<meta charset="utf-8" />
-	<link th:href="@{/css/qna.css}" rel="stylesheet">
+	<link th:href="@{/css/community/qna.css}" rel="stylesheet">
 </head>
 
 <body>
 	<section layout:fragment="content">
+		<!--QNA 화면-->
 		<div class="container">
 			<div class="qna-content">
 				<div class="qna-title">
@@ -53,6 +54,7 @@
 							</tr>
 						</th:block>
 					</table>
+					<!--페이징 영역-->
 					<div class="qna-paging">
 						<th:block th:if="${list != null}">
 							<th:block th:if="${currentPage > 1}">
@@ -81,6 +83,7 @@
 							</th:block>
 						</th:block>
 					</div>
+					<!--검색창 및 버튼영역-->
 					<div class="qna-bottom">
 						<div class="searchBox">
 							<form action="/community/qna">

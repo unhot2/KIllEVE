@@ -29,42 +29,52 @@ public class ProductService {
 	int startPage = 0;		// 시작 게시물 번호
 	int endPage = 0;		// 끝 게시물 번호
 	
+	/* BEST 카테고리 조회 */
 	public List<Product> productBest() {
 		return productRepository.productBest();
 	}
 	
+	/* NEW 카테고리 조회 */
 	public List<Product> productNew() {
 		return productRepository.productNew();
 	}
 	
+	/* OUTER 카테고리 조회 */
 	public List<Product> productOuter() {
 		return productRepository.productOuter();
 	}
 
+	/* TOP 카테고리 조회 */
 	public List<Product> productTop() {
 		return productRepository.productTop();
 	}
 
+	/* PANTS 카테고리 조회 */
 	public List<Product> productPants() {
 		return productRepository.productPants();
 	}
 	
+	/* 상품 상세정보 조회 */
 	public Product productInfo(int productNo) {
 		return productRepository.productInfo(productNo);
 	}
-
+	
+	/* 상품 상세이미지 조회 */
 	public List<ProductImg> productImg(int productNo) {
 		return productRepository.productImg(productNo);
 	}
-
+	
+	/* 상품 색상조회 */
 	public List<ProductColor> productColor(int productNo) {
 		return productRepository.productColor(productNo);
 	}
 
+	/* 상품 사이즈 조회 */
 	public List<ProductSize> productSize(int productNo) {
 		return productRepository.productSize(productNo);
 	}
-
+	
+	/* 상품 검색 */
 	public List<Product> search(Search search, Integer page, Model model) {
 		totalCount = productRepository.searchCnt(search);
 		paging(page); //페이징 처리
@@ -77,6 +87,7 @@ public class ProductService {
         return productRepository.search(search);
 	}
 	
+	/* 페이징 */
 	public void paging(Integer page) {
 		totalPage = totalCount / listCount + (totalCount % listCount > 0 ? 1 : 0);
 		if (page == null) {

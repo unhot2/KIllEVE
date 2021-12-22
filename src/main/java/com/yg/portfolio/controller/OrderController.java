@@ -39,7 +39,7 @@ public class OrderController {
 	@Autowired
 	private CartService cartService;
 
-	// 주문내역
+	/* 주문내역 */
 	@GetMapping("/orderList")
 	public String orderList(User user, Model model, HttpSession session) {
 		List<KakaoPay> orderList = orderService.orderList((String) session.getAttribute("userId"));
@@ -52,10 +52,9 @@ public class OrderController {
 		return "/order/orderList";
 	}
 	
-	// 주문서 상세정보
+	/* 주문서 상세정보 */
 	@GetMapping("/orderDetail")
 	public String orderFormCart(OrderFormList list, Model model, HttpSession session){
-			System.out.println("!=null 들어옴");
 			List<OrderForm> orderList = new ArrayList<OrderForm>();
 			// 장바구니에서 가져온 CartNo 리스트
 			for (OrderForm order : list.getOrderFormList()) {
@@ -71,7 +70,7 @@ public class OrderController {
 		return "/order/orderForm";
 	}
 
-	// 주문서 상세정보
+	/* 주문서 상세정보 */
 	@GetMapping("/directOrderDetail")
 	public String orderFormBuy(OrderFormList list, Model model, HttpSession session
 			, @RequestParam(value="productNo") int productNo
@@ -100,6 +99,7 @@ public class OrderController {
 		return "/order/orderForm";
 	}
 
+	/* 카카오페이 결제 */
 	@PostMapping("/kakaoPayment")
 	public @ResponseBody String kakaoPayment(KakaoPay kakaopay
 			, @RequestParam("cartList") List<String> cartList
@@ -110,7 +110,6 @@ public class OrderController {
 		// 장바구니 목록 삭제
 		if(cartList !=null) {
 			for (String cartNo : cartList) {
-			System.out.println("넘어온 cartNo값  :"+cartNo);
 			cartService.cartDelete(cartNo);
 			}
 		}
@@ -130,28 +129,9 @@ public class OrderController {
 				detail.setColor((String)jsonObject.get("color"));
 				detail.setQuantity(Integer.parseInt(String.valueOf(jsonObject.get("quantity"))));
 				detail.setTotalPrice(Integer.parseInt(String.valueOf(jsonObject.get("totalPrice"))));
-				System.out.println("uid : "+detail.getMerchant_uid());
-				System.out.println("productNo : "+detail.getProductNo());
-				System.out.println("size : "+detail.getSize());
-				System.out.println("color : "+detail.getColor());
-				System.out.println("quantity : "+detail.getQuantity());
-				System.out.println("totalPrice : "+detail.getTotalPrice());
 				orderService.orderDetailSave(detail);
 			}
 		}
-		System.out.println(kakaopay.getUserId());
-		System.out.println(kakaopay.getName());
-		System.out.println(kakaopay.getAmount());
-		System.out.println(kakaopay.getDelivery_price());
-		System.out.println(kakaopay.getDelivery_name());
-		System.out.println(kakaopay.getDelivery_tel());
-		System.out.println(kakaopay.getDelivery_postcode());
-		System.out.println(kakaopay.getDelivery_addr());
-		System.out.println(kakaopay.getDelivery_message());
-		System.out.println(kakaopay.getImp_uid());
-		System.out.println(kakaopay.getMerchant_uid());
-		System.out.println(kakaopay.getPaid_at());
-		System.out.println(kakaopay.getReceipt_url());
 		return kakaopay.getMerchant_uid();
 	}
 	
@@ -171,7 +151,6 @@ public class OrderController {
 	// 주문내역 상세정보
 	@GetMapping("/orderDetailList")
 	public @ResponseBody List<OrderDetail> orderDetailList(@RequestParam(value="merchant_uid") String merchant_uid) {
-		System.out.println("orderDetailList 들어옴");
 		List<OrderDetail> productList = orderService.productDetails(merchant_uid);
 		return productList;
 	}

@@ -21,7 +21,7 @@ public class CommunityController {
 	@Autowired
 	private CommunityService communityService;
 
-	// 공지사항 전체 글 조회
+	/* 공지사항 조회 */
 	@GetMapping("/notice")
 	public String notice(Model model, 
 			@RequestParam(value = "search", required = false) String search, 
@@ -39,22 +39,19 @@ public class CommunityController {
 		return "/community/notice";
 	}
 	
-	// 공지사항 글 상세보기
+	/* 공지사항 상세조회 */
 	@GetMapping("/notice/{boardNum}")
 	public String noticeDetail(Model model, @PathVariable int boardNum) {
 		model.addAttribute("detail",communityService.noticeDetail(boardNum));
 		return "/community/noticeDetailForm";
 	}
 	
-	// QNA 전체 글 조회
+	/* QNA 조회 */
 	@GetMapping("/qna")
 	public String qna(Model model, 
 			@RequestParam(value = "search", required = false) String search,
 			@RequestParam(value = "searchKind", required = false) String searchKind,
 			@RequestParam(value = "currentPage", required = false) Integer currentPage) {
-		System.out.println("search값 : "+search);
-		System.out.println("searchKind값 : "+searchKind);
-		System.out.println("currentPage값 : "+currentPage);
 		if (search == null || search.isEmpty()) {
 			List<Qna> list = communityService.qna(currentPage, model);
 			model.addAttribute("list",list);
@@ -67,7 +64,7 @@ public class CommunityController {
 		return "/community/qna";
 	}
 	
-	// QNA 글 상세보기
+	/* QNA 상세조회 */
 	@GetMapping("/qna/{boardNum}")
 	public String qnaDetail(Model model, @PathVariable int boardNum,
 			@RequestParam(value = "chkSecret", required = false) String chkSecret) {
@@ -81,7 +78,7 @@ public class CommunityController {
 		}
 	}
 	
-	// QNA 글 작성 Form 이동 
+	/* QNA 글 작성 Form 이동 */ 
 	@GetMapping("/qnaForm")
 	public String qnaForm(@RequestParam(value = "boardNum", required = false) Integer boardNum, Model model) {
 		if (boardNum != null) {
@@ -90,13 +87,12 @@ public class CommunityController {
 		return "/community/qnaForm";
 	}
 	
-	// QNA 비밀글 비밀번호 체크
+	/* QNA 비밀글 비밀번호 체크 */
 	@GetMapping("/chkPassword")
 	public @ResponseBody int chkPassword(Model model,
 			@RequestParam(value = "password", required = false) String password,
 			@RequestParam(value = "boardNum", required = false) Integer boardNum,
 			@RequestParam(value = "role", required = false) String role) {
-		System.out.println("role 값 : "+role);
 		Qna qna = communityService.qnaDetail(boardNum);
 		if (role.equals("ROLE_ADMIN") || role.equals("ROLE_MANAGER")) {
 			return 1;
@@ -110,21 +106,21 @@ public class CommunityController {
 		}
 	}
 	
-	// QNA 글 작성
+	/* QNA 글 작성 */
 	@PostMapping("/writeQna")
 	public String writeQna(Qna qna) {
 		communityService.writeQna(qna);
 		return "redirect:/community/qna";
 	}
 	
-	// QNA 글 수정
+	/* QNA 글 수정 */
 	@PostMapping("/updateQna")
 	public String updateQna(Qna qna) {
 		communityService.updateQna(qna);
 		return "redirect:/community/qna";
 	}
 	
-	// QNA 글 삭제
+	/* QNA 글 삭제 */
 	@PostMapping("/deleteQna")
 	public @ResponseBody int deleteQna(@RequestParam(value = "boardNum", required = false) Integer boardNum) {
 		return communityService.deleteQna(boardNum);

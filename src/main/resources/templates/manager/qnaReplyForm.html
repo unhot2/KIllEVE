@@ -5,10 +5,11 @@
 <head>
 	<meta charset="utf-8" />
 	<script th:src="@{/js/qna.js}"></script>
-	<link th:href="@{/css/qnaReply.css}" rel="stylesheet">
+	<link th:href="@{/css/community/qnaReply.css}" rel="stylesheet">
 	<!--TinyMCE-->
 	<script src="https://cdn.tiny.cloud/1/pyf8q7628ksvj3qubyx8rsw0isih2qaef5jsvej0txldx5ji/tinymce/5/tinymce.min.js"
 		referrerpolicy="origin"></script>
+	<!--TinyMCE 설정-->
 	<script>
 		tinymce.init({
 			selector: 'textarea',
@@ -23,6 +24,7 @@
 </head>
 <body>
 	<div layout:fragment="content">
+		<!--QNA 관리자 답변작성 화면-->
 		<section>
 			<div class="container">
 				<div class="qna-content">

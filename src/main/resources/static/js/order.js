@@ -1,4 +1,3 @@
-
 var totalPriceArray = [];
 var totalQuantityArray = [];
 var deliveryPrice = 2500;
@@ -21,7 +20,6 @@ $(function() {
 	// 이메일 제공자 설정
 	$('#emailProviderSelect').change(function(){
 		var provider = $('#emailProviderSelect').val();
-		console.log("provider값 : "+provider);
 		if(provider != '*'){
 			$('#emailProvider').val(provider);
 			$('#emailProvider').attr('readOnly',true);
@@ -135,7 +133,6 @@ $(function() {
 	       buyer_addr : buyer_addr,
 	       buyer_postcode : buyer_postcode
 	      }, function(rsp) {
-				console.log(rsp)
 	    	  if(rsp.success){
 	    		 $.ajax({
 	    	            url : "/order/kakaoPayment",
@@ -219,7 +216,6 @@ $(function() {
 									<td>\
 										<b><span class="totalPrice">￦'+priceToString(data[i].totalPrice)+'원</span></b>\
 									</td>';
-								
 					}
 					html +=	'</tr>';
 				}
@@ -320,6 +316,5 @@ function paymentOpen(url){
 	strOption += "top=" + nTop + "px,";
 	strOption += "width=" + nWidth + "px,";
 	strOption += "height=" + nHeight + "px,";
-	console.log("nTop : "+nTop)
 	window.open(url, "KakaoPay", strOption)
 }

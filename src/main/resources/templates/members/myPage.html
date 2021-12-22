@@ -4,19 +4,19 @@
 
 <head>
 	<meta charset="utf-8" />
-	<link href="/css/myPage.css" rel="stylesheet">
+	<link href="/css/user/myPage.css" rel="stylesheet">
 </head>
 
 <body>
 	<div layout:fragment="content">
 		<section>
+			<!--마이페이지-->
 			<div class="container">
 				<div>
 					<ul class="myPageUl">
 						<li class="myPageCard order">
 							<a th:href="@{/order/orderList(userId=${session.userId})}">
-								<h3><strong>Order</strong><span>주문내역
-										조회</span></h3>
+								<h3><strong>Order</strong><span>주문내역 조회</span></h3>
 								<p>고객님께서 주문하신 상품의<br> 주문내역을 확인하실 수 있습니다.</p>
 							</a>
 						</li>

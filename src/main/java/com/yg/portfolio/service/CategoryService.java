@@ -23,6 +23,7 @@ public class CategoryService {
 	int startPage = 0;		// 시작 게시물 번호
 	int endPage = 0;		// 끝 게시물 번호
 	
+	/* NEW 카테고리 조회 */
 	public List<Product> categoryNew(Integer page, Model model) {
 		totalCount = categoryRepository.categoryNewCnt(); 
 		paging(page); //페이징 처리
@@ -30,7 +31,8 @@ public class CategoryService {
 		model.addAttribute("totalPage", totalPage);
 		return categoryRepository.categoryNew(startPage, endPage);
 	}
-
+	
+	/* BEST 카테고리 조회 */ 
 	public List<Product> categoryBest(Integer page, Model model) {
 		totalCount = categoryRepository.categoryBestCnt(); 
 		paging(page); //페이징 처리
@@ -39,6 +41,7 @@ public class CategoryService {
 		return categoryRepository.categoryBest(startPage, endPage);
 	}
 
+	/* OUTER 카테고리 조회 */
 	public List<Product> categoryOuter(Integer page, String category, Model model) {
 		totalCount = categoryRepository.categoryCnt(category); 
 		paging(page); //페이징 처리
@@ -47,6 +50,7 @@ public class CategoryService {
 		return categoryRepository.categoryOuter(startPage, endPage);
 	}
 
+	/* TOP 카테고리 조회 */
 	public List<Product> categoryTop(Integer page, String category, Model model) {
 		totalCount = categoryRepository.categoryCnt(category); 
 		paging(page); //페이징 처리
@@ -55,6 +59,7 @@ public class CategoryService {
 		return categoryRepository.categoryTop(startPage, endPage);
 	}
 
+	/* PANTS 카테고리 조회 */
 	public List<Product> categoryPants(Integer page, String category, Model model) {
 		totalCount = categoryRepository.categoryCnt(category); 
 		paging(page); //페이징 처리
@@ -63,6 +68,7 @@ public class CategoryService {
 		return categoryRepository.categoryPants(startPage, endPage);
 	}
 
+	/* SHOES 카테고리 조회 */
 	public List<Product> categoryShoes(Integer page, String category, Model model) {
 		totalCount = categoryRepository.categoryCnt(category); 
 		paging(page); //페이징 처리
@@ -71,6 +77,7 @@ public class CategoryService {
 		return categoryRepository.categoryShoes(startPage, endPage);
 	}
 	
+	/* 페이징 */
 	public void paging(Integer page) {
 		totalPage = totalCount / listCount + (totalCount % listCount > 0 ? 1 : 0);
 		if (page == null) {

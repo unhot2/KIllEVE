@@ -16,67 +16,54 @@ public class ManagerService {
 	@Autowired
 	private ManagerRepository managerRepository;
 	
-	// 공지사항 글 작성
+	/* 공지사항 글 작성 */
 	public void writeNotice(Notice notice) {
-		int test = managerRepository.writeNotice(notice);
-		if (test == 1) {
-			System.out.println("NOTICE 작성 성공 : "+test);
-		}
-		else {
-			System.out.println("NOTICE 작성 실패 : "+test);
-		}
+		managerRepository.writeNotice(notice);
 	};
 	
-	// 공지사항 글 수정
+	/* 공지사항 글 수정 */
 	public void updateNotice(Notice notice) {
-		int test = managerRepository.updateNotice(notice);
-		if (test == 1) {
-			System.out.println("NOTICE 수정 성공 : "+test);
-		}
-		else {
-			System.out.println("NOTICE 수정 실패 : "+test);
-		}
+		managerRepository.updateNotice(notice);
 	}
 	
-	// 공지사항 글 삭제
+	/* 공지사항 글 삭제 */
 	public int deleteNotice(Integer boardNum) {
 		return managerRepository.deleteNotice(boardNum);
 	}
 	
-	// QNA 답글 작성
+	/* QNA 답글 작성 */
 	public int writeReplyQna(Qna qna) {
-		System.out.println("답변작성 서비스");
 		qna.setTitle("'킬이브'에서 답변드립니다");
 		qna.setChkSecret("secret");
 		return managerRepository.writeReplyQna(qna);
 	}
 
-	// 상품등록
+	/* 상품등록 */
 	public void productSave(Product product) {
 		managerRepository.productSave(product);
 	}
 
-	// 상세이미지 등록
+	/* 상세이미지 등록 */
 	public void productImgSave(String fileName) {
 		managerRepository.productImgSave(fileName);
 	}
 
-	// 컬러등록
+	/* 컬러등록 */
 	public void productColorSave(String colorName) {
 		managerRepository.productColorSave(colorName);
 	};
 	
-	// 사이즈등록
+	/* 사이즈등록 */
 	public void productSizeSave(String sizeName) {
 		managerRepository.productSizeSave(sizeName);
 	}
 
-	// 상품목록 조회
+	/* 상품목록 조회 */
 	public List<Product> productAllList() {
 		return managerRepository.productAllList();
 	}
 	
-	// 상품수정
+	/* 상품수정 */
 	public int productUpdate(Product product) {
 		return managerRepository.productUpdate(product);
 	};

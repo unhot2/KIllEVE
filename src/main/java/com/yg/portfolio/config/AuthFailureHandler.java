@@ -43,7 +43,6 @@ public class AuthFailureHandler implements AuthenticationFailureHandler {
 		} else if (accessException instanceof CredentialsExpiredException) {
 			errorMsg = "비밀번호가 만료되었습니다.";
 		}
-		System.out.println("errorMsg 값 : "+errorMsg);
 		RequestDispatcher view = request.getRequestDispatcher("/users/loginForm?error=" + errorMsg);
 		view.forward(request, response);
 

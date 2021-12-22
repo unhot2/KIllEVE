@@ -41,25 +41,6 @@ public class UserController {
 	// 2. @AuthenticationPrincipal 어노테이션을 통해 바로 PrincipalDetails에서 User를 가져오는 방법
 	@GetMapping("/loginSucess")
 	public String loginSucess(@AuthenticationPrincipal PrincipalDetails principalDetailss, HttpSession session) {
-//		if (principalDetailss.getUser().getProvider() == null) {
-//			System.out.println("★★★★★ 일반 로그인 ★★★★★	");
-//		} else {
-//			System.out.println("★★★★★ " + principalDetailss.getUser().getProvider() + " OAuth 로그인 ★★★★★	");
-//		}
-//		System.out.println("★★★★★ UserId		값 : " + principalDetailss.getUser().getUserId());
-//		System.out.println("★★★★★ Password		값 : " + principalDetailss.getUser().getPassword());
-//		System.out.println("★★★★★ UserName		값 : " + principalDetailss.getUser().getUserName());
-//		System.out.println("★★★★★ Email		값 : " + principalDetailss.getUser().getEmail());
-//		System.out.println("★★★★★ Role		값 : " + principalDetailss.getUser().getRole());
-//		System.out.println("★★★★★ EmailRec		값 : " + principalDetailss.getUser().getEmailReceiveYn());
-//		System.out.println("★★★★★ smsRec		값 : " + principalDetailss.getUser().getSmsReceiveYn());
-//		System.out.println("★★★★★ Address		값 : " + principalDetailss.getUser().getAddress());
-//		System.out.println("★★★★★ DetailAddress	값 : " + principalDetailss.getUser().getDetailAddress());
-//		System.out.println("★★★★★ ZipCode		값 : " + principalDetailss.getUser().getZipCode());
-//		System.out.println("★★★★★ Gender		값 : " + principalDetailss.getUser().getGender());
-//		System.out.println("★★★★★ Phone		값 : " + principalDetailss.getUser().getPhone());
-//		System.out.println("★★★★★ Provider		값 : " + principalDetailss.getUser().getProvider());
-//		System.out.println("★★★★★ ProviderId	값 : " + principalDetailss.getUser().getProviderId());
 		session.setAttribute("userRole", principalDetailss.getUser().getRole());
 		session.setAttribute("userId", principalDetailss.getUser().getUserId());
 		session.setAttribute("userName", principalDetailss.getUser().getUserName());
@@ -89,21 +70,6 @@ public class UserController {
 	// 회원가입
 	@PostMapping("/join")
 	public String join(User user) {
-		System.out.println("들어온값 userid : " + user.getUserId());
-		System.out.println("들어온값 password : " + user.getPassword());
-		System.out.println("들어온값 username: " + user.getUserName());
-		System.out.println("들어온값 email : " + user.getEmail());
-		System.out.println("들어온값 email제공자 : " + user.getEmailProvider());
-		System.out.println("들어온값 phone : " + user.getPhone());
-		System.out.println("들어온값 gender : " + user.getGender());
-		System.out.println("들어온값 email yn : " + user.getEmailReceiveYn());
-		System.out.println("들어온값 sms yn :" + user.getSmsReceiveYn());
-		System.out.println("들어온값 zipcode :" + user.getZipCode());
-		System.out.println("들어온값 address :" + user.getAddress());
-		System.out.println("들어온값 detailAddress :" + user.getDetailAddress());
-		System.out.println("들어온값 birthYear :" + user.getBirthYear());
-		System.out.println("들어온값 birthMonth :" + user.getBirthMonth());
-		System.out.println("들어온값 birthDay :" + user.getBirthDay());
 		userService.join(user);
 		return "redirect:/users/loginForm";
 	}

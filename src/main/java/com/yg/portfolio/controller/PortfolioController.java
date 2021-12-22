@@ -13,6 +13,7 @@ public class PortfolioController {
 	@Autowired
 	private ProductService productService;
 	
+	/* INDEX 화면 */
 	@RequestMapping({"","/"})
 	public String index(Model model) {
 		model.addAttribute("bestList",productService.productBest());

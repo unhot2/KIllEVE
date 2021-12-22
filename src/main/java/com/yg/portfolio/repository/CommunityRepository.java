@@ -28,7 +28,6 @@ public interface CommunityRepository {
 	// 공지사항 상세정보 조회
 	public Notice noticeDetail(int boardNum);
 	
-	
 	// QNA 목록 조회
 	public List<Qna> qna(int startPage, int endPage);
 	
