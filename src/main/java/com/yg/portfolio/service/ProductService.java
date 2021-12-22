@@ -73,6 +73,7 @@ public class ProductService {
 		model.addAttribute("totalCount", totalCount);
 		search.setStartPage(startPage);
 		search.setEndPage(endPage);
+		List<Product> list = productRepository.search(search);
         return productRepository.search(search);
 	}
 	

@@ -191,11 +191,11 @@ $(function() {
 		for(var i = 0; i < fileList.length; i++){
 			files.push(fileList[i].name);
 		}
-		var hot = $('input:checkbox[name="hotYn"]').is(":checked")
-		var mdPick = $('input:checkbox[name="mdPickYn"]').is(":checked")
-		var quick = $('input:checkbox[name="quickYn"]').is(":checked")
-		var best = $('input:checkbox[name="bestYn"]').is(":checked")
-		var sale = $('input:checkbox[name="saleYn"]').is(":checked")
+		var hot = $('.addBtn-table:first input:checkbox[name="hotYn"]').is(":checked")
+		var mdPick = $('.addBtn-table:first input:checkbox[name="mdPickYn"]').is(":checked")
+		var quick = $('.addBtn-table:first input:checkbox[name="quickYn"]').is(":checked")
+		var best = $('.addBtn-table:first input:checkbox[name="bestYn"]').is(":checked")
+		var sale = $('.addBtn-table:first input:checkbox[name="saleYn"]').is(":checked")
 		
 		$.ajax({             
 	    	type: "POST",          

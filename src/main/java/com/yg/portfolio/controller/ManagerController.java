@@ -94,6 +94,7 @@ public class ManagerController {
 			, @RequestParam(value= "colorList[]", required = false) List colorList
 			, @RequestParam(value= "sizeList[]", required = false) List sizeList
 			, Product product) throws Exception {
+			System.out.println(product.toString());
 			managerService.productSave(product);
 			for(int i =0; i < colorList.size(); i++) { 
 				managerService.productColorSave((String) colorList.get(i));
