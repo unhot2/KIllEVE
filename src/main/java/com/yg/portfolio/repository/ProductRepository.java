@@ -34,5 +34,7 @@ public interface ProductRepository {
 	public List<ProductColor> productColor(int productNo);
 
 	public List<ProductSize> productSize(int productNo);
+
+	public List<ProductSize> search(String search);
 	
 }

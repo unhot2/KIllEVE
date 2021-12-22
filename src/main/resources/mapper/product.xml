@@ -61,6 +61,12 @@
 		 WHERE productNo = #{productNo}
 	</select>
 	
+	<select id="search" resultType="Product">
+		SELECT *
+		  FROM productSize
+		 WHERE productName LIKE CONCAT('%',#{search},'%')
+	</select>
+	
 	<!-- 판매량 많은순 -->
 	<select id="rankProduct" resultType="ProductSize">
 		<!-- 상품번호 그룹으로 묶고 수량을 더한값을 가지고 가장 많은 순으로 정렬 = 가장많이팔린 상품 -->

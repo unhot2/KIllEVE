@@ -25,7 +25,8 @@
 /*배너 검색창*/
 .searchBar {
     top: 107px;
-    right: 21px;
+    /*right: 21px;*/
+    right: 197px;
     z-index: 1;
     background: white;
     padding: 0 24px;
@@ -33,29 +34,37 @@
     border-radius: 17px;
 }
 
-.searchBar > input {
+.searchBar > form > input {
     background: none;
     border: 0px;
     height: 32px;
     font-size: 14px;
-    padding: 0 6px 2px 0;
+    padding: 0 0 2px 0;
 }
 
-.searchBar > input:focus {
+.searchBar > form > input:focus {
 	outline:none;
 }
+
+.searchBar > form > button {
+	border : 0px;
+	background: none;
+}
+
 /*배너 쇼핑몰 로고*/
 .shopLogo {
     top: 96px;
+    /*left: 23px;*/
+    left: 203px;
     z-index: 1;
     width: 80px;
-    left: 23px;
 }
 /*배너 쇼핑몰 설명*/
 .shopDescription {
     top: 116px;
+    /*left: 113px;*/
+    left: 289px;
     z-index: 1;
-    left: 113px;
     font-size: 10px;
     color: white;
     opacity: 0.4;

@@ -56,5 +56,9 @@ public class ProductService {
 	public List<ProductSize> productSize(int productNo) {
 		return productRepository.productSize(productNo);
 	}
+
+	public List<ProductSize> search(String search) {
+		return productRepository.search(search);
+	}
 	
 }

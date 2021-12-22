@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yg.portfolio.model.Product;
 import com.yg.portfolio.model.ProductColor;
@@ -32,6 +33,13 @@ public class ProductController {
 		model.addAttribute("imgDetail",imgDetail);
 		model.addAttribute("color",color);
 		model.addAttribute("size",size);
+		return "/product/productDetailForm";
+	}
+	
+	@GetMapping("/search")
+	public String search(@RequestParam("search") String search, Model model) {
+		List<ProductSize> searchList = productService.search(search); 
+		model.addAttribute("searchList",searchList);
 		return "/product/productDetailForm";
 	}
 }

@@ -1,6 +1,6 @@
 $(function() {
 	/*초기설정*/
-	var test = ['best','new'];
+	var test = ['best','new','outer','top','pants','shoes'];
 	for(var i in test){
 		var index = $('.'+test[i]+'-component:last').index()
 		for(var j=0; j<=index; j++){

@@ -56,7 +56,12 @@
 					</ul>
 				</div>
 			</div>
-			<feildset class="searchBar"><input type="text" name="search" placeholder="상품명을 검색해보세요"><i class="fas fa-search"></i></feildset>
+			<feildset class="searchBar">
+				<form action="/product/search">
+					<input type="text" name="search" placeholder="상품명을 검색해보세요">
+					<button><i class="fas fa-search"></i></button>
+				</form>
+			</feildset>
 			<img src="/img/logo-white.svg" class="shopLogo">
 			<p class="shopDescription">'킬이브'는 남성의 매력을 <br> 극대화할 수 있는 디자인을 선보입니다.</p>
 			<div class="index-header">
@@ -67,65 +72,45 @@
 			<div class="category-bar">
 				<ul>
 					<li>
-						<div class="dropdown">
-							<a class="btn">
+						<div>
+							<a th:href="@{/category/new}" class="btn">
 								NEW
 							</a>
 						</div>
 					</li>
 					<li>
-						<div class="dropdown">
-							<a class="btn">
+						<div>
+							<a th:href="@{/category/best}" class="btn">
 								BEST
 							</a>
 						</div>
 					</li>
 					<li>
-						<div class="dropdown">
-							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						<div>
+							<a th:href="@{/category/outer(category='outer')}"class="btn">
 								OUTER
 							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="#">코트</a></li>
-								<li><a class="dropdown-item" href="#">자켓</a></li>
-								<li><a class="dropdown-item" href="#">패딩</a></li>
-							</ul>
 						</div>
 					</li>
 					<li>
-						<div class="dropdown">
-							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						<div>
+							<a th:href="@{/category/top(category='top')}"class="btn">
 								TOP
 							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="#">코트</a></li>
-								<li><a class="dropdown-item" href="#">자켓</a></li>
-								<li><a class="dropdown-item" href="#">패딩</a></li>
-							</ul>
 						</div>
 					</li>
 					<li>
-						<div class="dropdown">
-							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						<div>
+							<a th:href="@{/category/pants(category='pants')}"class="btn">
 								PANTS
 							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="#">코트</a></li>
-								<li><a class="dropdown-item" href="#">자켓</a></li>
-								<li><a class="dropdown-item" href="#">패딩</a></li>
-							</ul>
 						</div>
 					</li>
 					<li>
-						<div class="dropdown">
-							<a class="btn" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-								SHIRT
+						<div>
+							<a th:href="@{/category/shoes(category='shoes')}" class="btn">
+								SHOES
 							</a>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="#">코트</a></li>
-								<li><a class="dropdown-item" href="#">자켓</a></li>
-								<li><a class="dropdown-item" href="#">패딩</a></li>
-							</ul>
 						</div>
 					</li>
 				</ul>
