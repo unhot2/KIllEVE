@@ -68,7 +68,25 @@
 		  FROM (SELECT *
 			      FROM product, (SELECT @ROWNUM:=0) AS R
 				 WHERE productName LIKE CONCAT('%',#{search},'%')
-				 ORDER BY productNo DESC ) A ) B
+				 <if test="category != '' and category != null">
+				   AND category = #{category}
+				 </if>
+				 <if test="minPrice > 0 and maxPrice > 0">
+				   AND salePrice BETWEEN #{minPrice} and #{maxPrice}		
+				 </if>
+				 <if test="alignKind == '' or alignKind == null or alignKind == 'recent'">
+				 ORDER BY productNo DESC
+				 </if>
+				 <if test="alignKind == 'priceasc'">
+				 ORDER BY salePrice ASC
+				 </if>
+				 <if test="alignKind == 'price'">
+				 ORDER BY salePrice DESC
+				 </if>
+				 <if test="alignKind == 'name'">
+				 ORDER BY productName DESC
+				 </if>
+				 ) A ) B
 	</select>
 	
 	<select id="search" resultType="Product">

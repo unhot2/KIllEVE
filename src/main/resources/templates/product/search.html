@@ -104,7 +104,12 @@
 					</div>
 				</th:block>
 				<th:block th:unless="${#lists.size(searchList) > 0}">
-					상품이 존재하지 않습니다.
+					<div class="empty-content">
+						<div>
+							<span>검색결과가 없습니다.<br>정확한 검색어 인지 확인하시고 다시 검색해 주세요.<br></span>
+							<span>검색어/제외검색어의 입력이 정확한지 확인해 보세요.<br>두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.<br>검색 옵션을 다시 확인해 보세요.</span>
+						</div>
+					</div>
 				</th:block>
 				<div class="search-paging">
 					<th:block th:if="${searchList != null  and totalPage > 1}">
