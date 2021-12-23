@@ -17,7 +17,7 @@ __사용기술__
 
 # 주요기능
 
-##로그인
+## 로그인
 
 ![login](https://user-images.githubusercontent.com/62008631/147200417-1fb95db0-9143-48bf-8cdf-525d3407433e.png)
 
@@ -26,7 +26,7 @@ __사용기술__
 - FACEBOOK API 로그인
 - NAVER API 로그인
 
-##회원가입
+## 회원가입
 
 ![membership](https://user-images.githubusercontent.com/62008631/147200487-5442ed33-da7f-442f-8295-5802117f950c.png)
 
@@ -35,27 +35,27 @@ __사용기술__
 - FACEBOOK API 자동로그인
 - NAVER API 자동로그인
 
-##결제
+## 결제
 
 ![payment](https://user-images.githubusercontent.com/62008631/147200600-c1621812-a99f-4237-923f-b9429674de95.png)
 
 - 아임포트 API이용 카카오페이 결제
 
-##구매
+## 구매
 
 ![cart](https://user-images.githubusercontent.com/62008631/147200824-0d28288c-edc4-4170-9216-29c56e9b859c.png)
 
 - 장바구니 추가 후 구매
 - 상품상세에서 바로 구매
 
-##게시판
+## 게시판
 
 ![image](https://user-images.githubusercontent.com/62008631/147200889-c43c7b76-8d57-46ed-8812-c4628a079cb9.png)
 
 - 공지사항
 - QNA 게시판 (비밀글 작성기능)
 
-##관리자메뉴
+## 관리자메뉴
 
 ![manager](https://user-images.githubusercontent.com/62008631/147200966-5ecbdbc8-b16e-4540-8a16-dddc957422de.png)
 
