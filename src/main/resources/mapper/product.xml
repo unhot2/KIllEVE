@@ -4,9 +4,20 @@
 	namespace="com.yg.portfolio.repository.ProductRepository">
 
 	<select id="productBest" resultType="Product">
-		SELECT *
+		<!-- SELECT *
 		  FROM product
-		 LIMIT 9
+		 LIMIT 9 -->
+		 SELECT *
+		  FROM (SELECT @ROWNUM:=@ROWNUM+1 as num
+		  			 , A.*
+				  FROM (SELECT *
+						  FROM product, (SELECT @ROWNUM:=0) AS R
+						 WHERE productNo in (SELECT productNo
+		 					   FROM orderdetail 
+		 					   GROUP BY productNo
+		 					   ORDER BY sum(quantity) DESC)
+						 ORDER BY productNo DESC ) A ) B
+		  LIMIT 9
 	</select>
 	
 	<select id="productNew" resultType="Product">
