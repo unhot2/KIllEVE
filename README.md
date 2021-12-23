@@ -3,13 +3,15 @@
 - 개발기간 : 21.11.04 ~ 21.12.23 (51일)
 
 __사용기술__
-- HTML & CSS & JAVASCRIPT
+- HTML & CSS
+- JAVASCRIPT
+- Bootstrap
 - JAVA 8
 - SpringBoot 2.5.6
+- Thymeleaf
 - MariaDB
 - Mybatis
 - Spring Security
-- Thymeleaf
 - Oauth 2.0
 
 # MAIN 화면
