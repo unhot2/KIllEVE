@@ -12,6 +12,9 @@ __사용기술__
 - Thymeleaf
 - Oauth 2.0
 
+# MAIN
+---
+![localhost_8099_](https://user-images.githubusercontent.com/62008631/147199394-5ca52a29-df59-4841-a985-a4b0565830cc.gif)
 
 
 
