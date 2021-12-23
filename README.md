@@ -37,7 +37,7 @@ __사용기술__
 
 ## 결제
 
-![payment](https://user-images.githubusercontent.com/62008631/147200600-c1621812-a99f-4237-923f-b9429674de95.png)
+![payment](https://user-images.githubusercontent.com/62008631/147201681-5fa9a3d2-0c93-4a68-a6d2-70d981ec77a2.png)
 
 - 아임포트 API이용 카카오페이 결제
 
