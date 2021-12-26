@@ -72,11 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.loginProcessingUrl("/login") // LOGIN 주소가 호출되면 시큐리티가 낚아채서 대신 로그인을 진행 ( 컨트롤러에 /login에 대한 메소드 안만들어도 됨 )
 			.defaultSuccessUrl("/users/loginSucess", true) /*로그인 성공시 url*/
 			.failureHandler(authFailureHandler)
-//			.failureUrl("/users/loginFail").permitAll() /*로그인 실패시 url*/
-//		.and() // 로그아웃 설정
-//	        .logout()
-//	        .logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
-//			.invalidateHttpSession(true) // "/logout"으로 로그아웃시 세션값 삭제
+		.and() // 로그아웃 설정
+	        .logout()
+	        .logoutSuccessUrl("/") // 로그아웃 성공 후 이동할 URL
+			.invalidateHttpSession(true) // "/logout"으로 로그아웃시 세션값 삭제
 		.and()
 			// Oauth 로그인 프로세스 => 1.코드받기, 2.엑세스토큰, 3.사용자 프포필정보를 가져옴
 			// 4-1.그 정보를 토대로 자동 회원가입을 진행 or 4-2. 정보가 부족시 추가정보 입력후 회원가입 시킴
