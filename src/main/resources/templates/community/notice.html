@@ -30,7 +30,7 @@
 										th:text="${product.title}"></a>
 								</td>
 								<td th:text="${product.userName}"></td>
-								<td th:text="${#dates.format(new java.util.Date(product.writeDate), 'yyyy-MM-dd')}">
+								<td th:text="${#dates.format(product.writeDate, 'yyyy-MM-dd')}">
 								</td>
 								<td th:text="${product.count}"></td>
 							</tr>

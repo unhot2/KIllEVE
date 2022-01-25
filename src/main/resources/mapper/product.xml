@@ -4,9 +4,6 @@
 	namespace="com.yg.portfolio.repository.ProductRepository">
 
 	<select id="productBest" resultType="Product">
-		<!-- SELECT *
-		  FROM product
-		 LIMIT 9 -->
 		 SELECT *
 		  FROM (SELECT @ROWNUM:=@ROWNUM+1 as num
 		  			 , A.*
