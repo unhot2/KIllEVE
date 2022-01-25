@@ -11,7 +11,7 @@ CREATE TABLE `qna` (
   `password` varchar(4) DEFAULT NULL,
   `chkSecret` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`boardNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 INSERT INTO yg.qna (groupNo,groupStep,writeDate,userId,userName,title,content,count,password,chkSecret) VALUES
 	 (1,0,'2021-11-24 17:42:51.0','unhot2','최윤규','상품 문의드립니다.','<p>상품 A 배송 언제오나요??</p>',7,'8265','secret'),

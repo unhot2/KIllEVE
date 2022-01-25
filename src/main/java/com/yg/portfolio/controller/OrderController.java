@@ -49,7 +49,7 @@ public class OrderController {
 			kakaoPay.setPaid_at(format.format(date));
 		}
 		model.addAttribute("orderList",orderList);
-		return "/order/orderList";
+		return "order/orderList";
 	}
 	
 	/* 주문서 상세정보 */
@@ -67,7 +67,7 @@ public class OrderController {
 			user.setUserId((String) session.getAttribute("userId"));
 			model.addAttribute("memberInfo",memberService.memberInfo(user));
 			model.addAttribute("orderList",orderList);
-		return "/order/orderForm";
+		return "order/orderForm";
 	}
 
 	/* 주문서 상세정보 */
@@ -96,7 +96,7 @@ public class OrderController {
 			user.setUserId((String) session.getAttribute("userId"));
 			model.addAttribute("memberInfo",memberService.memberInfo(user));
 			model.addAttribute("orderList",orderList);
-		return "/order/orderForm";
+		return "order/orderForm";
 	}
 
 	/* 카카오페이 결제 */
@@ -145,7 +145,7 @@ public class OrderController {
 		paymentInfo.setPaid_at(format.format(date));
 		model.addAttribute("payment",paymentInfo);
 		model.addAttribute("productList",productList);
-		return "/order/checkPayment";
+		return "order/checkPayment";
 	}
 	
 	// 주문내역 상세정보

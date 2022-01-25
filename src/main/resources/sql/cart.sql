@@ -8,7 +8,7 @@ CREATE TABLE `cart` (
   PRIMARY KEY (`cartNo`),
   KEY `cart_FK` (`productNo`),
   CONSTRAINT `cart_FK` FOREIGN KEY (`productNo`) REFERENCES `product` (`productNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 INSERT INTO yg.cart (productNo,quantity,`size`,color,userId) 
 VALUES (33,1,'260mm','아이보리','unhot2'),

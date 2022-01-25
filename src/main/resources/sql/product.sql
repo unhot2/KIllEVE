@@ -13,7 +13,7 @@ CREATE TABLE `product` (
   `bestYn` tinyint(1) DEFAULT 0,
   `saleYn` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`productNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 INSERT INTO yg.product (productName,category,discountRate,consumerPrice,salePrice,stock,mainImage,hotYn,mdPickYn,quickYn,bestYn,saleYn) 
 VALUES ('[wool] 울 캐시 세미핏 싱글코트OT','outer','36',140000,89600,100,'1_main.png',1,0,1,0,0),

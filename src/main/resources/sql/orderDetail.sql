@@ -1,4 +1,4 @@
-CREATE TABLE `orderdetail` (
+CREATE TABLE `orderDetail` (
   `merchant_uid` varchar(100) NOT NULL,
   `productNo` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE `orderdetail` (
   `totalPrice` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
-INSERT INTO yg.orderdetail (merchant_uid,productNo,quantity,color,`size`,totalPrice) VALUES
+INSERT INTO yg.orderDetail (merchant_uid,productNo,quantity,color,`size`,totalPrice) VALUES
 	 ('merchant_1639720962069',1,3,'아이보리','100(L)',268800),
 	 ('merchant_1639720962069',1,2,'블랙','105(XL)',179200),
 	 ('merchant_1639725951631',2,2,'블랙','100(M)',154000),

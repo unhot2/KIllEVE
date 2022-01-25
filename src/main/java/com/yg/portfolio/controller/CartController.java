@@ -30,7 +30,7 @@ public class CartController {
 	public String cartList(String userId, Model model) {
 		List<Cart> cartList = cartService.cartList(userId);
 		model.addAttribute("cartList",cartList);
-		return "/cart/cart";
+		return "cart/cart";
 	}
 	
 	/* 장바구니 등록 */

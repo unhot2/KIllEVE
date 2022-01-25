@@ -1,11 +1,7 @@
 package com.yg.portfolio.controller;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.server.RequestPath;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.nimbusds.oauth2.sdk.http.HTTPRequest;
 import com.yg.portfolio.model.PrincipalDetails;
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.service.UserService;
@@ -32,7 +26,7 @@ public class UserController {
 	@RequestMapping(value = "/loginForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(@RequestParam(value = "error", required = false) String error, Model model) {
 		model.addAttribute("error", error);
-		return "/users/loginForm";
+		return "users/loginForm";
 	}
 
 	// 로그인 성공 메소드
@@ -53,7 +47,7 @@ public class UserController {
 		if (nomalJoin != null) {
 			model.addAttribute("nomalJoin", "Y");
 		}
-		return "/users/joinForm";
+		return "users/joinForm";
 	}
 
 	// 회원가입 => 아이디 중복체크

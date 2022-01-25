@@ -36,14 +36,14 @@ public class CommunityController {
 				model.addAttribute("list",list);
 			}
 		}
-		return "/community/notice";
+		return "community/notice";
 	}
 	
 	/* 공지사항 상세조회 */
 	@GetMapping("/notice/{boardNum}")
 	public String noticeDetail(Model model, @PathVariable int boardNum) {
 		model.addAttribute("detail",communityService.noticeDetail(boardNum));
-		return "/community/noticeDetailForm";
+		return "community/noticeDetailForm";
 	}
 	
 	/* QNA 조회 */
@@ -61,7 +61,7 @@ public class CommunityController {
 				model.addAttribute("list",list);
 			}
 		}
-		return "/community/qna";
+		return "community/qna";
 	}
 	
 	/* QNA 상세조회 */
@@ -71,10 +71,10 @@ public class CommunityController {
 		if (chkSecret.equals("secret") || chkSecret.equals("reply")) {
 			model.addAttribute("boardNum",boardNum);
 			
-			return "/community/qnaCheckPw";
+			return "community/qnaCheckPw";
 		} else {
 			model.addAttribute("detail",communityService.qnaDetail(boardNum));
-			return "/community/qnaDetailForm";
+			return "community/qnaDetailForm";
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class CommunityController {
 		if (boardNum != null) {
 			model.addAttribute("detail",communityService.qnaDetail(boardNum));
 		}
-		return "/community/qnaForm";
+		return "community/qnaForm";
 	}
 	
 	/* QNA 비밀글 비밀번호 체크 */

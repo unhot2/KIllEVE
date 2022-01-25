@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.yg.portfolio.model.Notice;
 import com.yg.portfolio.model.Product;
 import com.yg.portfolio.model.Qna;
@@ -33,7 +31,7 @@ public class ManagerController {
 		if (boardNum != null) {
 			model.addAttribute("detail",communityService.noticeDetail(boardNum));
 		}
-		return "/manager/noticeForm";
+		return "manager/noticeForm";
 	}
 	
 	/* 공지사항 글 작성 */
@@ -60,7 +58,7 @@ public class ManagerController {
 	@GetMapping("/qnaReplyForm")
 	public String qnaReplyForm(@RequestParam(value = "boardNum", required = false) Integer boardNum,Model model) {
 		model.addAttribute("detail",communityService.qnaDetail(boardNum));
-		return "/manager/qnaReplyForm";
+		return "manager/qnaReplyForm";
 	}
 	
 	/* QNA 답글 작성 */
@@ -75,7 +73,7 @@ public class ManagerController {
 	public String productForm(Model model) {
 		List<Product> productList = managerService.productAllList();
 		model.addAttribute("productList",productList);
-		return "/manager/managerMenu";
+		return "manager/managerMenu";
 	}
 	
 	/* 상품 등록 */
@@ -101,7 +99,7 @@ public class ManagerController {
 	@PostMapping("/productUpdate")
 	@ResponseBody
 	public void productUpdate(Product product) throws Exception {
-		int chk = managerService.productUpdate(product);
+		managerService.productUpdate(product);
 	}
 	
 	/* 상품관리 목록 */

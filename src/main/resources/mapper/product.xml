@@ -13,7 +13,7 @@
 				  FROM (SELECT *
 						  FROM product, (SELECT @ROWNUM:=0) AS R
 						 WHERE productNo in (SELECT productNo
-		 					   FROM orderdetail 
+		 					   FROM orderDetail 
 		 					   GROUP BY productNo
 		 					   ORDER BY sum(quantity) DESC)
 						 ORDER BY productNo DESC ) A ) B

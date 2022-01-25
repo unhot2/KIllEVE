@@ -1,15 +1,12 @@
 package com.yg.portfolio.controller;
 
-import javax.annotation.processing.SupportedSourceVersion;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yg.portfolio.model.User;
 import com.yg.portfolio.service.MemberService;
@@ -24,7 +21,7 @@ public class MemberController {
 	/* 마이페이지 */
 	@GetMapping("/myPage")
 	public String myPage(Model model) {
-		return "/members/myPage";
+		return "members/myPage";
 	}
 	
 	/* 회원정보 조회 */
@@ -32,7 +29,7 @@ public class MemberController {
 	public String memberInfo(Model model, User user) {
 		User info = memberService.memberInfo(user);
 		model.addAttribute("userInfo",info);
-		return "/members/memberInfo";
+		return "members/memberInfo";
 	}
 	
 	/* 회원정보 수정 */
@@ -45,7 +42,7 @@ public class MemberController {
 	}
 	
 	/* 회원탈퇴 */ 
-	@GetMapping("memberWithdrawal")
+	@GetMapping("/memberWithdrawal")
 	public String memberWithdrawal(User user) {
 		memberService.memberWithdrawal(user);
 		return "redirect:/";

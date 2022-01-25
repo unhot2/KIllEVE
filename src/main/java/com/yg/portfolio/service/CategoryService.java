@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
-import com.yg.portfolio.model.Notice;
 import com.yg.portfolio.model.Product;
 import com.yg.portfolio.repository.CategoryRepository;
 

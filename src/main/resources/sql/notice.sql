@@ -9,7 +9,7 @@ CREATE TABLE `notice` (
   `updateUser` varchar(100) DEFAULT NULL,
   `updateTime` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`boardNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 
 

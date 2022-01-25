@@ -20,14 +20,14 @@ public class CategoryController {
 	@GetMapping("/new")
 	public String categoryNew(@RequestParam(value = "currentPage", required = false) Integer currentPage, Model model) {
 		model.addAttribute("newList",categoryService.categoryNew(currentPage,model));
-		return "/category/new";
+		return "category/new";
 	}
 	
 	/* BEST 카테고리 조회 */ 
 	@GetMapping("/best")
 	public String categoryBest(@RequestParam(value = "currentPage", required = false) Integer currentPage, Model model) {
 		model.addAttribute("bestList",categoryService.categoryBest(currentPage,model));
-		return "/category/best";
+		return "category/best";
 	}
 	
 	/* OUTER 카테고리 조회 */
@@ -36,7 +36,7 @@ public class CategoryController {
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
 			, @RequestParam(value = "category", required = false) String category) {
 		model.addAttribute("outerList",categoryService.categoryOuter(currentPage,category,model));
-		return "/category/outer";
+		return "category/outer";
 	}
 	
 	/* TOP 카테고리 조회 */
@@ -45,7 +45,7 @@ public class CategoryController {
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
 			, @RequestParam(value = "category", required = false) String category) {
 		model.addAttribute("topList",categoryService.categoryTop(currentPage,category,model));
-		return "/category/top";
+		return "category/top";
 	}
 	
 	/* PANTS 카테고리 조회 */
@@ -54,7 +54,7 @@ public class CategoryController {
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
 			, @RequestParam(value = "category", required = false) String category) {
 		model.addAttribute("pantsList",categoryService.categoryPants(currentPage,category,model));
-		return "/category/pants";
+		return "category/pants";
 	}
 	
 	/* SHOES 카테고리 조회 */
@@ -63,7 +63,7 @@ public class CategoryController {
 			, @RequestParam(value = "currentPage", required = false) Integer currentPage
 			, @RequestParam(value = "category", required = false) String category) {
 		model.addAttribute("shoesList",categoryService.categoryShoes(currentPage,category,model));
-		return "/category/shoes";
+		return "category/shoes";
 	}
 	
 }

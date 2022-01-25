@@ -1,13 +1,13 @@
-CREATE TABLE `productsize` (
+CREATE TABLE `productSize` (
   `sizeNo` int(11) NOT NULL AUTO_INCREMENT,
   `productNo` int(11) NOT NULL,
   `sizeName` varchar(100) NOT NULL,
   PRIMARY KEY (`sizeNo`),
   KEY `productSize_FK` (`productNo`),
   CONSTRAINT `productSize_FK` FOREIGN KEY (`productNo`) REFERENCES `product` (`productNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
-INSERT INTO yg.productsize (productNo,sizeName) VALUES
+INSERT INTO yg.productSize (productNo,sizeName) VALUES
 	 (1,'95(M)'),
 	 (1,'100(L)'),
 	 (1,'105(XL)'),

@@ -1,13 +1,13 @@
-CREATE TABLE `productimg` (
+CREATE TABLE `productImg` (
   `imageNo` int(11) NOT NULL AUTO_INCREMENT,
   `productNo` int(11) NOT NULL,
   `fileName` varchar(255) NOT NULL,
   PRIMARY KEY (`imageNo`),
   KEY `productimg_FK` (`productNo`),
   CONSTRAINT `productimg_FK` FOREIGN KEY (`productNo`) REFERENCES `product` (`productNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=729 DEFAULT CHARSET=utf8mb3
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3
 
-INSERT INTO yg.productimg (productNo,fileName) VALUES
+INSERT INTO yg.productImg (productNo,fileName) VALUES
 	 (1,'ouser_1_1.jpg'),
 	 (1,'ouser_1_2.jpg'),
 	 (1,'ouser_1_3.jpg'),

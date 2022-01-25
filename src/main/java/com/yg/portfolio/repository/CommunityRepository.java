@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.yg.portfolio.model.Notice;
 import com.yg.portfolio.model.Qna;
-import com.yg.portfolio.model.User;
 
 
 @Mapper

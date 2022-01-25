@@ -1,13 +1,13 @@
-CREATE TABLE `productcolor` (
+CREATE TABLE `productColor` (
   `colorNo` int(11) NOT NULL AUTO_INCREMENT,
   `productNo` int(11) NOT NULL,
   `colorName` varchar(100) NOT NULL,
   PRIMARY KEY (`colorNo`),
   KEY `productColor_FK` (`productNo`),
   CONSTRAINT `productColor_FK` FOREIGN KEY (`productNo`) REFERENCES `product` (`productNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
-INSERT INTO yg.productcolor (productNo,colorName) 
+INSERT INTO yg.productColor (productNo,colorName) 
 VALUES (1,'블랙'),
 	   (1,'아이보리'),
 	   (1,'차콜'),

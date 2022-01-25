@@ -35,7 +35,7 @@ public class ProductController {
 		model.addAttribute("imgDetail",imgDetail);
 		model.addAttribute("color",color);
 		model.addAttribute("size",size);
-		return "/product/productDetailForm";
+		return "product/productDetailForm";
 	}
 	
 	/* 상품검색 */
@@ -44,6 +44,6 @@ public class ProductController {
 			,@RequestParam(value = "currentPage", required = false) Integer currentPage) {
 		model.addAttribute("searchList",productService.search(search,currentPage,model));
 		model.addAttribute("prevSearch",search.getSearch());
-		return "/product/search";
+		return "product/search";
 	}
 }

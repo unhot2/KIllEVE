@@ -99,7 +99,7 @@
 			 , (SELECT productName
 			 	  FROM product
 			 	 WHERE productNo = A.productNo) as productName
-		  FROM orderdetail A
+		  FROM orderDetail A
 		 WHERE merchant_uid = #{merchant_uid}
 	</select>
 	
