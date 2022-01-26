@@ -253,6 +253,6 @@ section {
 
 /*index 카카오배너 이미지*/
 .kakaoBanner img {
-	width : 1500px;
+	width : 100%;
 }
 
