@@ -1,4 +1,7 @@
 $(function() {
+	/*안내팝업*/
+	window.open('popup.html', 'pop01', 'top=10, left=10, width=300, height=350, status=no, menubar=no, directories=no, scrollbars=no, toolbar=no, resizable=no');
+	
 	/*초기설정*/
 	var test = ['best','new','outer','top','pants','shoes'];
 	for(var i in test){
