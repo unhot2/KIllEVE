@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yg.portfolio.model.Notice;
 import com.yg.portfolio.model.Qna;
 import com.yg.portfolio.service.CommunityService;
@@ -70,7 +71,6 @@ public class CommunityController {
 			@RequestParam(value = "chkSecret", required = false) String chkSecret) {
 		if (chkSecret.equals("secret") || chkSecret.equals("reply")) {
 			model.addAttribute("boardNum",boardNum);
-			
 			return "community/qnaCheckPw";
 		} else {
 			model.addAttribute("detail",communityService.qnaDetail(boardNum));

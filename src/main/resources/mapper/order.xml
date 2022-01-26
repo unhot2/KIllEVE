@@ -107,6 +107,7 @@
 		SELECT * 
 		  FROM `order`
 		 WHERE userId = #{userId}
+		 ORDER BY merchant_uid DESC
 	</select>
 	
 </mapper>

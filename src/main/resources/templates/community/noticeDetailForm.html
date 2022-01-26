@@ -30,7 +30,7 @@
 						</tr>
 						<tr>
 							<th>작성일</th>
-							<td th:text="${#dates.format(new java.util.Date(detail.writeDate), 'yyyy-MM-dd')}"></td>
+							<td th:text="${#dates.format(detail.writeDate, 'yyyy-MM-dd')}"></td>
 						</tr>
 						<tr>
 							<th>조회수</th>
