@@ -166,14 +166,19 @@
 	
 	<insert id="writeQna">
 		INSERT INTO qna (
-			   userId
+			   groupNo
+			 , userId
 			 , userName
 			 , title
 			 , content
 			 , chkSecret
 			 , password)
 		VALUES (
-			   #{userId}
+			   (SELECT AUTO_INCREMENT
+			   	  FROM information_schema.tables
+			   	 WHERE table_name = 'qna'
+			   	   AND table_schema = database())
+			 , #{userId}
 			 , #{userName}
 			 , #{title}
 			 , #{content}

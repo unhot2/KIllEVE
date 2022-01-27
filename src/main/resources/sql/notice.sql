@@ -4,7 +4,7 @@ CREATE TABLE `notice` (
   `userId` varchar(100) NOT NULL,
   `userName` varchar(100) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `content` varchar(255) DEFAULT NULL,
+  `content` varchar(2000) DEFAULT NULL,
   `count` int(11) DEFAULT 0,
   `updateUser` varchar(100) DEFAULT NULL,
   `updateTime` timestamp NULL DEFAULT NULL,
