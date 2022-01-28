@@ -74,7 +74,7 @@
 					</table>
 					<div class="btnDivArea">
 						<div class="btnDiv">
-							<span><a href="/">주문내역</a></span>
+							<span><a th:href="@{/order/orderList(userId=${session.userId})}">주문내역</a></span>
 						</div>
 						<div class="btnDiv">
 							<span><a href="/">메인화면</a></span>
