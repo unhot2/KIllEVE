@@ -18,13 +18,22 @@
 				</div>
 				<div class="order-body">
 					<table class="order-table">
-						<tr>
+						<tr class="normal-table">
 							<td style="width:12%;">주문번호</td>
 							<td style="width:12%;">거래일시</td>
 							<td style="width:47%;">상품정보</td>
 							<td style="width:7%;">배송비</td>
 							<td style="width:7%;">총 결제금액</td>
 							<td style="width:7%;">결제전표</td>
+							<td style="width:7%;">상세보기</td>
+						</tr>
+						<tr class="mobile-table">
+							<td style="width:1%;">주문번호</td>
+							<td style="width:22%;">거래일시</td>
+							<td style="width:43%;">상품정보</td>
+							<td style="width:7%;">배송비</td>
+							<td style="width:5%;">총 결제금액</td>
+							<td style="width:31%;">결제전표</td>
 							<td style="width:7%;">상세보기</td>
 						</tr>
 						<th:block th:if="${#lists.isEmpty(orderList)}">

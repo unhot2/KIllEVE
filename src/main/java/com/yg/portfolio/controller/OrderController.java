@@ -9,6 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +56,7 @@ public class OrderController {
 	/* 주문서 상세정보 */
 	@GetMapping("/orderDetail")
 	public String orderFormCart(OrderFormList list, Model model, HttpSession session){
+			System.out.println("list값 : "+list);
 			List<OrderForm> orderList = new ArrayList<OrderForm>();
 			// 장바구니에서 가져온 CartNo 리스트
 			for (OrderForm order : list.getOrderFormList()) {

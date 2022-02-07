@@ -100,7 +100,8 @@
 											data-rule-required="true" maxlength="30">
 										<span class="chkId"></span>
 										<!--아이디 중복체크여부 hidden으로 넣어야됨-->
-										<span>30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다.</span>
+										<span class="normal">30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다.</span>
+										<div class="mobile">30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다.</div>
 									</td>
 								</tr>
 								<tr>
@@ -110,7 +111,8 @@
 									</th>
 									<td>
 										<input type="password" class="joinInput" id="password" name="password" data-rule-required="true" maxlength="30">
-										<span class="chkPwd"></span>
+										<span class="chkPwd normal"></span>
+										<div class="chkPwd mobile"></div>
 									</td>
 								</tr>
 								<tr>
@@ -121,7 +123,8 @@
 									</th>
 									<td>
 										<input type="password" class="joinInput" id="passwordCheck"	data-rule-required="true" maxlength="30">
-										<span class="chkPwdMatch"></span>
+										<span class="chkPwdMatch normal"></span>
+										<div class="chkPwdMatch mobile"></div>
 									</td>
 								</tr>
 								<tr>
@@ -132,7 +135,8 @@
 									</th>
 									<td>
 										<input type="text" class="joinInput onlyHangul" id="name" name="userName" data-rule-required="true" maxlength="15">
-										<span>한글만 입력 가능합니다.</span>
+										<span class="normal">한글만 입력 가능합니다.</span>
+										<div class="mobile">한글만 입력 가능합니다.</div>
 									</td>
 								</tr>
 								<tr>
@@ -160,7 +164,8 @@
 									</th>
 									<td>
 										<input type="tel" class="joinInput onlyNumber" id="phoneNumber" name="phone" data-rule-required="true" maxlength="11">
-										<span>-를 제외하고 숫자만 입력하세요.</span>
+										<span class="normal">-를 제외하고 숫자만 입력하세요.</span>
+										<div class="mobile">-를 제외하고 숫자만 입력하세요.</div>
 									</td>
 								</tr>
 								<tr>
@@ -233,7 +238,7 @@
 						</div>
 						<span class="font">전체동의</span>
 						<div class="form-group">
-							<table class="terms-table">
+							<table class="terms-table" style="margin-bottom : 25px;">
 								<tr>
 									<th>
 										<span class="check-span">

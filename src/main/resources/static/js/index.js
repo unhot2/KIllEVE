@@ -1,6 +1,6 @@
 $(function() {
 	/*안내팝업*/
-	window.open('popup.html', 'pop01', 'top=10, left=10, width=300, height=350, status=no, menubar=no, directories=no, scrollbars=no, toolbar=no, resizable=no');
+	/*window.open('popup.html', 'pop01', 'top=10, left=10, width=300, height=350, status=no, menubar=no, directories=no, scrollbars=no, toolbar=no, resizable=no');*/
 	
 	/*초기설정*/
 	var test = ['best','new','outer','top','pants','shoes'];
@@ -34,12 +34,14 @@ $(function() {
 			current = 'src2';
 			for(j=0; j<arrayList.length; j++){
 				$('.best-component').eq(j).children().children('.card-image').attr("src",arrayList[j].src2)
+				$('.best-component').eq(j).children().children().children('.card-image').attr("src",arrayList[j].src2)
 			}
 		}
 		else {
 			current = 'src1';
 			for(j=0; j<arrayList.length; j++){
 				$('.best-component').eq(j).children().children('.card-image').attr("src",arrayList[j].src1)
+				$('.best-component').eq(j).children().children().children('.card-image').attr("src",arrayList[j].src1)
 			}
 		}
 	},2500)
@@ -79,7 +81,12 @@ $(function() {
         className.css('top','23px');
     });
 	
- });
+});
+ 
+function popupClose() {
+	window.close();
+}
+ 
  
 
 

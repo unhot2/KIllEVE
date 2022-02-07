@@ -18,11 +18,18 @@
 				</div>
 				<div class="qna-body">
 					<table class="qna-table">
-						<tr>
+						<tr class="normal-table">
 							<th class="col-1">번호</th>
 							<th class="col-8">제목</th>
 							<th class="col-1">작성자</th>
 							<th class="col-1">작성일</th>
+							<th class="col-1">조회수</th>	
+						</tr>
+						<tr class="mobile-table">
+							<th class="col-1">번호</th>
+							<th class="col-6">제목</th>
+							<th class="col-2">작성자</th>
+							<th class="col-2">작성일</th>
 							<th class="col-1">조회수</th>	
 						</tr>
 						<th:block th:if="${list != null}">
@@ -91,7 +98,7 @@
 								  <option value="title" selected="selected">제목</option>
 								  <option value="userName">작성자</option>
 								</select>
-								<input type="text" name="search">
+								<input type="text" name="search"  class="searchInput">
 								<button>SEARCH</button>
 							</form>
 						</div>

@@ -63,6 +63,7 @@ public class CartController {
 	
 	/* 장바구니 상품삭제 */
 	@PostMapping("/cartDelete")
+	@ResponseBody
 	public void cartDelete(@RequestParam(value="cartNo") String cartNo) {
 		cartService.cartDelete(cartNo);
 	}

@@ -47,6 +47,19 @@ function trimPrice(price){
 	return Number(price.replace('￦', '').replace('원', '').replace(',', ''));
 }
 
+ $(function () {
+    $("#slide-open").click(function () {
+        if ($("#burgur").hasClass('on')) {
+            $("#burgur").removeClass('on');
+            $("#slide").removeClass('on');
+
+        } else {
+            $("#burgur").addClass('on');
+            $("#slide").addClass('on');
+        }
+    });
+
+});
 
 
 

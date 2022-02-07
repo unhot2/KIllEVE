@@ -7,14 +7,13 @@
 
 <body>
 	<div th:fragment="sampleheader">
-		<!--HEADER-->
 		<header>
 			<div class="header_top">
 				<div class="inwrap">
 					<!--최상단 로고-->
 					<ul class="navlog">
 						<li>
-							<a th:href="@{/}"><img src="/img/logo-black.svg"></a>
+							<a th:href="@{/}"><img src="/img/logo-black.png"></a>
 						</li>
 					</ul>
 					<!--NAV BAR-->
@@ -57,18 +56,81 @@
 							<li><a th:href="@{/admin}"><span>ADMIN</span></a></li>
 						</th:block>
 					</ul>
+					<!--burger 메뉴-->
+					<div class="burger-menu">
+			            <div class="burger-head">
+			                <div class="slide-open" id="slide-open">
+			                    <span class="burgur" id="burgur">
+			                        <span class="top-line"></span>
+			                        <span class="bot-line"></span>
+			                    </span>
+			                </div>
+			            </div>
+			            <div class="burger-body">
+			                <div class="slide" id="slide">
+			                    <ul>
+			                    	<li>
+			                    		상품검색<br><br><br>
+			                    		<feildset class="burger-searchBar">
+											<form action="/product/search">
+											<input type="text" name="search" placeholder="상품명 입력" required>
+											<button><i class="fas fa-search"></i></button>
+											</form>
+										</feildset>
+			                    	</li>
+			                        <th:block th:if="${session.userRole != null }">
+										<li>
+											<span th:text="${session.userName}"></span>
+											<span style="font-size: 14px;">님</span>
+										</li>
+										<li><a th:href="@{/members/myPage}"><span>마이페이지</span></a>
+										</li>
+										<li>
+											<details>
+					                            <summary>커뮤니티</summary>
+					                            <a th:href="@{/community/notice}">공지사항</a><br>
+					                            <a th:href="@{/community/qna}">질문사항</a>
+			                           		 </details>
+										</li>
+										<li><a th:href="@{/cart/cartList(userId=${session.userId})}"><span>장바구니</span></a></li>
+									</th:block>
+									<th:block th:if="${session.userRole == null}">
+										<li><a th:href="@{/users/loginForm}"><span>로그인</span></a></li>
+										<li><a th:href="@{/users/joinForm}"><span>회원가입</span></a></li>
+										<li>
+											<details>
+					                            <summary>커뮤니티</summary>
+					                            <a th:href="@{/community/notice}">공지사항</a><br>
+					                            <a th:href="@{/community/qna}">질문사항</a>
+			                           		 </details>
+										</li>
+										<li><a th:href="@{/cart/cartList(userId=${session.userId})}"><span>장바구니</span></a></li>
+									</th:block>
+									<th:block th:if="${session.userRole != null }">
+										<li><a th:href="@{/logout}"><span>LOGOUT</span></a></li>
+									</th:block>
+									<th:block th:if="${session.userRole == 'ROLE_MANAGER' }">
+										<li><a th:href="@{/manager/managerMenu}"><span>MANAGER</span></a></li>
+									</th:block>
+									<th:block th:if="${session.userRole == 'ROLE_ADMIN' }">
+										<li><a th:href="@{/admin}"><span>ADMIN</span></a></li>
+									</th:block>
+			                    </ul>
+			                </div>
+			            </div>
+					</div>
 				</div>
 			</div>
 			<!--검색창-->
 			<feildset class="searchBar">
 				<form action="/product/search">
-					<input type="text" name="search" placeholder="상품명을 검색해보세요" required>
-					<button><i class="fas fa-search"></i></button>
+				<input type="text" name="search" placeholder="상품명을 입력해주세요" required>
+				<button><i class="fas fa-search"></i></button>
 				</form>
 			</feildset>
 			<!--하단 NAV-->
-			<img src="/img/logo-white.svg" class="shopLogo">
-			<p class="shopDescription">'킬이브'는 남성의 매력을 <br> 극대화할 수 있는 디자인을 선보입니다.</p>
+			<!--<img src="/img/logo-white.png" class="shopLogo">
+			<p class="shopDescription">'킬이브'는 남성의 매력을 <br> 극대화할 수 있는 디자인을 선보입니다.</p>-->
 			<div class="index-header">
 				<div class="shop-name-area">
 					<div class="shop-name">KIIIEVE</div>

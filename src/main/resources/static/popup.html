@@ -2,6 +2,7 @@
 <html lang="ko">
     <head>
     	<meta charset="utf-8" />
+    	<script src="/js/index.js"></script>
         <style>
             body {
                 margin : 0px;
@@ -29,7 +30,7 @@
             .text-content {
                 padding: 35px 10px 0 10px;
                 color : white;
-                font-size: 17px;
+                font-size: 14px;
                 text-shadow: black 3px 1px 3px;
                 text-align: center;
             }
@@ -37,10 +38,24 @@
             .text-content2 {
                 padding: 15px 10px 0 10px;
                 color : white;
-                font-size: 17px;
+                font-size: 14px;
                 text-shadow: black 3px 1px 3px;
                 text-align: center;
             }
+            
+            .text-content3 {
+                padding: 15px 10px 0 10px;
+                color : white;
+                font-size: 14px;
+                text-shadow: black 3px 1px 3px;
+                text-align: center;
+            }
+             
+            input[type="button"] {
+				position : absolute;
+				top : 319px;
+				right : 5px;
+			}
         </style>
     </head>
     <body>
@@ -71,10 +86,16 @@
                 </table>
             </div>
             <div class="text-content">
-                * 로그인 API는 테스트버전으로
+                * 네이버, 페이스북 API는 테스트버전으로
             </div>
             <div class="text-content2">
-                로그인은 불가능합니다.
+                구현되어 현재 로그인은 
+            </div>
+            <div class="text-content3">
+                구글로만 가능합니다.
+            </div>
+            <div>
+            <input type="button" onclick="popupClose()" value="닫기" />
             </div>
         </div>
     </body>

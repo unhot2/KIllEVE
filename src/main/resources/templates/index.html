@@ -55,7 +55,10 @@
 						<input type="hidden" class="replaceCategory" th:value="${product.category}">
 						<input type="hidden" class="replaceMainImage" th:value="${product.mainImage}">
 						<div class="card-image-div">
-								<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${product.category},productNo=${product.productNo}, fileName=${product.mainImage})}" class="card-image">
+								<a th:href="@{/product/detail/{productNo}(productNo= ${product.productNo})}" style="text-decoration: none;" class="mobile">								
+									<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${product.category},productNo=${product.productNo}, fileName=${product.mainImage})}" class="card-image">
+								</a>
+								<img th:src="@{/img/product/{category}/{productNo}/{fileName}(category=${product.category},productNo=${product.productNo}, fileName=${product.mainImage})}" class="card-image normal">
 						</div>
 						<a th:href="@{/product/detail/{productNo}(productNo= ${product.productNo})}" style="text-decoration: none;">
 							<div class="best-description">
