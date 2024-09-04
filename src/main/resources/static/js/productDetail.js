@@ -115,6 +115,7 @@ $(function() {
 		var sessionId = $('#userId').val(); 
 		if(isEmpty(sessionId)){
 			alert("로그인 후 이용가능합니다.")
+			document.location.href="/users/loginForm";
 			return;
 		}
 		productCnt = $('.total-product-tr:last').index();
@@ -161,6 +162,7 @@ $(function() {
 		var sessionId = $('#userId').val(); 
 		if(isEmpty(sessionId)){
 			alert("로그인 후 이용가능합니다.")
+			document.location.href="/users/loginForm";
 			return;
 		}
 		productCnt = $('.total-product-tr:last').index();
